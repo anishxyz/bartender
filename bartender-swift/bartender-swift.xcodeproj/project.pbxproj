@@ -7,75 +7,67 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B6D66E8C2AFF351900A4F5AD /* bartenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D66E8B2AFF351900A4F5AD /* bartenderApp.swift */; };
-		B6D66E8E2AFF351900A4F5AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D66E8D2AFF351900A4F5AD /* ContentView.swift */; };
-		B6D66E902AFF351A00A4F5AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6D66E8F2AFF351A00A4F5AD /* Assets.xcassets */; };
-		B6D66E932AFF351A00A4F5AD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6D66E922AFF351A00A4F5AD /* Preview Assets.xcassets */; };
-		B6D66E952AFF351A00A4F5AD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D66E942AFF351A00A4F5AD /* Persistence.swift */; };
-		B6D66E982AFF351A00A4F5AD /* bartender.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B6D66E962AFF351A00A4F5AD /* bartender.xcdatamodeld */; };
-		B6D66EA02AFF396200A4F5AD /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D66E9F2AFF396200A4F5AD /* LoginView.swift */; };
-		B6D66EA32AFF3FEE00A4F5AD /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = B6D66EA22AFF3FEE00A4F5AD /* Supabase */; };
+		B68CA52A2B05D58A00F83F80 /* bartender_swiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CA5292B05D58A00F83F80 /* bartender_swiftApp.swift */; };
+		B68CA52C2B05D58A00F83F80 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CA52B2B05D58A00F83F80 /* ContentView.swift */; };
+		B68CA52E2B05D58B00F83F80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B68CA52D2B05D58B00F83F80 /* Assets.xcassets */; };
+		B68CA5312B05D58B00F83F80 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B68CA5302B05D58B00F83F80 /* Preview Assets.xcassets */; };
+		B68CA5362B05D58B00F83F80 /* bartender_swift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B68CA5342B05D58B00F83F80 /* bartender_swift.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B6D66E882AFF351900A4F5AD /* bartender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bartender.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B6D66E8B2AFF351900A4F5AD /* bartenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bartenderApp.swift; sourceTree = "<group>"; };
-		B6D66E8D2AFF351900A4F5AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		B6D66E8F2AFF351A00A4F5AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B6D66E922AFF351A00A4F5AD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		B6D66E942AFF351A00A4F5AD /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		B6D66E972AFF351A00A4F5AD /* bartender.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bartender.xcdatamodel; sourceTree = "<group>"; };
-		B6D66E992AFF351A00A4F5AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B6D66E9F2AFF396200A4F5AD /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		B68CA5262B05D58A00F83F80 /* bartender-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "bartender-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B68CA5292B05D58A00F83F80 /* bartender_swiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bartender_swiftApp.swift; sourceTree = "<group>"; };
+		B68CA52B2B05D58A00F83F80 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B68CA52D2B05D58B00F83F80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B68CA5302B05D58B00F83F80 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B68CA5352B05D58B00F83F80 /* bartender_swift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = bartender_swift.xcdatamodel; sourceTree = "<group>"; };
+		B68CA5372B05D58B00F83F80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		B6D66E852AFF351900A4F5AD /* Frameworks */ = {
+		B68CA5232B05D58A00F83F80 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6D66EA32AFF3FEE00A4F5AD /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B6D66E7F2AFF351900A4F5AD = {
+		B68CA51D2B05D58A00F83F80 = {
 			isa = PBXGroup;
 			children = (
-				B6D66E8A2AFF351900A4F5AD /* bartender */,
-				B6D66E892AFF351900A4F5AD /* Products */,
+				B68CA5282B05D58A00F83F80 /* bartender-swift */,
+				B68CA5272B05D58A00F83F80 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		B6D66E892AFF351900A4F5AD /* Products */ = {
+		B68CA5272B05D58A00F83F80 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B6D66E882AFF351900A4F5AD /* bartender.app */,
+				B68CA5262B05D58A00F83F80 /* bartender-swift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B6D66E8A2AFF351900A4F5AD /* bartender */ = {
+		B68CA5282B05D58A00F83F80 /* bartender-swift */ = {
 			isa = PBXGroup;
 			children = (
-				B6D66E8B2AFF351900A4F5AD /* bartenderApp.swift */,
-				B6D66E9F2AFF396200A4F5AD /* LoginView.swift */,
-				B6D66E8D2AFF351900A4F5AD /* ContentView.swift */,
-				B6D66E8F2AFF351A00A4F5AD /* Assets.xcassets */,
-				B6D66E942AFF351A00A4F5AD /* Persistence.swift */,
-				B6D66E992AFF351A00A4F5AD /* Info.plist */,
-				B6D66E962AFF351A00A4F5AD /* bartender.xcdatamodeld */,
-				B6D66E912AFF351A00A4F5AD /* Preview Content */,
+				B68CA5292B05D58A00F83F80 /* bartender_swiftApp.swift */,
+				B68CA52B2B05D58A00F83F80 /* ContentView.swift */,
+				B68CA52D2B05D58B00F83F80 /* Assets.xcassets */,
+				B68CA5372B05D58B00F83F80 /* Info.plist */,
+				B68CA5342B05D58B00F83F80 /* bartender_swift.xcdatamodeld */,
+				B68CA52F2B05D58B00F83F80 /* Preview Content */,
 			);
-			path = bartender;
+			path = "bartender-swift";
 			sourceTree = "<group>";
 		};
-		B6D66E912AFF351A00A4F5AD /* Preview Content */ = {
+		B68CA52F2B05D58B00F83F80 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				B6D66E922AFF351A00A4F5AD /* Preview Assets.xcassets */,
+				B68CA5302B05D58B00F83F80 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -83,42 +75,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B6D66E872AFF351900A4F5AD /* bartender */ = {
+		B68CA5252B05D58A00F83F80 /* bartender-swift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B6D66E9C2AFF351A00A4F5AD /* Build configuration list for PBXNativeTarget "bartender" */;
+			buildConfigurationList = B68CA53A2B05D58B00F83F80 /* Build configuration list for PBXNativeTarget "bartender-swift" */;
 			buildPhases = (
-				B6D66E842AFF351900A4F5AD /* Sources */,
-				B6D66E852AFF351900A4F5AD /* Frameworks */,
-				B6D66E862AFF351900A4F5AD /* Resources */,
+				B68CA5222B05D58A00F83F80 /* Sources */,
+				B68CA5232B05D58A00F83F80 /* Frameworks */,
+				B68CA5242B05D58A00F83F80 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = bartender;
-			packageProductDependencies = (
-				B6D66EA22AFF3FEE00A4F5AD /* Supabase */,
-			);
-			productName = bartender;
-			productReference = B6D66E882AFF351900A4F5AD /* bartender.app */;
+			name = "bartender-swift";
+			productName = "bartender-swift";
+			productReference = B68CA5262B05D58A00F83F80 /* bartender-swift.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		B6D66E802AFF351900A4F5AD /* Project object */ = {
+		B68CA51E2B05D58A00F83F80 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					B6D66E872AFF351900A4F5AD = {
+					B68CA5252B05D58A00F83F80 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
-			buildConfigurationList = B6D66E832AFF351900A4F5AD /* Build configuration list for PBXProject "bartender" */;
+			buildConfigurationList = B68CA5212B05D58A00F83F80 /* Build configuration list for PBXProject "bartender-swift" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -126,48 +115,43 @@
 				en,
 				Base,
 			);
-			mainGroup = B6D66E7F2AFF351900A4F5AD;
-			packageReferences = (
-				B6D66EA12AFF3FEE00A4F5AD /* XCRemoteSwiftPackageReference "supabase-swift" */,
-			);
-			productRefGroup = B6D66E892AFF351900A4F5AD /* Products */;
+			mainGroup = B68CA51D2B05D58A00F83F80;
+			productRefGroup = B68CA5272B05D58A00F83F80 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B6D66E872AFF351900A4F5AD /* bartender */,
+				B68CA5252B05D58A00F83F80 /* bartender-swift */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		B6D66E862AFF351900A4F5AD /* Resources */ = {
+		B68CA5242B05D58A00F83F80 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6D66E932AFF351A00A4F5AD /* Preview Assets.xcassets in Resources */,
-				B6D66E902AFF351A00A4F5AD /* Assets.xcassets in Resources */,
+				B68CA5312B05D58B00F83F80 /* Preview Assets.xcassets in Resources */,
+				B68CA52E2B05D58B00F83F80 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B6D66E842AFF351900A4F5AD /* Sources */ = {
+		B68CA5222B05D58A00F83F80 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6D66E952AFF351A00A4F5AD /* Persistence.swift in Sources */,
-				B6D66E982AFF351A00A4F5AD /* bartender.xcdatamodeld in Sources */,
-				B6D66E8E2AFF351900A4F5AD /* ContentView.swift in Sources */,
-				B6D66EA02AFF396200A4F5AD /* LoginView.swift in Sources */,
-				B6D66E8C2AFF351900A4F5AD /* bartenderApp.swift in Sources */,
+				B68CA52C2B05D58A00F83F80 /* ContentView.swift in Sources */,
+				B68CA52A2B05D58A00F83F80 /* bartender_swiftApp.swift in Sources */,
+				B68CA5362B05D58B00F83F80 /* bartender_swift.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		B6D66E9A2AFF351A00A4F5AD /* Debug */ = {
+		B68CA5382B05D58B00F83F80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -227,7 +211,7 @@
 			};
 			name = Debug;
 		};
-		B6D66E9B2AFF351A00A4F5AD /* Release */ = {
+		B68CA5392B05D58B00F83F80 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -281,30 +265,28 @@
 			};
 			name = Release;
 		};
-		B6D66E9D2AFF351A00A4F5AD /* Debug */ = {
+		B68CA53B2B05D58B00F83F80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"bartender/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"bartender-swift/Preview Content\"";
 				DEVELOPMENT_TEAM = 4FF97FVLA5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Bartender;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = xyz.anish.bartender;
+				PRODUCT_BUNDLE_IDENTIFIER = "xyz.anish.bartender-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -312,30 +294,28 @@
 			};
 			name = Debug;
 		};
-		B6D66E9E2AFF351A00A4F5AD /* Release */ = {
+		B68CA53C2B05D58B00F83F80 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"bartender/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"bartender-swift/Preview Content\"";
 				DEVELOPMENT_TEAM = 4FF97FVLA5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Bartender;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = xyz.anish.bartender;
+				PRODUCT_BUNDLE_IDENTIFIER = "xyz.anish.bartender-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -346,57 +326,38 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B6D66E832AFF351900A4F5AD /* Build configuration list for PBXProject "bartender" */ = {
+		B68CA5212B05D58A00F83F80 /* Build configuration list for PBXProject "bartender-swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B6D66E9A2AFF351A00A4F5AD /* Debug */,
-				B6D66E9B2AFF351A00A4F5AD /* Release */,
+				B68CA5382B05D58B00F83F80 /* Debug */,
+				B68CA5392B05D58B00F83F80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B6D66E9C2AFF351A00A4F5AD /* Build configuration list for PBXNativeTarget "bartender" */ = {
+		B68CA53A2B05D58B00F83F80 /* Build configuration list for PBXNativeTarget "bartender-swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B6D66E9D2AFF351A00A4F5AD /* Debug */,
-				B6D66E9E2AFF351A00A4F5AD /* Release */,
+				B68CA53B2B05D58B00F83F80 /* Debug */,
+				B68CA53C2B05D58B00F83F80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		B6D66EA12AFF3FEE00A4F5AD /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/supabase-community/supabase-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		B6D66EA22AFF3FEE00A4F5AD /* Supabase */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B6D66EA12AFF3FEE00A4F5AD /* XCRemoteSwiftPackageReference "supabase-swift" */;
-			productName = Supabase;
-		};
-/* End XCSwiftPackageProductDependency section */
-
 /* Begin XCVersionGroup section */
-		B6D66E962AFF351A00A4F5AD /* bartender.xcdatamodeld */ = {
+		B68CA5342B05D58B00F83F80 /* bartender_swift.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				B6D66E972AFF351A00A4F5AD /* bartender.xcdatamodel */,
+				B68CA5352B05D58B00F83F80 /* bartender_swift.xcdatamodel */,
 			);
-			currentVersion = B6D66E972AFF351A00A4F5AD /* bartender.xcdatamodel */;
-			path = bartender.xcdatamodeld;
+			currentVersion = B68CA5352B05D58B00F83F80 /* bartender_swift.xcdatamodel */;
+			path = bartender_swift.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
 	};
-	rootObject = B6D66E802AFF351900A4F5AD /* Project object */;
+	rootObject = B68CA51E2B05D58A00F83F80 /* Project object */;
 }
