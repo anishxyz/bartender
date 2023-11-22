@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B660618C2B0D9556002F8DF2 /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618B2B0D9556002F8DF2 /* CellarView.swift */; };
+		B660618E2B0D97DE002F8DF2 /* CocktailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618D2B0D97DE002F8DF2 /* CocktailView.swift */; };
+		B66061912B0D98A3002F8DF2 /* BuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66061902B0D98A3002F8DF2 /* BuilderView.swift */; };
 		B68CA52A2B05D58A00F83F80 /* bartender_swiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CA5292B05D58A00F83F80 /* bartender_swiftApp.swift */; };
 		B68CA52C2B05D58A00F83F80 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CA52B2B05D58A00F83F80 /* ContentView.swift */; };
 		B68CA52E2B05D58B00F83F80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B68CA52D2B05D58B00F83F80 /* Assets.xcassets */; };
@@ -30,6 +33,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B660618B2B0D9556002F8DF2 /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
+		B660618D2B0D97DE002F8DF2 /* CocktailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailView.swift; sourceTree = "<group>"; };
+		B66061902B0D98A3002F8DF2 /* BuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderView.swift; sourceTree = "<group>"; };
 		B68CA5262B05D58A00F83F80 /* bartender-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "bartender-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B68CA5292B05D58A00F83F80 /* bartender_swiftApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bartender_swiftApp.swift; sourceTree = "<group>"; };
 		B68CA52B2B05D58A00F83F80 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -66,6 +72,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B66061862B0D939B002F8DF2 /* Cellar */ = {
+			isa = PBXGroup;
+			children = (
+				B660618B2B0D9556002F8DF2 /* CellarView.swift */,
+			);
+			path = Cellar;
+			sourceTree = "<group>";
+		};
+		B66061882B0D93F9002F8DF2 /* Cocktail */ = {
+			isa = PBXGroup;
+			children = (
+				B660618D2B0D97DE002F8DF2 /* CocktailView.swift */,
+			);
+			path = Cocktail;
+			sourceTree = "<group>";
+		};
+		B660618F2B0D988C002F8DF2 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				B66061902B0D98A3002F8DF2 /* BuilderView.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
 		B68CA51D2B05D58A00F83F80 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +115,9 @@
 		B68CA5282B05D58A00F83F80 /* bartender-swift */ = {
 			isa = PBXGroup;
 			children = (
+				B660618F2B0D988C002F8DF2 /* Builder */,
+				B66061882B0D93F9002F8DF2 /* Cocktail */,
+				B66061862B0D939B002F8DF2 /* Cellar */,
 				B68CA5532B05E91000F83F80 /* bartender-swift.entitlements */,
 				B68CA54B2B05E51C00F83F80 /* Auth */,
 				B68CA5292B05D58A00F83F80 /* bartender_swiftApp.swift */,
@@ -108,13 +141,13 @@
 		B68CA54B2B05E51C00F83F80 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				B68CA55F2B05F53900F83F80 /* HomeView.swift */,
 				B68CA54C2B05E53800F83F80 /* SignInApple.swift */,
 				B68CA54F2B05E56F00F83F80 /* SignInViewModel.swift */,
 				B68CA5512B05E5F800F83F80 /* AuthManager.swift */,
 				B68CA5542B05ED3600F83F80 /* SignInView.swift */,
 				B68CA5562B05EEFE00F83F80 /* SignInGoogle.swift */,
 				B68CA55D2B05F19200F83F80 /* RegistrationView.swift */,
-				B68CA55F2B05F53900F83F80 /* HomeView.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -203,11 +236,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B66061912B0D98A3002F8DF2 /* BuilderView.swift in Sources */,
 				B68CA52C2B05D58A00F83F80 /* ContentView.swift in Sources */,
+				B660618C2B0D9556002F8DF2 /* CellarView.swift in Sources */,
 				B68CA5552B05ED3600F83F80 /* SignInView.swift in Sources */,
 				B68CA5572B05EEFE00F83F80 /* SignInGoogle.swift in Sources */,
 				B68CA5602B05F53900F83F80 /* HomeView.swift in Sources */,
 				B68CA55E2B05F19200F83F80 /* RegistrationView.swift in Sources */,
+				B660618E2B0D97DE002F8DF2 /* CocktailView.swift in Sources */,
 				B68CA5522B05E5F800F83F80 /* AuthManager.swift in Sources */,
 				B68CA52A2B05D58A00F83F80 /* bartender_swiftApp.swift in Sources */,
 				B68CA54D2B05E53800F83F80 /* SignInApple.swift in Sources */,

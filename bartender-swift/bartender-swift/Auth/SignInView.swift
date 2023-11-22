@@ -19,6 +19,7 @@ struct SignInView: View {
     
     var body: some View {
         VStack(spacing: 30) {
+            Spacer()
             VStack(spacing: 10) {
                 TextField("Email address", text: $email)
                 SecureField("Password", text: $password)
@@ -46,11 +47,12 @@ struct SignInView: View {
             } label: {
                 Text("Sign In")
                     .padding()
-                    .foregroundColor(Color(uiColor: .systemBackground))
+                    .bold()
+                    .foregroundColor(Color(UIColor.systemBackground))
                     .frame(maxWidth: .infinity)
                     .frame(height: 55)
                     .background {
-                        RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
                             .foregroundColor(Color(uiColor: .label))
                     }
             }
@@ -69,15 +71,15 @@ struct SignInView: View {
                 } label: {
                     HStack {
                         Image(systemName: "applelogo")
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(UIColor.systemBackground))
 
                         Text("Sign in with Apple")
                             .bold()
-                            .foregroundColor(.white)
+                            .foregroundColor(Color(UIColor.systemBackground))
                     }
                     .frame(maxWidth: .infinity)
                     .padding()
-                    .background(Color.black)
+                    .background(Color("ReverseDark"))
                     .cornerRadius(8)
                 }
                 
@@ -91,15 +93,22 @@ struct SignInView: View {
                         }
                     }
                 } label: {
-                    Text("Sign in with Google")
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(Color(uiColor: .label))
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(Color(uiColor: .label), lineWidth: 1)
-                        }
+                    HStack {
+                        Image("googleLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+
+                        Text("Sign in with Google")
+                            .bold()
+                            .foregroundColor(.white)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .background(Color.blue)
+                    .cornerRadius(8)
                 }
+
             }
             .padding(.top)
             .padding(.horizontal, 24)
@@ -109,6 +118,12 @@ struct SignInView: View {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(appUser: .constant(.init(uid: "1234", email: nil)))
+
+        Group {
+            SignInView(appUser: .constant(.init(uid: "1234", email: nil)))
+            
+            SignInView(appUser: .constant(.init(uid: "1234", email: nil)))
+                .environment(\.colorScheme, .dark)
+        }
     }
 }

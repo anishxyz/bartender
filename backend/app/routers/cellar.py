@@ -65,3 +65,36 @@ async def add_bottle(bottle_data: BottleData, user_id: str = Depends(get_user_id
         raise HTTPException(status_code=500, detail="Failed to add bottle to cellar")
 
     return response.data[0]
+
+
+class UpdateBottleData(BaseModel):
+    name: Optional[str]
+    type: Optional[str]
+    qty: Optional[int]
+    current: Optional[bool]
+    price: Optional[float]
+    description: Optional[str]
+    bar_id: Optional[int]
+
+
+@router.put("/update_bottle/{bottle_id}", response_model=Cellar)
+async def update_bottle(bottle_id: int, bottle_data: UpdateBottleData, user_id: str = Depends(get_user_id)):
+    update_data = bottle_data.model_dump(exclude_unset=True)
+    update_data["last_updated"] = datetime.now()
+
+    response = supabase.table("cellar").update(update_data).eq("id", bottle_id).eq("uid", user_id).execute()
+
+    if not response.data:
+        raise HTTPException(status_code=404, detail="Bottle not found or update failed")
+
+    return response.data[0]
+
+
+@router.delete("/delete_bottle/{bottle_id}", response_model=dict)
+async def delete_bottle(bottle_id: int, user_id: str = Depends(get_user_id)):
+    response = supabase.table("cellar").delete().eq("id", bottle_id).eq("uid", user_id).execute()
+
+    if not response.data:
+        raise HTTPException(status_code=500, detail="Failed to delete bottle")
+
+    return {"msg": "Bottle deleted successfully"}

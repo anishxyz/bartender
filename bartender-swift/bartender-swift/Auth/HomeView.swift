@@ -12,6 +12,36 @@ struct HomeView: View {
     
     var body: some View {
         if let appUser = appUser {
+            TabView {
+                CellarView(appUser: $appUser)
+                    .tabItem {
+                        Label("Cellar", systemImage: "wineglass.fill")
+                    }
+                
+                CocktailView(appUser: $appUser)
+                    .tabItem {
+                        Label("Cocktails", systemImage: "books.vertical.fill")
+                    }
+                
+                BuilderView(appUser: $appUser)
+                    .tabItem {
+                        Label("Builder", systemImage: "flame.fill")
+                    }
+                
+                UserDataView(appUser: $appUser)
+                    .tabItem {
+                        Label("Debug", systemImage: "hammer.fill")
+                    }
+            }
+        }
+    }
+}
+
+struct UserDataView: View {
+    @Binding var appUser: AppUser?
+
+    var body: some View {
+        if let appUser = appUser {
             VStack {
                 Text(appUser.uid)
                 
@@ -29,24 +59,21 @@ struct HomeView: View {
                 } label: {
                     Text("Sign Out")
                         .foregroundColor(.red)
+                        .buttonStyle(.bordered)
                 }
             }
-//            .onAppear {
-//                Task {
-//                    do {
-//                        try await ToDoViewModel().fetchItems(for: appUser.uid)
-//                    } catch {
-//                        print(error)
-//                    }
-//
-//                }
-//            }
         }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView(appUser: .constant(.init(uid: "1234", email: "jason@gmail.com")))
+
+        Group {
+            HomeView(appUser: .constant(.init(uid: "123456789", email: "anishagrawal2003@gmail.com")))
+            
+            HomeView(appUser: .constant(.init(uid: "123456789", email: "anishagrawal2003@gmail.com")))
+                .environment(\.colorScheme, .dark)
+        }
     }
 }
