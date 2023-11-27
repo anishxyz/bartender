@@ -7,8 +7,20 @@
 
 import SwiftUI
 
+class CurrUser: ObservableObject {
+    @Published var uid: String
+    @Published var email: String?
+
+    init(uid: String, email: String?) {
+        self.uid = uid
+        self.email = email
+    }
+}
+
+
 struct ContentView: View {
     @State var appUser: AppUser? = nil
+    @StateObject var currUser = CurrUser(uid: "", email: nil)
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -16,14 +28,18 @@ struct ContentView: View {
             backgroundColor
                 .edgesIgnoringSafeArea(.all)
             if appUser != nil {
-                HomeView(appUser: $appUser)
+                HomeView()
+                    .environmentObject(currUser)
             } else {
                 SignInView(appUser: $appUser)
             }
         }
         .onAppear {
             Task {
-                self.appUser = try await AuthManager.shared.getCurrentSession()
+                let sessionUser = try await AuthManager.shared.getCurrentSession()
+                self.appUser = sessionUser
+                self.currUser.uid = sessionUser.uid
+                self.currUser.email = sessionUser.email
             }
         }
     }

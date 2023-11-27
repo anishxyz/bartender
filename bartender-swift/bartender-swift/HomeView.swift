@@ -8,59 +8,56 @@
 import SwiftUI
 
 struct HomeView: View {
-    @Binding var appUser: AppUser?
+    @EnvironmentObject var currUser: CurrUser
     
     var body: some View {
-        if let appUser = appUser {
-            TabView {
-                CellarView(appUser: $appUser)
-                    .tabItem {
-                        Label("Cellar", systemImage: "wineglass.fill")
-                    }
-                
-                CocktailView(appUser: $appUser)
-                    .tabItem {
-                        Label("Cocktails", systemImage: "books.vertical.fill")
-                    }
-                
-                BuilderView(appUser: $appUser)
-                    .tabItem {
-                        Label("Builder", systemImage: "flame.fill")
-                    }
-                
-                UserDataView(appUser: $appUser)
-                    .tabItem {
-                        Label("Debug", systemImage: "hammer.fill")
-                    }
-            }
+        TabView {
+            CellarView()
+                .tabItem {
+                    Label("Cellar", systemImage: "wineglass.fill")
+                }
+            
+            CocktailView()
+                .tabItem {
+                    Label("Cocktails", systemImage: "books.vertical.fill")
+                }
+            
+            BuilderView()
+                .tabItem {
+                    Label("Builder", systemImage: "flame.fill")
+                }
+            
+            UserDataView()
+                .tabItem {
+                    Label("Debug", systemImage: "hammer.fill")
+                }
         }
     }
 }
 
 struct UserDataView: View {
-    @Binding var appUser: AppUser?
+    @EnvironmentObject var currUser: CurrUser
 
     var body: some View {
-        if let appUser = appUser {
-            VStack {
-                Text(appUser.uid)
-                
-                Text(appUser.email ?? "No Email")
-                
-                Button {
-                    Task {
-                        do {
-                            try await AuthManager.shared.signOut()
-                            self.appUser = nil
-                        } catch {
-                            print("unable to sign out")
-                        }
+        VStack {
+            Text(currUser.uid)
+            
+            Text(currUser.email ?? "No Email")
+            
+            Button {
+                Task {
+                    do {
+                        try await AuthManager.shared.signOut()
+                        currUser.uid = ""
+                        currUser.email = nil
+                    } catch {
+                        print("unable to sign out")
                     }
-                } label: {
-                    Text("Sign Out")
-                        .foregroundColor(.red)
-                        .buttonStyle(.bordered)
                 }
+            } label: {
+                Text("Sign Out")
+                    .foregroundColor(.red)
+                    .buttonStyle(.bordered)
             }
         }
     }
@@ -70,9 +67,11 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            HomeView(appUser: .constant(.init(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com")))
+            HomeView()
+                .environmentObject(CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com"))
             
-            HomeView(appUser: .constant(.init(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com")))
+            HomeView()
+                .environmentObject(CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com"))
                 .environment(\.colorScheme, .dark)
         }
     }
