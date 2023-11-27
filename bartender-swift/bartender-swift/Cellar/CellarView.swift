@@ -1,5 +1,5 @@
 //
-//  Cellar.swift
+//  CellarView.swift
 //  bartender-swift
 //
 //  Created by Anish Agrawal on 11/21/23.
@@ -24,6 +24,9 @@ struct CellarView: View {
                 }
                 .navigationTitle("🍾 The Cellar")
             }
+        }
+        .onAppear {
+            viewModel.fetchCellarData(forUserID: currUser.uid)
         }
     }
 }

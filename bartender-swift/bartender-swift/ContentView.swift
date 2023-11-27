@@ -32,6 +32,7 @@ struct ContentView: View {
                     .environmentObject(currUser)
             } else {
                 SignInView(appUser: $appUser)
+                    .environmentObject(currUser)
             }
         }
         .onAppear {

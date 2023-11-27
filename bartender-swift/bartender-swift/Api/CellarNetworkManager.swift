@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct NetworkManager {
-    static let shared = NetworkManager()
+struct CellarNetworkManager {
+    static let shared = CellarNetworkManager()
     let baseURL = "http://127.0.0.1:8000/api"
 
     // Fetch all bottles from the cellar
     func fetchCellar(user_id: String, completion: @escaping (Result<[Bottle], Error>) -> Void) {
-        let url = URL(string: "\(baseURL)/cellar")!
+        let url = URL(string: "\(baseURL)/cellar/")!
         
         var request = URLRequest(url: url)
         request.addValue("Bearer \(user_id)", forHTTPHeaderField: "Authorization")
@@ -28,7 +28,12 @@ struct NetworkManager {
                 return
             }
             do {
-                let bottles = try JSONDecoder().decode([Bottle].self, from: data)
+                if let jsonResponse = String(data: data, encoding: .utf8) {
+                    print("Cellar JSON Response: \(jsonResponse)")
+                }
+            
+                let decoder = BottleJSONDecoder.standard()
+                let bottles = try decoder.decode([Bottle].self, from: data)
                 completion(.success(bottles))
             } catch {
                 completion(.failure(error))
