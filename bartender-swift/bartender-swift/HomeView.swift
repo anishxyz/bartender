@@ -70,9 +70,9 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
 
         Group {
-            HomeView(appUser: .constant(.init(uid: "123456789", email: "anishagrawal2003@gmail.com")))
+            HomeView(appUser: .constant(.init(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com")))
             
-            HomeView(appUser: .constant(.init(uid: "123456789", email: "anishagrawal2003@gmail.com")))
+            HomeView(appUser: .constant(.init(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com")))
                 .environment(\.colorScheme, .dark)
         }
     }

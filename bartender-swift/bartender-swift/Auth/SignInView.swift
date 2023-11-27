@@ -19,9 +19,17 @@ struct SignInView: View {
     
     var body: some View {
         VStack(spacing: 30) {
+            HStack {
+                Text("🍹 Welcome to Bartender!")
+                    .font(.title)
+                    .bold()
+                Spacer()
+            }
+            .padding()
             Spacer()
             VStack(spacing: 10) {
                 TextField("Email address", text: $email)
+                    .padding(.bottom)
                 SecureField("Password", text: $password)
             }
             .padding(.horizontal, 24)

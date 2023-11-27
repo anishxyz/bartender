@@ -11,8 +11,20 @@ import SwiftUI
 struct CellarView: View {
     @Binding var appUser: AppUser?
     
+    @StateObject var viewModel = CellarViewModel()
+    
     var body: some View {
-        Text("Cellar View")
+        ZStack {
+            NavigationStack {
+                List(viewModel.cellar) { bottle in
+                    VStack {
+                        Text(bottle.name)
+                        Text(bottle.type)
+                    }
+                }
+                .navigationTitle("🍾 The Cellar")
+            }
+        }
     }
 }
 

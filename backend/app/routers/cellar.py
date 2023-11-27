@@ -20,7 +20,7 @@ class Cellar(BaseModel):
     current: bool
     price: float
     description: str
-    bar_id: int
+    bar_id: Optional[int] = None
 
     class Config:
         orm_mode = True
@@ -56,8 +56,8 @@ class BottleData(BaseModel):
 async def add_bottle(bottle_data: BottleData, user_id: str = Depends(get_user_id)):
     new_bottle = bottle_data.model_dump()
     new_bottle["uid"] = user_id
-    new_bottle["created_at"] = datetime.now()
-    new_bottle["last_updated"] = datetime.now()
+    new_bottle["created_at"] = datetime.now().isoformat()
+    new_bottle["last_updated"] = datetime.now().isoformat()
 
     response = supabase.table("cellar").insert(new_bottle).execute()
 
