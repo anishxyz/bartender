@@ -18,7 +18,7 @@ class Cellar(BaseModel):
     type: str
     qty: int
     current: bool
-    price: float
+    price: Optional[float] = None
     description: str
     bar_id: Optional[int] = None
 
@@ -54,6 +54,7 @@ class BottleData(BaseModel):
 
 @router.post("/add_bottle", response_model=Cellar)
 async def add_bottle(bottle_data: BottleData, user_id: str = Depends(get_user_id)):
+    print(bottle_data)
     new_bottle = bottle_data.model_dump()
     new_bottle["uid"] = user_id
     new_bottle["created_at"] = datetime.now().isoformat()
@@ -64,6 +65,7 @@ async def add_bottle(bottle_data: BottleData, user_id: str = Depends(get_user_id
     if not response.data:
         raise HTTPException(status_code=500, detail="Failed to add bottle to cellar")
 
+    print(response.data[0])
     return response.data[0]
 
 
