@@ -9,7 +9,7 @@ from supabase import create_client, Client
 url: str = os.environ.get("SUPABASE_URL")
 key: str = os.environ.get("SUPABASE_KEY")
 supabase: Client = create_client(url, key)
-
+USER_ID = "8e2fc51e-58a6-469d-b932-d483dd9e10b5"
 
 class BottleData(BaseModel):
     name: str
@@ -50,13 +50,43 @@ def generate_synthetic_bottle_data():
     )
 
 
-def main():
-    user_id = "8e2fc51e-58a6-469d-b932-d483dd9e10b5"
+class MenuData(BaseModel):
+    name: Optional[str]
+
+def generate_synthetic_menu_data():
+    adjectives = ["Summer", "Winter", "Spring", "Autumn", "Holiday", "Exclusive", "Classic", "Tropical", "Cozy"]
+    themes = ["Delights", "Collection", "Fiesta", "Specials", "Favorites", "Selection", "Gala", "Jubilee", "Extravaganza"]
+    types = ["Menu", "Assortment", "Series", "Range", "Variety", "Array", "Set", "Lineup", "Spread"]
+
+    name = f"{choice(adjectives)} {choice(themes)} {choice(types)}"
+    return MenuData(name=name)
+
+
+def add_menu(user_id: str, menu_data: MenuData):
+    # Assuming your API is hosted and accessible at a given URL
+    api_url = "http://127.0.0.1:8000/api/menu/create"
+
+    headers = {"Authorization": f"Bearer {user_id}"}
+
+    response = requests.post(api_url, headers=headers, json=menu_data.model_dump())
+
+    if response.status_code != 200:
+        print(f"Failed to add menu: {response.text}")
+    else:
+        print(f"Menu added successfully: {response.json()}")
+
+def main_bottle():
     bottles_to_add = 5
     for _ in range(bottles_to_add):
         synthetic_bottle = generate_synthetic_bottle_data()
-        add_bottle(user_id, synthetic_bottle)
+        add_bottle(USER_ID, synthetic_bottle)
 
+
+def main_menu():
+    menus_to_add = 5
+    for _ in range(menus_to_add):
+        synthetic_menu = generate_synthetic_menu_data()
+        add_menu(USER_ID, synthetic_menu)
 
 if __name__ == "__main__":
-    main()
+    main_menu()

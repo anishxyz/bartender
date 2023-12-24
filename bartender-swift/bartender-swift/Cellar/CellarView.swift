@@ -11,7 +11,7 @@ import SwiftUI
 struct CellarView: View {
     @EnvironmentObject var currUser: CurrUser
     
-    @StateObject var viewModel = CellarViewModel()
+    @EnvironmentObject var viewModel: CellarViewModel
     
     @State private var showingAddBottle = false
     
@@ -50,9 +50,6 @@ struct CellarView: View {
                 }
             }
         }
-        .onAppear {
-            viewModel.fetchCellarData(forUserID: currUser.uid)
-        }
     }
     
     private func deleteBottle(at offsets: IndexSet) {
@@ -67,13 +64,17 @@ struct CellarView: View {
 
 struct CellarView_Previews: PreviewProvider {
     static var previews: some View {
+        
+        let mockViewModel = CellarViewModel()
 
         Group {
             CellarView()
                 .environmentObject(CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com"))
+                .environmentObject(mockViewModel)
             
             CellarView()
                 .environmentObject(CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com"))
+                .environmentObject(mockViewModel)
                 .environment(\.colorScheme, .dark)
         }
     }

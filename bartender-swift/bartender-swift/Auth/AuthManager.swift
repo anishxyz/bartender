@@ -29,8 +29,8 @@ class AuthManager {
     
     func getCurrentSession() async throws -> AppUser {
         let session = try await client.auth.session
-        print(session)
-        print(session.user.id)
+//        print(session)
+//        print(session.user.id)
         return AppUser(uid: session.user.id.uuidString, email: session.user.email)
     }
     
@@ -60,8 +60,8 @@ class AuthManager {
     func signInWithGoogle(idToken: String, nonce: String) async throws -> AppUser {
 //        try await network(idToken: idToken, nonce: nonce)
         let session = try await client.auth.signInWithIdToken(credentials: .init(provider: .google, idToken: idToken, nonce: nonce))
-        print(session)
-        print(session.user)
+//        print(session)
+//        print(session.user)
         return AppUser(uid: session.user.id.uuidString, email: session.user.email)
     }
     

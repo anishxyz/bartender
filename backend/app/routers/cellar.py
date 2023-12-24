@@ -92,11 +92,14 @@ async def update_bottle(bottle_id: int, bottle_data: UpdateBottleData, user_id: 
     return response.data[0]
 
 
+## TODO: fix delete via RLS
 @router.delete("/delete_bottle/{bottle_id}", response_model=dict)
 async def delete_bottle(bottle_id: int, user_id: str = Depends(get_user_id)):
-    response = supabase.table("cellar").delete().eq("id", bottle_id).eq("uid", user_id).execute()
-
+    print('BOTTLE ID', bottle_id, 'USER', user_id)
+    response = supabase.table("cellar").delete().eq('id', bottle_id).eq("uid", user_id).execute()
+    print('RESPONSE IS', response)
     if not response.data:
+        print('failed')
         raise HTTPException(status_code=500, detail="Failed to delete bottle")
 
     return {"msg": "Bottle deleted successfully"}

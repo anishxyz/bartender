@@ -10,6 +10,10 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject var currUser: CurrUser
     
+    // view models
+    @StateObject var cellarViewModel = CellarViewModel()
+    @StateObject var cocktailViewModel = CocktailViewModel()
+    
     var body: some View {
         TabView {
             CellarView()
@@ -17,7 +21,7 @@ struct HomeView: View {
                     Label("Cellar", systemImage: "wineglass.fill")
                 }
             
-            CocktailView()
+            CocktailMenuView()
                 .tabItem {
                     Label("Cocktails", systemImage: "books.vertical.fill")
                 }
@@ -31,6 +35,12 @@ struct HomeView: View {
                 .tabItem {
                     Label("Debug", systemImage: "hammer.fill")
                 }
+        }
+        .environmentObject(cellarViewModel)
+        .environmentObject(cocktailViewModel)
+        .onAppear {
+            cellarViewModel.fetchCellarData(forUserID: currUser.uid)
+            cocktailViewModel.fetchAllMenus(userID: currUser.uid)
         }
     }
 }
