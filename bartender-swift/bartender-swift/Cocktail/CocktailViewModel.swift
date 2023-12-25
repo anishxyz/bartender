@@ -28,4 +28,18 @@ class CocktailViewModel: ObservableObject {
         }
     }
     
+    func createMenu(name: String, userID: String) {
+        networkManager.createMenu(name: name, userID: userID) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let newMenu):
+                    self?.menus.append(newMenu)
+                case .failure(let error):
+                    print("Error creating menu: \(error)")
+                    // TODO: HANDLE ERROR
+                }
+            }
+        }
+    }
+    
 }

@@ -42,6 +42,7 @@ async def add_menu(menu_data: MenuCreate, user_id: str = Depends(get_user_id)):
         raise HTTPException(status_code=500, detail="Failed to add the menu")
 
     # Return the inserted menu
+    print(insert_query.data)
     return insert_query.data[0]
 
 

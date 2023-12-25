@@ -66,6 +66,7 @@ struct CellarView_Previews: PreviewProvider {
     static var previews: some View {
         
         let mockViewModel = CellarViewModel()
+        
 
         Group {
             CellarView()

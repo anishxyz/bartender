@@ -83,7 +83,7 @@ def main_bottle():
 
 
 def main_menu():
-    menus_to_add = 5
+    menus_to_add = 2
     for _ in range(menus_to_add):
         synthetic_menu = generate_synthetic_menu_data()
         add_menu(USER_ID, synthetic_menu)

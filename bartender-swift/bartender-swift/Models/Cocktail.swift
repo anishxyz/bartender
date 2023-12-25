@@ -23,6 +23,18 @@ extension CocktailMenu: Identifiable {
     var id: Int { menu_id }
 }
 
+extension CocktailMenu: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(menu_id)
+    }
+}
+
+extension CocktailMenu: Equatable {
+    static func ==(lhs: CocktailMenu, rhs: CocktailMenu) -> Bool {
+        return lhs.menu_id == rhs.menu_id
+    }
+}
+
 struct Cocktail: Codable, Identifiable {
     let cocktail_id: Int
     let created_at: Date

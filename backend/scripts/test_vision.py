@@ -3,7 +3,7 @@ from openai import OpenAI
 import base64
 
 # OpenAI setup
-api_key = "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"
+api_key = "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"
 client = OpenAI(api_key=api_key)
 
 
@@ -32,7 +32,7 @@ def encode_image(image_path):
 
 
 # Path to your image
-image_path = "test_images/IMG_6323.jpeg"
+image_path = "IMG_0765.jpg"
 
 # Getting the base64 string
 base64_image = encode_image(image_path)

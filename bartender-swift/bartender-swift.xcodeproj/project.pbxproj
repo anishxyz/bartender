@@ -14,6 +14,8 @@
 		B66061962B0DFED9002F8DF2 /* CellarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66061952B0DFED9002F8DF2 /* CellarViewModel.swift */; };
 		B66061992B13403C002F8DF2 /* CellarNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66061982B13403C002F8DF2 /* CellarNetworkManager.swift */; };
 		B660619B2B15EAF1002F8DF2 /* BottleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660619A2B15EAF1002F8DF2 /* BottleDetailView.swift */; };
+		B66A2B042B3968A9000EFF6F /* AddMenuSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66A2B032B3968A9000EFF6F /* AddMenuSheetView.swift */; };
+		B66A2B062B397DF6000EFF6F /* CocktailMenuDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66A2B052B397DF6000EFF6F /* CocktailMenuDetailView.swift */; };
 		B6814B402B3821DE00B3194D /* CocktailNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6814B3F2B3821DE00B3194D /* CocktailNetworkManager.swift */; };
 		B6814B422B382A6300B3194D /* MenuNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6814B412B382A6300B3194D /* MenuNetworkManager.swift */; };
 		B68CA52A2B05D58A00F83F80 /* bartender_swiftApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68CA5292B05D58A00F83F80 /* bartender_swiftApp.swift */; };
@@ -40,6 +42,7 @@
 		B6B62A142B2EBAFC0059E8C5 /* BottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B62A132B2EBAFC0059E8C5 /* BottleType.swift */; };
 		B6B62A162B36BC010059E8C5 /* CocktailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B62A152B36BC010059E8C5 /* CocktailViewModel.swift */; };
 		B6B62A182B36C0680059E8C5 /* Cocktail.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B62A172B36C0680059E8C5 /* Cocktail.swift */; };
+		B6DB39002B3961C6006F3221 /* MenuCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DB38FF2B3961C6006F3221 /* MenuCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,8 @@
 		B66061952B0DFED9002F8DF2 /* CellarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarViewModel.swift; sourceTree = "<group>"; };
 		B66061982B13403C002F8DF2 /* CellarNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarNetworkManager.swift; sourceTree = "<group>"; };
 		B660619A2B15EAF1002F8DF2 /* BottleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleDetailView.swift; sourceTree = "<group>"; };
+		B66A2B032B3968A9000EFF6F /* AddMenuSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMenuSheetView.swift; sourceTree = "<group>"; };
+		B66A2B052B397DF6000EFF6F /* CocktailMenuDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailMenuDetailView.swift; sourceTree = "<group>"; };
 		B6814B3F2B3821DE00B3194D /* CocktailNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailNetworkManager.swift; sourceTree = "<group>"; };
 		B6814B412B382A6300B3194D /* MenuNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuNetworkManager.swift; sourceTree = "<group>"; };
 		B68CA5262B05D58A00F83F80 /* bartender-swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "bartender-swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +76,7 @@
 		B6B62A132B2EBAFC0059E8C5 /* BottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleType.swift; sourceTree = "<group>"; };
 		B6B62A152B36BC010059E8C5 /* CocktailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailViewModel.swift; sourceTree = "<group>"; };
 		B6B62A172B36C0680059E8C5 /* Cocktail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cocktail.swift; sourceTree = "<group>"; };
+		B6DB38FF2B3961C6006F3221 /* MenuCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,9 @@
 			children = (
 				B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */,
 				B6B62A152B36BC010059E8C5 /* CocktailViewModel.swift */,
+				B6DB38FF2B3961C6006F3221 /* MenuCardView.swift */,
+				B66A2B032B3968A9000EFF6F /* AddMenuSheetView.swift */,
+				B66A2B052B397DF6000EFF6F /* CocktailMenuDetailView.swift */,
 			);
 			path = Cocktail;
 			sourceTree = "<group>";
@@ -296,15 +305,18 @@
 				B68CA55E2B05F19200F83F80 /* RegistrationView.swift in Sources */,
 				B6B62A142B2EBAFC0059E8C5 /* BottleType.swift in Sources */,
 				B660618E2B0D97DE002F8DF2 /* CocktailMenuView.swift in Sources */,
+				B66A2B042B3968A9000EFF6F /* AddMenuSheetView.swift in Sources */,
 				B68CA5522B05E5F800F83F80 /* AuthManager.swift in Sources */,
 				B6B62A182B36C0680059E8C5 /* Cocktail.swift in Sources */,
 				B66061962B0DFED9002F8DF2 /* CellarViewModel.swift in Sources */,
+				B66A2B062B397DF6000EFF6F /* CocktailMenuDetailView.swift in Sources */,
 				B6814B422B382A6300B3194D /* MenuNetworkManager.swift in Sources */,
 				B68CA52A2B05D58A00F83F80 /* bartender_swiftApp.swift in Sources */,
 				B6B62A122B2EB8BC0059E8C5 /* AddBottleView.swift in Sources */,
 				B68CA54D2B05E53800F83F80 /* SignInApple.swift in Sources */,
 				B68CA5362B05D58B00F83F80 /* bartender_swift.xcdatamodeld in Sources */,
 				B68CA5502B05E56F00F83F80 /* SignInViewModel.swift in Sources */,
+				B6DB39002B3961C6006F3221 /* MenuCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

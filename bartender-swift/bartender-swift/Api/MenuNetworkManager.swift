@@ -43,6 +43,43 @@ struct MenuNetworkManager {
             }
         }.resume()
     }
+    
+    func createMenu(name: String, userID: String, completion: @escaping (Result<CocktailMenu, Error>) -> Void) {
+        let url = URL(string: "\(baseURL)/create")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(userID)", forHTTPHeaderField: "Authorization")
+
+        let requestBody = ["name": name]
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: requestBody, options: [])
+            request.httpBody = jsonData
+        } catch {
+            completion(.failure(error))
+            return
+        }
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard let data = data else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                return
+            }
+            do {
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+
+                let menu = try decoder.decode(CocktailMenu.self, from: data)
+                completion(.success(menu))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
+    }
 
     // Fetch a specific menu by its ID
     func fetchMenu(menuID: Int, userID: String, completion: @escaping (Result<CocktailMenu, Error>) -> Void) {
@@ -100,4 +137,14 @@ struct MenuNetworkManager {
             completion(.failure(error))
         }
     }
+}
+
+extension DateFormatter {
+    static let iso8601Full: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSX"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        return formatter
+    }()
 }
