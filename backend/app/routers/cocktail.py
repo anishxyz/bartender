@@ -1,14 +1,44 @@
+import base64
 from typing import Optional, List
 from datetime import datetime
 import uuid
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
+from openai import OpenAI
 from pydantic import BaseModel
 from ..database import supabase
 from ..dependencies import get_user_id
+from ..llm_pipelines.cocktail_from_image import cocktail_extraction
 from ..schemas.cocktail_schemas import Menu, Cocktail, Ingredient, Section, Step
 
 
 router = APIRouter()
+
+client = OpenAI()
+
+@router.post("/{menu_id:int}/ai")
+async def upload_cocktail(
+    menu_id: int,
+    file: Optional[UploadFile] = File(None),
+    base64_image: Optional[str] = Form(None),
+    user_id: str = Depends(get_user_id)
+):
+    if base64_image:
+        # Base64 string provided by the client
+        image_data = base64_image.split(",")[-1]
+    elif file:
+        # File uploaded to the server
+        file_contents = await file.read()
+        image_data = base64.b64encode(file_contents).decode("utf-8")
+        await file.close()
+    else:
+        raise HTTPException(status_code=400, detail="No image provided")
+
+    print('calling OAI API')
+
+    response = cocktail_extraction(image_data)
+
+    print(response.choices[0])
+    return {"hello": "world"}
 
 
 @router.get("/{cocktail_id}", response_model=Cocktail)

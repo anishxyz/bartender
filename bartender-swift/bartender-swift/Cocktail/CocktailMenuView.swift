@@ -33,7 +33,7 @@ struct CocktailMenuView: View {
                 }
                 .padding(2 * gridSpacing)
             }
-            .navigationTitle("🥂 Menus")
+            .navigationTitle("Menus")
             .refreshable {
                 viewModel.fetchAllMenus(userID: currUser.uid)
 
@@ -90,3 +90,4 @@ struct CocktailMenuView_Previews: PreviewProvider {
         }
     }
 }
+

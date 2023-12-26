@@ -104,3 +104,27 @@ struct RecipeStep: Codable {
 extension RecipeStep: Identifiable {
     var id: Int { step_id }
 }
+
+
+// ingredient lists
+let margaritaIngredients = [
+    Ingredient(ingredient_id: 1, cocktail_id: 1, created_at: Date(), updated_at: Date(), name: "Tequila", type: "Alcohol", quantity: 2, units: "oz"),
+    Ingredient(ingredient_id: 2, cocktail_id: 1, created_at: Date(), updated_at: Date(), name: "Triple Sec", type: "Alcohol", quantity: 1, units: "oz"),
+    Ingredient(ingredient_id: 3, cocktail_id: 1, created_at: Date(), updated_at: Date(), name: "Lime Juice", type: "Juice", quantity: 1, units: "oz")
+]
+
+// recipe steps
+let margaritaSteps = [
+    RecipeStep(step_id: 1, section_id: 1, created_at: Date(), updated_at: Date(), index: 1, instruction: "Combine all ingredients in a shaker."),
+    RecipeStep(step_id: 2, section_id: 1, created_at: Date(), updated_at: Date(), index: 2, instruction: "Shake well with ice."),
+    RecipeStep(step_id: 3, section_id: 1, created_at: Date(), updated_at: Date(), index: 3, instruction: "Strain into a chilled glass.")
+]
+
+// recipe sections
+let margaritaSection = RecipeSection(section_id: 1, cocktail_id: 1, created_at: Date(), updated_at: Date(), name: "Mixing", index: 1, steps: margaritaSteps)
+
+// ex cocktails
+let margarita = Cocktail(cocktail_id: 1, created_at: Date(), updated_at: Date(), menu_id: 1, name: "Margarita", sections: [margaritaSection], ingredients: margaritaIngredients)
+
+// menu!
+let cocktailMenu = CocktailMenu(menu_id: 1, created_at: Date(), updated_at: Date(), uid: UUID(), name: "My Cocktail Menu", cocktails: [margarita])
