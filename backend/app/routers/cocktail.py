@@ -33,12 +33,10 @@ async def upload_cocktail(
     else:
         raise HTTPException(status_code=400, detail="No image provided")
 
-    print('calling OAI API')
+    response = await cocktail_extraction(image_data)
 
-    response = cocktail_extraction(image_data)
-
-    print(response.choices[0])
-    return {"hello": "world"}
+    print(response)
+    return response
 
 
 @router.get("/{cocktail_id}", response_model=Cocktail)
