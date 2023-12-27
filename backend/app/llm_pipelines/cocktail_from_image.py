@@ -1,8 +1,10 @@
 from openai import OpenAI, AsyncOpenAI
 
 from app.llm_pipelines.helpers import extract_json
+from app.schemas.cellar_schemas import BottleType
 
 client = AsyncOpenAI()
+
 
 async def cocktail_extraction(image_data):
     response = await client.chat.completions.create(
@@ -43,15 +45,105 @@ async def cocktail_extraction(image_data):
 
 
 async def generate_cocktail(cocktail_description):
+    tools = [
+        {
+            "type": "function",
+            "function": {
+                "name": "cocktail_description",
+                "description": "Detailed content on how to make a cocktail",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "name of cocktail"
+                        },
+                        "sections": {
+                            "type": "array",
+                            "description": "sections",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "index": {
+                                        "type": "integer",
+                                        "description": "index of the section"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "name of the section"
+                                    },
+                                    "steps": {
+                                        "type": "array",
+                                        "description": "steps in the section",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "index": {
+                                                    "type": "integer",
+                                                    "description": "index of the step"
+                                                },
+                                                "instruction": {
+                                                    "type": "string",
+                                                    "description": "instruction for the step"
+                                                }
+                                            },
+                                            "required": ["index", "instruction"]
+                                        }
+                                    }
+                                },
+                                "required": ["index", "steps"]
+                            }
+                        },
+                        "ingredients": {
+                            "type": "array",
+                            "description": "ingredients",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "name of the ingredient"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "enum": BottleType.list(),
+                                        "description": "type of the ingredient"
+                                    },
+                                    "quantity": {
+                                        "type": "number",
+                                        "description": "quantity of the ingredient"
+                                    },
+                                    "units": {
+                                        "type": "string",
+                                        "description": "units of measurement"
+                                    }
+                                },
+                                "required": ["name", "quantity", "units"]
+                            }
+                        }
+                    },
+                    "required": ["name", "sections", "ingredients"]
+                }
+            }
+        }
+    ]
+
+    tool_choice = {
+        "type": "function",
+        "function": {
+            "name": "cocktail_description"
+        }
+    }
+
     response = await client.chat.completions.create(
-        model="gpt-4-vision-preview",
+        model="gpt-4-1106-preview",
         messages=[
             {
                 "role": "system",
                 "content": [
                     {
                         "type": "text",
-                        "text": "You are a professional, michelin-star rated bartender. You are capable of making the best cocktails in the world. You can only respond with bartending and cocktail information related to the image"
+                        "text": "You are a professional, michelin-star rated bartender. You are capable of making the best cocktails in the world. Your job is to help the user make the cocktail from the limited descriptions they provide you"
                     }
                 ]
             },
@@ -60,17 +152,13 @@ async def generate_cocktail(cocktail_description):
                 "content": [
                     {
                         "type": "text",
-                        "text": "I want to know what cocktails are in this image. Please return a JSON array of objects, each of which has the following attributes: name, ingredients, and notes. Notes should ONLY include any other relevant info about the cocktail from the image that may assist when making it. If no other info else is present, leave it as 'none'"
+                        "text": "I have a brief description of the cocktail I want to make. Please help me make it. I have the following description: " + cocktail_description
                     },
-                    {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:image/jpeg;base64,{image_data}"
-                        }
-                    }
                 ]
             }
         ],
         max_tokens=4096,
-        temperature=0
+        temperature=0,
+        tools=tools,
+        tool_choice=tool_choice
     )
