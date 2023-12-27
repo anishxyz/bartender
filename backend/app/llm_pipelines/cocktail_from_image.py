@@ -1,7 +1,9 @@
+import json
+
 from openai import OpenAI, AsyncOpenAI
 
 from app.llm_pipelines.helpers import extract_json
-from app.schemas.cellar_schemas import BottleType
+from app.schemas.cellar_schemas import BottleType, IngredientType
 
 client = AsyncOpenAI()
 
@@ -49,15 +51,15 @@ async def generate_cocktail(cocktail_description):
         {
             "type": "function",
             "function": {
-                "name": "cocktail_description",
+                "name": "cocktail_instructions",
                 "description": "Detailed content on how to make a cocktail",
                 "parameters": {
                     "type": "object",
                     "properties": {
-                        "name": {
-                            "type": "string",
-                            "description": "name of cocktail"
-                        },
+                        # "name": {
+                        #     "type": "string",
+                        #     "description": "name of cocktail"
+                        # },
                         "sections": {
                             "type": "array",
                             "description": "sections",
@@ -106,7 +108,7 @@ async def generate_cocktail(cocktail_description):
                                     },
                                     "type": {
                                         "type": "string",
-                                        "enum": BottleType.list(),
+                                        "enum": IngredientType.list(),
                                         "description": "type of the ingredient"
                                     },
                                     "quantity": {
@@ -115,10 +117,10 @@ async def generate_cocktail(cocktail_description):
                                     },
                                     "units": {
                                         "type": "string",
-                                        "description": "units of measurement"
+                                        "description": "units of measurement. for smaller measurements oz is preferred"
                                     }
                                 },
-                                "required": ["name", "quantity", "units"]
+                                "required": ["name", "type", "quantity", "units"]
                             }
                         }
                     },
@@ -152,7 +154,7 @@ async def generate_cocktail(cocktail_description):
                 "content": [
                     {
                         "type": "text",
-                        "text": "I have a brief description of the cocktail I want to make. Please help me make it. I have the following description: " + cocktail_description
+                        "text": "I have a brief description of the cocktail I want to make. Please help me make it. I have the following description: " + str(cocktail_description)
                     },
                 ]
             }
@@ -162,3 +164,5 @@ async def generate_cocktail(cocktail_description):
         tools=tools,
         tool_choice=tool_choice
     )
+
+    return json.loads(response.choices[0].message.tool_calls[0].function.arguments)

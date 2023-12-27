@@ -1,3 +1,4 @@
+import asyncio
 import base64
 from typing import Optional, List
 from datetime import datetime
@@ -7,7 +8,7 @@ from openai import OpenAI
 from pydantic import BaseModel
 from ..database import supabase
 from ..dependencies import get_user_id
-from ..llm_pipelines.cocktail_from_image import cocktail_extraction
+from ..llm_pipelines.cocktail_from_image import cocktail_extraction, generate_cocktail
 from ..schemas.cocktail_schemas import Menu, Cocktail, Ingredient, Section, Step
 
 
@@ -33,9 +34,22 @@ async def upload_cocktail(
     else:
         raise HTTPException(status_code=400, detail="No image provided")
 
-    response = await cocktail_extraction(image_data)
+    cocktails = await cocktail_extraction(image_data)
 
-    print(response)
+    print(cocktails)
+
+    async def process_cocktail(cocktail):
+        description = await generate_cocktail(cocktail)
+        return {"cocktail": cocktail, "description": description}
+
+    tasks = [process_cocktail(cocktail) for cocktail in cocktails]
+
+    response = []
+    for task in asyncio.as_completed(tasks):
+        cocktail_description = await task
+        response.append(cocktail_description)
+        print(cocktail_description)
+
     return response
 
 
