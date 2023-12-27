@@ -16,7 +16,6 @@ class Cocktail(BaseModel):
     updated_at: datetime
     menu_id: int
     name: str
-    uid: uuid.UUID
 
 class Ingredient(BaseModel):
     ingredient_id: int
