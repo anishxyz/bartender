@@ -8,7 +8,8 @@ from openai import OpenAI
 from pydantic import BaseModel
 from ..database import supabase
 from ..dependencies import get_user_id
-from ..llm_pipelines.cocktail_from_image import cocktail_extraction, generate_cocktail
+from ..llm_pipelines.cocktail_from_image import cocktail_extraction, generate_cocktail_instructions, get_cocktails_from_image
+from ..llm_pipelines.helpers import process_image_data
 from ..schemas.cocktail_schemas import Menu, Cocktail, Ingredient, Section, Step
 
 
@@ -23,34 +24,13 @@ async def upload_cocktail(
     base64_image: Optional[str] = Form(None),
     user_id: str = Depends(get_user_id)
 ):
-    if base64_image:
-        # Base64 string provided by the client
-        image_data = base64_image.split(",")[-1]
-    elif file:
-        # File uploaded to the server
-        file_contents = await file.read()
-        image_data = base64.b64encode(file_contents).decode("utf-8")
-        await file.close()
-    else:
-        raise HTTPException(status_code=400, detail="No image provided")
+    image_data = await process_image_data(base64_image=base64_image, file=file)
 
-    cocktails = await cocktail_extraction(image_data)
+    response = await get_cocktails_from_image(image_data)
 
-    print(cocktails)
+    sorted_response = sorted(response, key=lambda x: x['name'])
 
-    async def process_cocktail(cocktail):
-        description = await generate_cocktail(cocktail)
-        return {"cocktail": cocktail, "description": description}
-
-    tasks = [process_cocktail(cocktail) for cocktail in cocktails]
-
-    response = []
-    for task in asyncio.as_completed(tasks):
-        cocktail_description = await task
-        response.append(cocktail_description)
-        print(cocktail_description)
-
-    return response
+    return sorted_response
 
 
 @router.get("/{cocktail_id}", response_model=Cocktail)

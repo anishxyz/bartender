@@ -1,4 +1,7 @@
+import base64
 import json
+
+from fastapi import HTTPException
 
 
 def extract_json(data_str, start_marker='```json', end_marker='```'):
@@ -17,3 +20,18 @@ def extract_json(data_str, start_marker='```json', end_marker='```'):
             raise ValueError("String could not be decoded as JSON.")
     else:
         raise ValueError("No JSON data found.")
+
+
+async def process_image_data(base64_image=None, file=None):
+    if base64_image:
+        # Base64 string provided by the client
+        image_data = base64_image.split(",")[-1]
+    elif file:
+        # File uploaded to the server
+        file_contents = await file.read()
+        image_data = base64.b64encode(file_contents).decode("utf-8")
+        await file.close()
+    else:
+        raise HTTPException(status_code=400, detail="No image provided")
+
+    return image_data

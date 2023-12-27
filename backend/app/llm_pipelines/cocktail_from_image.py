@@ -1,3 +1,4 @@
+import asyncio
 import json
 
 from openai import OpenAI, AsyncOpenAI
@@ -6,6 +7,33 @@ from app.llm_pipelines.helpers import extract_json
 from app.schemas.cellar_schemas import BottleType, IngredientType
 
 client = AsyncOpenAI()
+
+
+async def get_cocktails_from_image(image_data):
+    cocktails = await cocktail_extraction(image_data)
+
+    print(cocktails)
+
+    async def process_cocktail(cocktail):
+        description = await generate_cocktail_instructions(cocktail)
+
+        ret = {
+            "name": cocktail["name"],
+            "sections": description["sections"],
+            "ingredients": description["ingredients"],
+        }
+
+        return ret
+
+    tasks = [process_cocktail(cocktail) for cocktail in cocktails]
+
+    response = []
+    for task in asyncio.as_completed(tasks):
+        cocktail_description = await task
+        response.append(cocktail_description)
+        # print(cocktail_description)
+
+    return response
 
 
 async def cocktail_extraction(image_data):
@@ -46,7 +74,7 @@ async def cocktail_extraction(image_data):
     return jsonified
 
 
-async def generate_cocktail(cocktail_description):
+async def generate_cocktail_instructions(cocktail_description):
     tools = [
         {
             "type": "function",
@@ -56,10 +84,10 @@ async def generate_cocktail(cocktail_description):
                 "parameters": {
                     "type": "object",
                     "properties": {
-                        # "name": {
-                        #     "type": "string",
-                        #     "description": "name of cocktail"
-                        # },
+                        "name": {
+                            "type": "string",
+                            "description": "name of cocktail"
+                        },
                         "sections": {
                             "type": "array",
                             "description": "sections",
@@ -133,12 +161,13 @@ async def generate_cocktail(cocktail_description):
     tool_choice = {
         "type": "function",
         "function": {
-            "name": "cocktail_description"
+            "name": "cocktail_instructions"
         }
     }
 
     response = await client.chat.completions.create(
         model="gpt-4-1106-preview",
+        # model="gpt-3.5-turbo-1106",
         messages=[
             {
                 "role": "system",
@@ -154,7 +183,7 @@ async def generate_cocktail(cocktail_description):
                 "content": [
                     {
                         "type": "text",
-                        "text": "I have a brief description of the cocktail I want to make. Please help me make it. I have the following description: " + str(cocktail_description)
+                        "text": "I have a brief description of the cocktail I want to make. Please help me make it. I have the following description:\n" + str(cocktail_description)
                     },
                 ]
             }
