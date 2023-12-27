@@ -166,8 +166,8 @@ async def generate_cocktail_instructions(cocktail_description):
     }
 
     response = await client.chat.completions.create(
-        model="gpt-4-1106-preview",
-        # model="gpt-3.5-turbo-1106",
+        # model="gpt-4-1106-preview",
+        model="gpt-3.5-turbo-1106",
         messages=[
             {
                 "role": "system",
