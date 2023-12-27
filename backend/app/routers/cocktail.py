@@ -40,9 +40,7 @@ async def upload_cocktail(
         "uid": user_id,
     } for cocktail in sorted_response]
 
-    print('inserting cocktails')
     inserted_cocktails = supabase.table("cocktails").insert(cocktails_batch).execute()
-    print('response', inserted_cocktails.data)
     cocktail_ids = [item['cocktail_id'] for item in inserted_cocktails.data]
 
     # Stage 2: Prepare Ingredients and Sections
@@ -82,14 +80,10 @@ async def upload_cocktail(
 
     # Stage 3: Insert Ingredients and Sections, Retrieve Section IDs
     if ingredients_batch:
-        print('inserting ingredients')
         data = supabase.table("ingredients").insert(ingredients_batch).execute()
-        print('response', data.data)
 
-    print('inserting sections')
-    print('attempting to insert', sections_batch)
+
     inserted_sections = supabase.table("sections").insert(sections_batch).execute()
-    print('response', inserted_sections.data)
     section_ids = [item['section_id'] for item in inserted_sections.data]
 
     # Update steps_batch with actual section IDs
@@ -98,10 +92,7 @@ async def upload_cocktail(
 
     # Stage 4: Insert Steps
     if steps_batch:
-        print('inserting steps')
-        print('attempting to insert', steps_batch)
         data = supabase.table("steps").insert(steps_batch).execute()
-        print('response', data.data)
 
     return sorted_response
 
