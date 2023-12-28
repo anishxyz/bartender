@@ -20,6 +20,7 @@ class IngredientType(str, Enum):
     mezcal = "Mezcal"
     bitters = "Bitters"
     mixer = "Mixer"
+    ice = "Ice" # added
     garnish = "Garnish" # added
     other = "Other"
 

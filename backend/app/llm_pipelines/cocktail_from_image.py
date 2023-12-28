@@ -10,28 +10,35 @@ client = AsyncOpenAI()
 
 
 async def get_cocktails_from_image(image_data):
+
     cocktails = await cocktail_extraction(image_data)
 
     print(cocktails)
 
     async def process_cocktail(cocktail):
-        description = await generate_cocktail_instructions(cocktail)
 
-        ret = {
-            "name": cocktail["name"],
-            "sections": description["sections"],
-            "ingredients": description["ingredients"],
-        }
+        try:
+            description = await generate_cocktail_instructions(cocktail)
 
-        return ret
+            ret = {
+                "name": cocktail["name"],
+                "sections": description["sections"],
+                "ingredients": description["ingredients"],
+            }
+
+            return ret
+
+        except Exception as e:
+            print('Error generating cocktail instructions: ', e)
+            return None
 
     tasks = [process_cocktail(cocktail) for cocktail in cocktails]
 
     response = []
     for task in asyncio.as_completed(tasks):
         cocktail_description = await task
-        response.append(cocktail_description)
-        # print(cocktail_description)
+        if cocktail_description:
+            response.append(cocktail_description)
 
     return response
 
@@ -139,16 +146,16 @@ async def generate_cocktail_instructions(cocktail_description):
                                         "enum": IngredientType.list(),
                                         "description": "type of the ingredient"
                                     },
-                                    "quantity": {
-                                        "type": "number",
-                                        "description": "quantity of the ingredient"
-                                    },
                                     "units": {
                                         "type": "string",
-                                        "description": "units of measurement. for smaller measurements oz is preferred"
-                                    }
+                                        "description": "units of measurement for quantity. can also describe portion if not expressible numerically for smaller measurements 'oz' is preferred"
+                                    },
+                                    "quantity": {
+                                        "type": "number",
+                                        "description": "quantity of the ingredient, numerical value"
+                                    },
                                 },
-                                "required": ["name", "type", "quantity", "units"]
+                                "required": ["name", "type", "units"]
                             }
                         }
                     },
@@ -166,8 +173,8 @@ async def generate_cocktail_instructions(cocktail_description):
     }
 
     response = await client.chat.completions.create(
-        # model="gpt-4-1106-preview",
-        model="gpt-3.5-turbo-1106",
+        model="gpt-4-1106-preview",
+        # model="gpt-3.5-turbo-1106",
         messages=[
             {
                 "role": "system",
@@ -194,4 +201,5 @@ async def generate_cocktail_instructions(cocktail_description):
         tool_choice=tool_choice
     )
 
+    print(response.choices[0].message.tool_calls[0].function.arguments)
     return json.loads(response.choices[0].message.tool_calls[0].function.arguments)
