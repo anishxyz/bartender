@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from ..database import supabase
 from ..dependencies import get_user_id
 from ..llm_pipelines.cocktail_from_image import cocktail_extraction, generate_cocktail_instructions, get_cocktails_from_image
+from ..llm_pipelines.cocktails_db_helper import add_cocktail_from_image_db, post_process_db_res
 from ..llm_pipelines.helpers import process_image_data
 from ..schemas.cocktail_schemas import Menu, Cocktail, Ingredient, Section, Step
 

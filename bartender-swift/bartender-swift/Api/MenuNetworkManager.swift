@@ -80,6 +80,9 @@ struct MenuNetworkManager {
             }
         }.resume()
     }
+    
+    
+    // UNVERIFIED BELOW //
 
     // Fetch a specific menu by its ID
     func fetchMenu(menuID: Int, userID: String, completion: @escaping (Result<CocktailMenu, Error>) -> Void) {
