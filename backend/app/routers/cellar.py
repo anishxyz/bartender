@@ -8,7 +8,6 @@ from ..dependencies import get_user_id
 
 router = APIRouter()
 
-
 class Cellar(BaseModel):
     id: Optional[int]
     created_at: Optional[datetime]
