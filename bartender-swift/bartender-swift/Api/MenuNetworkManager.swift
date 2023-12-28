@@ -12,7 +12,7 @@ struct MenuNetworkManager {
     static let shared = MenuNetworkManager()
     let baseURL = "http://127.0.0.1:8000/api/menu"
     
-    func fetchAllMenuDetails(userID: String, completion: @escaping (Result<[CocktailMenu], Error>) -> Void) {
+    func fetchMenus(userID: String, completion: @escaping (Result<[CocktailMenu], Error>) -> Void) {
         let url = URL(string: "\(baseURL)/all")!
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -140,14 +140,4 @@ struct MenuNetworkManager {
             completion(.failure(error))
         }
     }
-}
-
-extension DateFormatter {
-    static let iso8601Full: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSX"
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        return formatter
-    }()
 }

@@ -11,11 +11,12 @@ import Combine
 class CocktailViewModel: ObservableObject {
     @Published var menus: [CocktailMenu] = []
     private var cancellables = Set<AnyCancellable>()
-    private let networkManager = MenuNetworkManager.shared
+    private let menuNetworkManager = MenuNetworkManager.shared
+    private let cocktailNetworkManager = CocktailNetworkManager.shared
 
     // TODO: MAKE IT A CALL FOR MENU SUMMARIES -> ALL MENU DATA for SPEEEEEDDDDYYYY
     func fetchAllMenus(userID: String) {
-        networkManager.fetchAllMenuDetails(userID: userID) { [weak self] result in
+        menuNetworkManager.fetchMenus(userID: userID) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let menus):
@@ -29,7 +30,7 @@ class CocktailViewModel: ObservableObject {
     }
     
     func createMenu(name: String, userID: String) {
-        networkManager.createMenu(name: name, userID: userID) { [weak self] result in
+        menuNetworkManager.createMenu(name: name, userID: userID) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let newMenu):
@@ -42,4 +43,23 @@ class CocktailViewModel: ObservableObject {
         }
     }
     
+    func createCocktailsForMenu(fromImage file: Data?, base64Image: String?, menuID: Int, userID: String) {
+        cocktailNetworkManager.uploadCocktailImage(menuID: menuID, userID: userID, file: file, base64Image: base64Image) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let cocktails):
+                    self?.addCocktails(cocktails, toMenuWithID: menuID)
+                case .failure(let error):
+                    print("Error creating cocktails: \(error)")
+                    // TODO: HANDLE ERROR
+                }
+            }
+        }
+    }
+
+    private func addCocktails(_ cocktails: [Cocktail], toMenuWithID menuID: Int) {
+        if let index = menus.firstIndex(where: { $0.menu_id == menuID }) {
+            menus[index].cocktails?.append(contentsOf: cocktails)
+        }
+    }
 }

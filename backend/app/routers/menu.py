@@ -146,52 +146,62 @@ async def get_menu_full_details(menu_id: int, user_id: str = Depends(get_user_id
 @router.get("/all", response_model=List[dict])
 async def get_all_menu_details(user_id: str = Depends(get_user_id)):
     # Fetch all menus for the user
-    print('got here')
     menus_query = supabase.table("menus").select("*").eq("uid", user_id)
     menus_data = menus_query.execute()
     if not menus_data.data:
         raise HTTPException(status_code=404, detail="No menus found for the user")
 
+    menu_ids = [menu['menu_id'] for menu in menus_data.data]
+
+    # Fetch all cocktails in a single query
+    cocktail_query = supabase.table("cocktails").select("*").in_("menu_id", menu_ids)
+    cocktail_data = cocktail_query.execute()
+    cocktails_by_menu_id = {menu_id: [] for menu_id in menu_ids}
+    for cocktail in cocktail_data.data:
+        cocktails_by_menu_id[cocktail['menu_id']].append(cocktail)
+
+    # Fetch all ingredients, sections, and steps in batch
+    cocktail_ids = [cocktail['cocktail_id'] for cocktail in cocktail_data.data]
+
+    ingredients_query = supabase.table("ingredients").select("*").in_("cocktail_id", cocktail_ids)
+    ingredients_data = ingredients_query.execute()
+    ingredients_by_cocktail_id = {cocktail_id: [] for cocktail_id in cocktail_ids}
+    for ingredient in ingredients_data.data:
+        ingredients_by_cocktail_id[ingredient['cocktail_id']].append(ingredient)
+
+    sections_query = supabase.table("sections").select("*").in_("cocktail_id", cocktail_ids).order("index")
+    sections_data = sections_query.execute()
+    sections_by_cocktail_id = {cocktail_id: [] for cocktail_id in cocktail_ids}
+    for section in sections_data.data:
+        sections_by_cocktail_id[section['cocktail_id']].append(section)
+
+    steps_query = supabase.table("steps").select("*").in_("section_id", [section['section_id'] for section in sections_data.data]).order("index")
+    steps_data = steps_query.execute()
+    steps_by_section_id = {section['section_id']: [] for section in sections_data.data}
+    for step in steps_data.data:
+        steps_by_section_id[step['section_id']].append(step)
+
+    # Construct the full details
     all_menus_full_details = []
-
-    # Loop through each menu to fetch full details
     for menu in menus_data.data:
-        menu_id = menu['menu_id']
         cocktails_full_details = []
-
-        # Fetch cocktails for the menu
-        cocktail_query = supabase.table("cocktails").select("*").eq("menu_id", menu_id)
-        cocktail_data = cocktail_query.execute()
-
-        for cocktail in cocktail_data.data:
-            # Fetch ingredients, sections, and steps for each cocktail
-            ingredients_query = supabase.table("ingredients").select("*").eq("cocktail_id", cocktail['cocktail_id'])
-            ingredients_data = ingredients_query.execute()
-
-            sections_query = supabase.table("sections").select("*").eq("cocktail_id", cocktail['cocktail_id']).order("index")
-            sections_data = sections_query.execute()
-
+        for cocktail in cocktails_by_menu_id[menu['menu_id']]:
             cocktail_sections = []
-            for section in sections_data.data:
-                steps_query = supabase.table("steps").select("*").eq("section_id", section['section_id']).order("index")
-                steps_data = steps_query.execute()
-
+            for section in sections_by_cocktail_id[cocktail['cocktail_id']]:
                 section_with_steps = section
-                section_with_steps["steps"] = steps_data.data
+                section_with_steps["steps"] = steps_by_section_id[section['section_id']]
                 cocktail_sections.append(section_with_steps)
 
-            # Append cocktail details
             cocktails_full_details.append({
                 "cocktail_id": cocktail['cocktail_id'],
                 "created_at": cocktail['created_at'],
                 "updated_at": cocktail['updated_at'],
                 "menu_id": cocktail['menu_id'],
                 "name": cocktail['name'],
-                "ingredients": ingredients_data.data,
+                "ingredients": ingredients_by_cocktail_id[cocktail['cocktail_id']],
                 "sections": cocktail_sections
             })
 
-        # Append full menu details
         all_menus_full_details.append({
             "menu_id": menu['menu_id'],
             "created_at": menu['created_at'],

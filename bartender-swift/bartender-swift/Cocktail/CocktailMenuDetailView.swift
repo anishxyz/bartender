@@ -9,17 +9,22 @@ import SwiftUI
 
 struct CocktailMenuDetailView: View {
     var menu: CocktailMenu?
-    @Environment(\.colorScheme) var colorScheme // To detect the current color scheme
+    @EnvironmentObject var viewModel: CocktailViewModel
+    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject var currUser: CurrUser
+    
+    @State private var showImagePicker = false
+    @State private var imagePickerSourceType = UIImagePickerController.SourceType.photoLibrary
+    @State private var selectedImage: UIImage?
 
     var body: some View {
         VStack {
-            if let menu = menu, let cocktails = menu.cocktails {
+            if let menu = menu, let cocktails = menu.cocktails, !cocktails.isEmpty {
                 List(cocktails) { cocktail in
                     Text(cocktail.name)
-                        
                 }
             } else {
-                Text("No details available")
+                Text("No cocktails here! Add one with the +")
             }
         }
         .background(colorScheme == .light ? Color.white : Color.clear)
@@ -29,7 +34,12 @@ struct CocktailMenuDetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button("From Camera", action: {
-                        // Action for selecting 'From Camera'
+                        self.imagePickerSourceType = .camera
+                        self.showImagePicker = true
+                    })
+                    Button("From Photo Library", action: {
+                        self.imagePickerSourceType = .photoLibrary
+                        self.showImagePicker = true
                     })
                     Button("Build Cocktail", action: {
                         // cocktail builder manual
@@ -40,6 +50,25 @@ struct CocktailMenuDetailView: View {
                         .colorMultiply(.orange)
                 }
             }
+        }
+        .sheet(isPresented: $showImagePicker) {
+            ImagePicker(selectedImage: $selectedImage, sourceType: imagePickerSourceType)
+                .onDisappear {
+                    if let selectedImage = selectedImage {
+                        processSelectedImage(selectedImage)
+                    }
+                }
+        }
+    }
+    
+    func processSelectedImage(_ image: UIImage) {
+        // Convert UIImage to Data
+        if let imageData = image.jpegData(compressionQuality: 0.8) {
+            
+            guard let menuID = menu?.menu_id else { return }
+
+            // Call the function to create cocktails for the menu
+            viewModel.createCocktailsForMenu(fromImage: imageData, base64Image: nil, menuID: menuID, userID: currUser.uid)
         }
     }
 }

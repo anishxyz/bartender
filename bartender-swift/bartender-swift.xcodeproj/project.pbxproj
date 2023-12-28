@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B61B06752B3D61CA00E04E46 /* NetworkManagerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B06742B3D61CA00E04E46 /* NetworkManagerHelper.swift */; };
+		B61B067B2B3D654600E04E46 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B067A2B3D654600E04E46 /* ImagePicker.swift */; };
 		B660618C2B0D9556002F8DF2 /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618B2B0D9556002F8DF2 /* CellarView.swift */; };
 		B660618E2B0D97DE002F8DF2 /* CocktailMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */; };
 		B66061912B0D98A3002F8DF2 /* BuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66061902B0D98A3002F8DF2 /* BuilderView.swift */; };
@@ -46,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B61B06742B3D61CA00E04E46 /* NetworkManagerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerHelper.swift; sourceTree = "<group>"; };
+		B61B067A2B3D654600E04E46 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		B660618B2B0D9556002F8DF2 /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
 		B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailMenuView.swift; sourceTree = "<group>"; };
 		B66061902B0D98A3002F8DF2 /* BuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderView.swift; sourceTree = "<group>"; };
@@ -98,6 +102,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B61B06792B3D653100E04E46 /* Auxiliary */ = {
+			isa = PBXGroup;
+			children = (
+				B61B067A2B3D654600E04E46 /* ImagePicker.swift */,
+			);
+			path = Auxiliary;
+			sourceTree = "<group>";
+		};
 		B66061862B0D939B002F8DF2 /* Cellar */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +157,7 @@
 				B66061982B13403C002F8DF2 /* CellarNetworkManager.swift */,
 				B6814B3F2B3821DE00B3194D /* CocktailNetworkManager.swift */,
 				B6814B412B382A6300B3194D /* MenuNetworkManager.swift */,
+				B61B06742B3D61CA00E04E46 /* NetworkManagerHelper.swift */,
 			);
 			path = Api;
 			sourceTree = "<group>";
@@ -168,6 +181,7 @@
 		B68CA5282B05D58A00F83F80 /* bartender-swift */ = {
 			isa = PBXGroup;
 			children = (
+				B61B06792B3D653100E04E46 /* Auxiliary */,
 				B68CA5532B05E91000F83F80 /* bartender-swift.entitlements */,
 				B66061972B134029002F8DF2 /* Api */,
 				B66061862B0D939B002F8DF2 /* Cellar */,
@@ -293,6 +307,7 @@
 			files = (
 				B66061912B0D98A3002F8DF2 /* BuilderView.swift in Sources */,
 				B68CA52C2B05D58A00F83F80 /* ContentView.swift in Sources */,
+				B61B06752B3D61CA00E04E46 /* NetworkManagerHelper.swift in Sources */,
 				B660618C2B0D9556002F8DF2 /* CellarView.swift in Sources */,
 				B68CA5552B05ED3600F83F80 /* SignInView.swift in Sources */,
 				B66061992B13403C002F8DF2 /* CellarNetworkManager.swift in Sources */,
@@ -307,6 +322,7 @@
 				B660618E2B0D97DE002F8DF2 /* CocktailMenuView.swift in Sources */,
 				B66A2B042B3968A9000EFF6F /* AddMenuSheetView.swift in Sources */,
 				B68CA5522B05E5F800F83F80 /* AuthManager.swift in Sources */,
+				B61B067B2B3D654600E04E46 /* ImagePicker.swift in Sources */,
 				B6B62A182B36C0680059E8C5 /* Cocktail.swift in Sources */,
 				B66061962B0DFED9002F8DF2 /* CellarViewModel.swift in Sources */,
 				B66A2B062B397DF6000EFF6F /* CocktailMenuDetailView.swift in Sources */,
