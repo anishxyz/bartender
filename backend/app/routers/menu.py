@@ -210,3 +210,43 @@ async def get_menu_full_details(menu_id: int, user_id: str = Depends(get_user_id
         "name": menu_data.data[0].get('name'),
         "cocktails": cocktails_full_details
     }
+
+@router.delete("/id/{menu_id:int}", response_model=dict)
+async def delete_menu(menu_id: int, user_id: str = Depends(get_user_id)):
+    # Check if the menu exists
+    menu_query = supabase.table("menus").select("menu_id").eq("menu_id", menu_id).eq("uid", user_id)
+    menu_data = menu_query.execute()
+    if not menu_data.data:
+        raise HTTPException(status_code=404, detail="Menu not found")
+
+    # Get all cocktail IDs for the menu
+    cocktail_ids_query = supabase.table("cocktails").select("cocktail_id").eq("menu_id", menu_id)
+    cocktail_ids_data = cocktail_ids_query.execute()
+    cocktail_ids = [cocktail['cocktail_id'] for cocktail in cocktail_ids_data.data]
+
+    if cocktail_ids:
+        # Get all section IDs for these cocktails
+        section_ids_query = supabase.table("sections").select("section_id").in_("cocktail_id", cocktail_ids)
+        section_ids_data = section_ids_query.execute()
+        section_ids = [section['section_id'] for section in section_ids_data.data]
+
+        # Delete steps for these sections
+        if section_ids:
+            supabase.table("steps").delete().in_("section_id", section_ids).execute()
+
+        # Delete sections for these cocktails
+        supabase.table("sections").delete().in_("cocktail_id", cocktail_ids).execute()
+
+        # Delete ingredients for these cocktails
+        supabase.table("ingredients").delete().in_("cocktail_id", cocktail_ids).execute()
+
+    # Delete cocktails for the menu
+    supabase.table("cocktails").delete().eq("menu_id", menu_id).execute()
+
+    # Delete the menu
+    delete_menu_result = supabase.table("menus").delete().eq("menu_id", menu_id).execute()
+
+    if not delete_menu_result.data:
+        raise HTTPException(status_code=500, detail="Failed to delete the menu")
+
+    return {"detail": "Menu deleted successfully"}

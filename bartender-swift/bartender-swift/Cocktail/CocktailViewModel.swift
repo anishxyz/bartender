@@ -71,4 +71,24 @@ class CocktailViewModel: ObservableObject {
             menus[index].cocktails?.append(contentsOf: cocktails)
         }
     }
+    
+    func deleteMenu(menuID: Int, userID: String, completion: (() -> Void)? = nil) {
+        menuNetworkManager.deleteMenu(menuID: menuID, userID: userID) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success():
+                    self?.removeMenu(withID: menuID)
+                case .failure(let error):
+                    print("Error deleting menu: \(error)")
+                    // TODO: HANDLE ERROR
+                }
+                
+            }
+            completion?()
+        }
+    }
+
+    private func removeMenu(withID menuID: Int) {
+        menus.removeAll { $0.menu_id == menuID }
+    }
 }

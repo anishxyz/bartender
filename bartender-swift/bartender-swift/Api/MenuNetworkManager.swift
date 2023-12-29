@@ -81,6 +81,26 @@ struct MenuNetworkManager {
         }.resume()
     }
     
+    func deleteMenu(menuID: Int, userID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let url = URL(string: "\(baseURL)/id/\(menuID)")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "DELETE"
+        request.addValue("Bearer \(userID)", forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Server error"])))
+                return
+            }
+
+            completion(.success(()))
+        }.resume()
+    }
     
     // UNVERIFIED BELOW //
 

@@ -14,7 +14,8 @@ struct CocktailMenuView: View {
     
     @State private var showingAddMenuSheet = false
     @State private var isRefreshing = false
-
+    @State private var showingDeleteConfirmation = false
+    @State private var selectedMenuID: Int?
     
     let gridSpacing: CGFloat = 10
     
@@ -30,6 +31,9 @@ struct CocktailMenuView: View {
                     ForEach(viewModel.menus) { menu in
                         NavigationLink(destination: CocktailMenuDetailView(menu_id: menu.menu_id)) {
                             MenuCardView(menu: menu)
+                                .contextMenu {
+                                    MenuContextMenuView(menuID: menu.menu_id, showingDeleteConfirmation: $showingDeleteConfirmation, selectedMenuID: $selectedMenuID)
+                                }
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
@@ -58,9 +62,40 @@ struct CocktailMenuView: View {
                     .environmentObject(viewModel)
                     .presentationDetents([.medium])
             }
+            .alert("Are you sure you want to delete this menu?", isPresented: $showingDeleteConfirmation) {
+                Button("Delete", role: .destructive) {
+                    if let menuID = selectedMenuID {
+                        loadingState.startLoading()
+                        
+                        viewModel.deleteMenu(menuID: menuID, userID: currUser.uid) {
+                            loadingState.stopLoading()
+                        }
+                    }
+                }
+                Button("Cancel", role: .cancel) {}
+            }
 //            .onAppear {
 //                viewModel.fetchAllMenus(userID: currUser.uid)
 //            }
+        }
+    }
+    
+    struct MenuContextMenuView: View {
+        let menuID: Int
+        @Binding var showingDeleteConfirmation: Bool
+        @Binding var selectedMenuID: Int?
+
+        var body: some View {
+            Button(action: {
+                selectedMenuID = menuID
+                showingDeleteConfirmation = true
+            }) {
+                HStack {
+                    Text("Delete Menu")
+                    Image(systemName: "trash")
+                }
+                .foregroundColor(.red)
+            }
         }
     }
     
