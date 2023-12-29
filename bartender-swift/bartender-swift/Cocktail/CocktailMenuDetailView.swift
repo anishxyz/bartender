@@ -80,14 +80,28 @@ struct CocktailMenuDetailView: View {
 }
 
 
-//struct CocktailMenuDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        
-//        Group {
-//            CocktailMenuDetailView(menu: cocktailMenu)
-//            
-//            CocktailMenuDetailView(menu: cocktailMenu)
-//                .environment(\.colorScheme, .dark)
-//        }
-//    }
-//}
+struct CocktailMenuDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        let mockViewModel = CocktailViewModel()
+        
+        let currUser = CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com")
+
+        Group {
+            CocktailMenuDetailView(menu_id: 14)
+                .environmentObject(CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com"))
+                .environmentObject(mockViewModel)
+                .onAppear {
+                    mockViewModel.fetchAllMenus(userID: currUser.uid)
+                }
+            
+            CocktailMenuDetailView(menu_id: 14)
+                .environmentObject(CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com"))
+                .environmentObject(mockViewModel)
+                .environment(\.colorScheme, .dark)
+                .onAppear {
+                    mockViewModel.fetchAllMenus(userID: currUser.uid)
+                }
+        }
+    }
+}

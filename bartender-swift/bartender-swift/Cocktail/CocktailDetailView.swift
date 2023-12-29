@@ -24,33 +24,18 @@ struct CocktailDetailView: View {
             if let cocktail = cocktail {
                 VStack(alignment: .leading) {
                     // Ingredients Section
-                    VStack(alignment: .leading) {
-                        Text("Ingredients")
-                            .font(.title2)
-                            .padding(.bottom, 5)
-                        
-                        ForEach(cocktail.ingredients ?? [], id: \.self) { ingredient in
-                            HStack {
-                                Text(ingredient.name)
-                                if let type = ingredient.type {
-                                    Text("Type: \(type.rawValue)")
-                                        .font(.subheadline)
-                                        .foregroundColor(type.color)
-                                }
-                                Spacer()
-                                Text("\(ingredient.quantity ?? 0) \(ingredient.units ?? "")")
-                            }
-                            .padding(.vertical, 2)
-                        }
+                    
+                    if let ingredients = cocktail.ingredients {
+                        IngredientsView(ingredients: ingredients)
                     }
-                    .padding()
                     
                     // Recipe Sections
                     ForEach(cocktail.sections ?? [], id: \.self) { section in
                         VStack(alignment: .leading) {
                             if let sectionName = section.name {
                                 Text(sectionName)
-                                    .font(.title2)
+                                    .font(.subheadline)
+                                    .bold()
                                     .padding(.bottom, 5)
                             }
                             
@@ -72,5 +57,68 @@ struct CocktailDetailView: View {
         .navigationTitle(cocktail?.name ?? "Cocktail Details")
         .navigationBarTitleDisplayMode(.inline)
 
+    }
+}
+
+
+struct IngredientsView: View {
+    var ingredients: [Ingredient]
+
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Ingredients")
+                .font(.subheadline)
+                .bold()
+                .padding(.bottom, 5)
+            
+            VStack {
+                ForEach(ingredients, id: \.self) { ingredient in
+                    HStack {
+                        Text(ingredient.name)
+                        Spacer()
+                        Group {
+                            if let quantity = ingredient.quantity, quantity > 0 {
+                                Text("\(String(format: "%.1f", quantity))")
+                            }
+                            Text(ingredient.units ?? "")
+                        }
+                    }
+                    .padding(.vertical, 2)
+                }
+            }
+            .padding()
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color(UIColor.systemGray6))
+            )
+        }
+        .padding()
+    }
+}
+
+
+struct CocktailDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        
+        let mockViewModel = CocktailViewModel()
+        
+        let currUser = CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com")
+
+        Group {
+            CocktailDetailView(menuId: 14, cocktailId: 290)
+                .environmentObject(CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com"))
+                .environmentObject(mockViewModel)
+                .onAppear {
+                    mockViewModel.fetchAllMenus(userID: currUser.uid)
+                }
+            
+            CocktailDetailView(menuId: 14, cocktailId: 290)
+                .environmentObject(CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com"))
+                .environmentObject(mockViewModel)
+                .environment(\.colorScheme, .dark)
+                .onAppear {
+                    mockViewModel.fetchAllMenus(userID: currUser.uid)
+                }
+        }
     }
 }
