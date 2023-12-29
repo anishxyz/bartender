@@ -58,9 +58,23 @@ struct Ingredient: Codable {
     let created_at: Date
     let updated_at: Date
     let name: String
-    var type: String?
+    private var typeString: String? // Store the actual string
+    var type: IngredientType? { // Computed property to get/set IngredientType
+        get {
+            guard let typeString = typeString else { return nil }
+            return IngredientType(type: typeString)
+        }
+        set {
+            typeString = newValue?.rawValue
+        }
+    }
     var quantity: Float?
     var units: String?
+
+    enum CodingKeys: String, CodingKey {
+        case ingredient_id, cocktail_id, created_at, updated_at, name, quantity, units
+        case typeString = "type"
+    }
 }
 
 extension Ingredient: Identifiable {
@@ -122,10 +136,10 @@ extension RecipeStep: Hashable {
 }
 
 // ingredient lists
-let margaritaIngredients = [
-    Ingredient(ingredient_id: 1, cocktail_id: 1, created_at: Date(), updated_at: Date(), name: "Tequila", type: "Alcohol", quantity: 2, units: "oz"),
-    Ingredient(ingredient_id: 2, cocktail_id: 1, created_at: Date(), updated_at: Date(), name: "Triple Sec", type: "Alcohol", quantity: 1, units: "oz"),
-    Ingredient(ingredient_id: 3, cocktail_id: 1, created_at: Date(), updated_at: Date(), name: "Lime Juice", type: "Juice", quantity: 1, units: "oz")
+let margaritaIngredients: [Ingredient] = [
+//    Ingredient(ingredient_id: 1, cocktail_id: 1, created_at: Date(), updated_at: Date(), name: "Tequila", type: "Alcohol", quantity: 2, units: "oz"),
+//    Ingredient(ingredient_id: 2, cocktail_id: 1, created_at: Date(), updated_at: Date(), name: "Triple Sec", type: "Alcohol", quantity: 1, units: "oz"),
+//    Ingredient(ingredient_id: 3, cocktail_id: 1, created_at: Date(), updated_at: Date(), name: "Lime Juice", type: "Juice", quantity: 1, units: "oz")
 ]
 
 // recipe steps

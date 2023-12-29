@@ -12,6 +12,7 @@
 		B61B067D2B3E490B00E04E46 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B067C2B3E490B00E04E46 /* ActivityIndicator.swift */; };
 		B61B067F2B3E50D800E04E46 /* LoadingStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B067E2B3E50D800E04E46 /* LoadingStateViewModel.swift */; };
 		B61B07282B3E5E5600E04E46 /* CocktailDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07272B3E5E5600E04E46 /* CocktailDetailView.swift */; };
+		B61B072A2B3EAD1300E04E46 /* IngredientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07292B3EAD1300E04E46 /* IngredientType.swift */; };
 		B660618C2B0D9556002F8DF2 /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618B2B0D9556002F8DF2 /* CellarView.swift */; };
 		B660618E2B0D97DE002F8DF2 /* CocktailMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */; };
 		B66061912B0D98A3002F8DF2 /* BuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66061902B0D98A3002F8DF2 /* BuilderView.swift */; };
@@ -56,6 +57,7 @@
 		B61B067C2B3E490B00E04E46 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B61B067E2B3E50D800E04E46 /* LoadingStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStateViewModel.swift; sourceTree = "<group>"; };
 		B61B07272B3E5E5600E04E46 /* CocktailDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDetailView.swift; sourceTree = "<group>"; };
+		B61B07292B3EAD1300E04E46 /* IngredientType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientType.swift; sourceTree = "<group>"; };
 		B660618B2B0D9556002F8DF2 /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
 		B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailMenuView.swift; sourceTree = "<group>"; };
 		B66061902B0D98A3002F8DF2 /* BuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderView.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				B66061932B0DF822002F8DF2 /* Cellar.swift */,
 				B6B62A132B2EBAFC0059E8C5 /* BottleType.swift */,
 				B6B62A172B36C0680059E8C5 /* Cocktail.swift */,
+				B61B07292B3EAD1300E04E46 /* IngredientType.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				B6814B422B382A6300B3194D /* MenuNetworkManager.swift in Sources */,
 				B68CA52A2B05D58A00F83F80 /* bartender_swiftApp.swift in Sources */,
 				B6B62A122B2EB8BC0059E8C5 /* AddBottleView.swift in Sources */,
+				B61B072A2B3EAD1300E04E46 /* IngredientType.swift in Sources */,
 				B68CA54D2B05E53800F83F80 /* SignInApple.swift in Sources */,
 				B68CA5362B05D58B00F83F80 /* bartender_swift.xcdatamodeld in Sources */,
 				B61B067D2B3E490B00E04E46 /* ActivityIndicator.swift in Sources */,
@@ -486,6 +490,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "bartender-swift/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Bartender;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -495,7 +501,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.anish.bartender-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -517,6 +523,8 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "bartender-swift/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Bartender;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.food-and-drink";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -526,7 +534,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.anish.bartender-swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -22,7 +22,7 @@ struct CocktailDetailView: View {
     var body: some View {
         ScrollView {
             if let cocktail = cocktail {
-                VStack(alignment: .leading) {                    
+                VStack(alignment: .leading) {
                     // Ingredients Section
                     VStack(alignment: .leading) {
                         Text("Ingredients")
@@ -32,6 +32,11 @@ struct CocktailDetailView: View {
                         ForEach(cocktail.ingredients ?? [], id: \.self) { ingredient in
                             HStack {
                                 Text(ingredient.name)
+                                if let type = ingredient.type {
+                                    Text("Type: \(type.rawValue)")
+                                        .font(.subheadline)
+                                        .foregroundColor(type.color)
+                                }
                                 Spacer()
                                 Text("\(ingredient.quantity ?? 0) \(ingredient.units ?? "")")
                             }
@@ -65,5 +70,7 @@ struct CocktailDetailView: View {
             }
         }
         .navigationTitle(cocktail?.name ?? "Cocktail Details")
+        .navigationBarTitleDisplayMode(.inline)
+
     }
 }

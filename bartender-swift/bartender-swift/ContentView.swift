@@ -23,24 +23,37 @@ struct ContentView: View {
     @StateObject var currUser = CurrUser(uid: "", email: nil)
     @Environment(\.colorScheme) var colorScheme
     
+    @State private var isAuthenticating = true
+    
     var body: some View {
         ZStack {
             backgroundColor
                 .edgesIgnoringSafeArea(.all)
-            if appUser != nil {
-                HomeView()
-                    .environmentObject(currUser)
+            
+            if isAuthenticating {
+                // Display a loading or intermediate view while checking authentication
+                LoadingView()
             } else {
-                SignInView(appUser: $appUser)
-                    .environmentObject(currUser)
+                if appUser != nil {
+                    HomeView()
+                        .environmentObject(currUser)
+                } else {
+                    SignInView(appUser: $appUser)
+                        .environmentObject(currUser)
+                }
             }
         }
         .onAppear {
             Task {
-                let sessionUser = try await AuthManager.shared.getCurrentSession()
-                self.appUser = sessionUser
-                self.currUser.uid = sessionUser.uid
-                self.currUser.email = sessionUser.email
+                do {
+                    let sessionUser = try await AuthManager.shared.getCurrentSession()
+                    self.appUser = sessionUser
+                    self.currUser.uid = sessionUser.uid
+                    self.currUser.email = sessionUser.email
+                } catch {
+                    // TODO: Handle errors
+                }
+                isAuthenticating = false
             }
         }
     }
@@ -48,6 +61,24 @@ struct ContentView: View {
     private var backgroundColor: Color {
             colorScheme == .dark ? Color.black : Color.white
         }
+}
+
+
+struct LoadingView: View {
+    var body: some View {
+        VStack {
+            Spacer()
+            Image("OrangeLogo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .padding(.bottom, 50)
+            ProgressView()
+            Spacer()
+            Text("Anish Agrawal")
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {

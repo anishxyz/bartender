@@ -15,12 +15,16 @@ class LoadingStateViewModel: ObservableObject {
     }
 
     func startLoading() {
-        loadingCount += 1
+        DispatchQueue.main.async {
+            self.loadingCount += 1
+        }
     }
 
     func stopLoading() {
-        if loadingCount > 0 {
-            loadingCount -= 1
+        DispatchQueue.main.async {
+            if self.loadingCount > 0 {
+                self.loadingCount -= 1
+            }
         }
     }
 }
