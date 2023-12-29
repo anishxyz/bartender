@@ -21,7 +21,6 @@ class CocktailViewModel: ObservableObject {
                 switch result {
                 case .success(let menus):
                     self?.menus = menus
-                    print(menus)
                 case .failure(let error):
                     print("Error fetching menus: \(error)")
                     // TODO: HANDLE ERROR
