@@ -11,24 +11,26 @@ import SwiftUI
     
     @Published var cellar: [Bottle] = []
 
-    func fetchCellarData(forUserID userID: String) {
+    func fetchCellarData(forUserID userID: String, completion: (() -> Void)? = nil) {
         CellarNetworkManager.shared.fetchCellar(user_id: userID) { [weak self] result in
-            switch result {
-            case .success(let bottles):
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let bottles):
                     self?.cellar = bottles.sorted {
                         if $0.last_updated == $1.last_updated {
                             return $0.name < $1.name
                         }
                         return $0.last_updated > $1.last_updated
                     }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    // TODO: Handle the error
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
-                // TODO: Handle the error
+                completion?() // Call completion here
             }
         }
     }
+
     
     func addBottleToCellar(bottleData: AddBottleData, forUserID userID: String) {
         CellarNetworkManager.shared.addBottle(bottleData: bottleData, userID: userID) { [weak self] result in

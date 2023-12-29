@@ -15,6 +15,8 @@ struct CellarView: View {
     
     @State private var showingAddBottle = false
     
+    @StateObject var loadingState = LoadingStateViewModel()
+    
     var body: some View {
         ZStack {
             NavigationStack {
@@ -25,22 +27,28 @@ struct CellarView: View {
                     .onDelete(perform: deleteBottle)
                 }
                 .refreshable {
-                    viewModel.fetchCellarData(forUserID: currUser.uid)
+                    loadingState.startLoading()
+                    viewModel.fetchCellarData(forUserID: currUser.uid) {
+                        loadingState.stopLoading()
+                    }
                 }
                 .navigationTitle("🍾 The Cellar")
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Menu {
-                            Button("From Camera", action: {
-                                // Action for selecting 'From Camera'
-                            })
-                            Button("Enter Manually", action: {
-                                showingAddBottle = true
-                            })
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .foregroundColor(.orange)
-                                .colorMultiply(.orange)
+                        HStack {
+                            ActivityIndicatorLS(loadingState: loadingState, style: .medium, color: UIColor.orange)
+                            Menu {
+                                Button("From Camera (coming soon)", action: {
+                                    // Action for selecting 'From Camera'
+                                })
+                                Button("Enter Manually", action: {
+                                    showingAddBottle = true
+                                })
+                            } label: {
+                                Image(systemName: "plus.circle.fill")
+                                    .foregroundColor(.orange)
+                                    .colorMultiply(.orange)
+                            }
                         }
                     }
                 }

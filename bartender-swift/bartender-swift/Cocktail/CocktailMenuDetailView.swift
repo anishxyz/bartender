@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CocktailMenuDetailView: View {
-    var menu: CocktailMenu?
+    let menu_id: Int
+    
     @EnvironmentObject var viewModel: CocktailViewModel
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var currUser: CurrUser
@@ -16,6 +17,10 @@ struct CocktailMenuDetailView: View {
     @State private var showImagePicker = false
     @State private var imagePickerSourceType = UIImagePickerController.SourceType.photoLibrary
     @State private var selectedImage: UIImage?
+    
+    var menu: CocktailMenu? {
+        viewModel.menus.first { $0.menu_id == menu_id }
+    }
 
     var body: some View {
         VStack {
@@ -41,7 +46,7 @@ struct CocktailMenuDetailView: View {
                         self.imagePickerSourceType = .photoLibrary
                         self.showImagePicker = true
                     })
-                    Button("Build Cocktail", action: {
+                    Button("Build Cocktail (coming soon)", action: {
                         // cocktail builder manual
                     })
                 } label: {
@@ -74,14 +79,14 @@ struct CocktailMenuDetailView: View {
 }
 
 
-struct CocktailMenuDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        
-        Group {
-            CocktailMenuDetailView(menu: cocktailMenu)
-            
-            CocktailMenuDetailView(menu: cocktailMenu)
-                .environment(\.colorScheme, .dark)
-        }
-    }
-}
+//struct CocktailMenuDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        
+//        Group {
+//            CocktailMenuDetailView(menu: cocktailMenu)
+//            
+//            CocktailMenuDetailView(menu: cocktailMenu)
+//                .environment(\.colorScheme, .dark)
+//        }
+//    }
+//}

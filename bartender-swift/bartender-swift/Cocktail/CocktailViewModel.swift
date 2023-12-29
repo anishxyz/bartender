@@ -15,17 +15,19 @@ class CocktailViewModel: ObservableObject {
     private let cocktailNetworkManager = CocktailNetworkManager.shared
 
     // TODO: MAKE IT A CALL FOR MENU SUMMARIES -> ALL MENU DATA for SPEEEEEDDDDYYYY
-    func fetchAllMenus(userID: String) {
+    func fetchAllMenus(userID: String, completion: (() -> Void)? = nil) {
         menuNetworkManager.fetchMenus(userID: userID) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let menus):
                     self?.menus = menus
+                    print(menus)
                 case .failure(let error):
                     print("Error fetching menus: \(error)")
                     // TODO: HANDLE ERROR
                 }
             }
+            completion?()
         }
     }
     
@@ -51,7 +53,7 @@ class CocktailViewModel: ObservableObject {
                     self?.addCocktails(cocktails, toMenuWithID: menuID)
                 case .failure(let error):
                     print("Error creating cocktails: \(error)")
-                    // TODO: HANDLE ERROR
+                    print(result)
                 }
             }
         }

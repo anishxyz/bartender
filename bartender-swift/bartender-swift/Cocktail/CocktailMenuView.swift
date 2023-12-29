@@ -10,8 +10,11 @@ import SwiftUI
 struct CocktailMenuView: View {
     @EnvironmentObject var currUser: CurrUser
     @EnvironmentObject var viewModel: CocktailViewModel
+    @StateObject var loadingState = LoadingStateViewModel()
     
     @State private var showingAddMenuSheet = false
+    @State private var isRefreshing = false
+
     
     let gridSpacing: CGFloat = 10
     
@@ -25,7 +28,7 @@ struct CocktailMenuView: View {
             ScrollView {
                 LazyVGrid(columns: columns, spacing: gridSpacing) {
                     ForEach(viewModel.menus) { menu in
-                        NavigationLink(destination: CocktailMenuDetailView(menu: menu)) {
+                        NavigationLink(destination: CocktailMenuDetailView(menu_id: menu.menu_id)) {
                             MenuCardView(menu: menu)
                         }
                         .buttonStyle(PlainButtonStyle())
@@ -35,12 +38,19 @@ struct CocktailMenuView: View {
             }
             .navigationTitle("Menus")
             .refreshable {
-                viewModel.fetchAllMenus(userID: currUser.uid)
-
+                loadingState.startLoading()
+                
+                viewModel.fetchAllMenus(userID: currUser.uid) {
+                    loadingState.stopLoading()
+                }
             }
+
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    addMenuToolbarItem
+                    HStack {
+                        ActivityIndicatorLS(loadingState: loadingState, style: .medium, color: UIColor.orange)
+                        addMenuToolbarItem
+                    }
                 }
             }
             .sheet(isPresented: $showingAddMenuSheet) {
@@ -48,17 +58,16 @@ struct CocktailMenuView: View {
                     .environmentObject(viewModel)
                     .presentationDetents([.medium])
             }
-            .onAppear {
-                viewModel.fetchAllMenus(userID: currUser.uid)
-            }
-            
+//            .onAppear {
+//                viewModel.fetchAllMenus(userID: currUser.uid)
+//            }
         }
     }
     
     
     private var addMenuToolbarItem: some View {
         Menu {
-            Button("From Camera", action: {
+            Button("From Camera (coming soon)", action: {
                 // Action for selecting 'From Camera'
             })
             Button("Enter Manually", action: {
