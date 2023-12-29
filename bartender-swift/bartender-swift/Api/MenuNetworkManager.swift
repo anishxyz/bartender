@@ -35,7 +35,7 @@ struct MenuNetworkManager {
 
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(dateFormatter)
-
+                
                 let menus = try decoder.decode([CocktailMenu].self, from: data)
                 completion(.success(menus))
             } catch {

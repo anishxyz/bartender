@@ -26,7 +26,9 @@ struct CocktailMenuDetailView: View {
         VStack {
             if let menu = menu, let cocktails = menu.cocktails, !cocktails.isEmpty {
                 List(cocktails) { cocktail in
-                    Text(cocktail.name)
+                    NavigationLink(destination: CocktailDetailView(menuId: menu_id, cocktailId: cocktail.cocktail_id)) {
+                        Text(cocktail.name)
+                    }
                 }
             } else {
                 Text("No cocktails here! Add one with the +")
@@ -34,7 +36,6 @@ struct CocktailMenuDetailView: View {
         }
         .background(colorScheme == .light ? Color.white : Color.clear)
         .navigationTitle("Cocktails")
-        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {

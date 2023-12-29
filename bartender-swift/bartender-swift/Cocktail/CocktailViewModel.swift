@@ -21,6 +21,14 @@ class CocktailViewModel: ObservableObject {
                 switch result {
                 case .success(let menus):
                     self?.menus = menus
+                    
+//                    print(menus)
+//                    
+//                    if let menuWithID15 = menus.first(where: { $0.menu_id == 15 }) {
+//                        print("Menu with ID 15: \(menuWithID15)")
+//                    } else {
+//                        print("Menu with ID 15 not found.")
+//                    }
                 case .failure(let error):
                     print("Error fetching menus: \(error)")
                     // TODO: HANDLE ERROR

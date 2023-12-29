@@ -45,14 +45,6 @@ struct Cocktail: Codable, Identifiable {
     // Relationships
     var sections: [RecipeSection]?
     var ingredients: [Ingredient]?
-
-    enum CodingKeys: String, CodingKey {
-        case cocktail_id
-        case created_at
-        case updated_at
-        case menu_id
-        case name
-    }
 }
 
 extension Cocktail {
@@ -75,6 +67,12 @@ extension Ingredient: Identifiable {
     var id: Int { ingredient_id }
 }
 
+extension Ingredient: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ingredient_id)
+    }
+}
+
 struct RecipeSection: Codable {
     let section_id: Int
     let cocktail_id: Int
@@ -92,6 +90,18 @@ extension RecipeSection: Identifiable {
     var id: Int { section_id }
 }
 
+extension RecipeSection: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(section_id)
+    }
+}
+
+extension RecipeSection: Equatable {
+    static func ==(lhs: RecipeSection, rhs: RecipeSection) -> Bool {
+        return lhs.section_id == rhs.section_id
+    }
+}
+
 struct RecipeStep: Codable {
     let step_id: Int
     let section_id: Int
@@ -105,6 +115,11 @@ extension RecipeStep: Identifiable {
     var id: Int { step_id }
 }
 
+extension RecipeStep: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(step_id)
+    }
+}
 
 // ingredient lists
 let margaritaIngredients = [
