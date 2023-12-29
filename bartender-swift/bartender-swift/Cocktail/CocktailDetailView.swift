@@ -23,33 +23,17 @@ struct CocktailDetailView: View {
         ScrollView {
             if let cocktail = cocktail {
                 VStack(alignment: .leading) {
-                    // Ingredients Section
                     
+                    // Ingredients Section
                     if let ingredients = cocktail.ingredients {
                         IngredientsView(ingredients: ingredients)
                     }
                     
                     // Recipe Sections
                     ForEach(cocktail.sections ?? [], id: \.self) { section in
-                        VStack(alignment: .leading) {
-                            if let sectionName = section.name {
-                                Text(sectionName)
-                                    .font(.subheadline)
-                                    .bold()
-                                    .padding(.bottom, 5)
-                            }
-                            
-                            ForEach(section.steps ?? [], id: \.self) { step in
-                                HStack {
-                                    Text("\(step.index).")
-                                    Text(step.instruction)
-                                }
-                                .padding(.vertical, 2)
-                            }
-                        }
-                        .padding()
+                        RecipeSectionView(section: section)
                     }
-                } 
+                }
             } else {
                 Text("Cocktail not found.")
             }
@@ -57,42 +41,6 @@ struct CocktailDetailView: View {
         .navigationTitle(cocktail?.name ?? "Cocktail Details")
         .navigationBarTitleDisplayMode(.inline)
 
-    }
-}
-
-
-struct IngredientsView: View {
-    var ingredients: [Ingredient]
-
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("Ingredients")
-                .font(.subheadline)
-                .bold()
-                .padding(.bottom, 5)
-            
-            VStack {
-                ForEach(ingredients, id: \.self) { ingredient in
-                    HStack {
-                        Text(ingredient.name)
-                        Spacer()
-                        Group {
-                            if let quantity = ingredient.quantity, quantity > 0 {
-                                Text("\(String(format: "%.1f", quantity))")
-                            }
-                            Text(ingredient.units ?? "")
-                        }
-                    }
-                    .padding(.vertical, 2)
-                }
-            }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(Color(UIColor.systemGray6))
-            )
-        }
-        .padding()
     }
 }
 

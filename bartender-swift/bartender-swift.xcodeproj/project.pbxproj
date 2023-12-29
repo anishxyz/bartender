@@ -13,6 +13,8 @@
 		B61B067F2B3E50D800E04E46 /* LoadingStateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B067E2B3E50D800E04E46 /* LoadingStateViewModel.swift */; };
 		B61B07282B3E5E5600E04E46 /* CocktailDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07272B3E5E5600E04E46 /* CocktailDetailView.swift */; };
 		B61B072A2B3EAD1300E04E46 /* IngredientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07292B3EAD1300E04E46 /* IngredientType.swift */; };
+		B61B072C2B3ED87100E04E46 /* IngredientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B072B2B3ED87100E04E46 /* IngredientsView.swift */; };
+		B61B072E2B3ED8B800E04E46 /* RecipeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B072D2B3ED8B800E04E46 /* RecipeSectionView.swift */; };
 		B660618C2B0D9556002F8DF2 /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618B2B0D9556002F8DF2 /* CellarView.swift */; };
 		B660618E2B0D97DE002F8DF2 /* CocktailMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */; };
 		B66061912B0D98A3002F8DF2 /* BuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66061902B0D98A3002F8DF2 /* BuilderView.swift */; };
@@ -58,6 +60,8 @@
 		B61B067E2B3E50D800E04E46 /* LoadingStateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStateViewModel.swift; sourceTree = "<group>"; };
 		B61B07272B3E5E5600E04E46 /* CocktailDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailDetailView.swift; sourceTree = "<group>"; };
 		B61B07292B3EAD1300E04E46 /* IngredientType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientType.swift; sourceTree = "<group>"; };
+		B61B072B2B3ED87100E04E46 /* IngredientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsView.swift; sourceTree = "<group>"; };
+		B61B072D2B3ED8B800E04E46 /* RecipeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSectionView.swift; sourceTree = "<group>"; };
 		B660618B2B0D9556002F8DF2 /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
 		B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailMenuView.swift; sourceTree = "<group>"; };
 		B66061902B0D98A3002F8DF2 /* BuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderView.swift; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 				B66A2B032B3968A9000EFF6F /* AddMenuSheetView.swift */,
 				B66A2B052B397DF6000EFF6F /* CocktailMenuDetailView.swift */,
 				B61B07272B3E5E5600E04E46 /* CocktailDetailView.swift */,
+				B61B072B2B3ED87100E04E46 /* IngredientsView.swift */,
+				B61B072D2B3ED8B800E04E46 /* RecipeSectionView.swift */,
 			);
 			path = Cocktail;
 			sourceTree = "<group>";
@@ -337,7 +343,9 @@
 				B6814B402B3821DE00B3194D /* CocktailNetworkManager.swift in Sources */,
 				B660619B2B15EAF1002F8DF2 /* BottleDetailView.swift in Sources */,
 				B68CA5572B05EEFE00F83F80 /* SignInGoogle.swift in Sources */,
+				B61B072E2B3ED8B800E04E46 /* RecipeSectionView.swift in Sources */,
 				B6B62A162B36BC010059E8C5 /* CocktailViewModel.swift in Sources */,
+				B61B072C2B3ED87100E04E46 /* IngredientsView.swift in Sources */,
 				B68CA5602B05F53900F83F80 /* HomeView.swift in Sources */,
 				B68CA55E2B05F19200F83F80 /* RegistrationView.swift in Sources */,
 				B6B62A142B2EBAFC0059E8C5 /* BottleType.swift in Sources */,
