@@ -21,6 +21,19 @@ struct Bottle: Codable, Identifiable {
     let bar_id: Int?
 }
 
+struct Bar: Codable {
+    var bar_id: Int
+    let created_at: Date
+    let updated_at: Date
+    let uid: UUID
+    let name: String
+    let description: String?
+}
+
+extension Bar: Identifiable {
+    var id: Int { bar_id }
+}
+
 struct BottleJSONDecoder {
     static func standard() -> JSONDecoder {
         let decoder = JSONDecoder()

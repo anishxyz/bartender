@@ -25,6 +25,7 @@ struct AddMenuSheetView: View {
             }
             .buttonStyle(.borderedProminent)
             .disabled(menuName.isEmpty)
+            Spacer()
         }
         .padding()
     }

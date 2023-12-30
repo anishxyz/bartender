@@ -34,10 +34,11 @@ class MenuCreate(BaseModel):
 
 @router.post("/create", response_model=Menu)
 async def add_menu(menu_data: MenuCreate, user_id: str = Depends(get_user_id)):
+    curr_time = datetime.now().isoformat()
     new_menu_data = menu_data.model_dump()
     new_menu_data['uid'] = user_id
-    new_menu_data['created_at'] = datetime.now().isoformat()
-    new_menu_data['updated_at'] = datetime.now().isoformat()
+    new_menu_data['created_at'] = curr_time
+    new_menu_data['updated_at'] = curr_time
 
     insert_query = supabase.table("menus").insert(new_menu_data).execute()
 

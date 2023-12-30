@@ -133,15 +133,17 @@ struct CocktailMenuView: View {
     
     private var addMenuToolbarItem: some View {
         Menu {
-            Button("From Camera", action: {
-                self.showCameraPicker = true
-            })
-            Button("From Photo Library", action: {
-                self.showPhotoLibraryPicker = true
-            })
-            Button("Enter Manually", action: {
-                showingAddMenuSheet = true
-            })
+            Section(header: Text("Create Menu").font(.headline)) {
+                Button("From Camera", action: {
+                    self.showCameraPicker = true
+                })
+                Button("From Photo Library", action: {
+                    self.showPhotoLibraryPicker = true
+                })
+                Button("Enter Manually", action: {
+                    showingAddMenuSheet = true
+                })
+            }
         } label: {
             Image(systemName: "plus.circle.fill")
                 .foregroundColor(.orange)
