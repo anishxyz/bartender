@@ -14,8 +14,8 @@ struct CocktailMenuDetailView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var currUser: CurrUser
     
-    @State private var showImagePicker = false
-    @State private var imagePickerSourceType = UIImagePickerController.SourceType.photoLibrary
+    @State private var showCameraPicker = false
+    @State private var showPhotoLibraryPicker = false
     @State private var selectedImage: UIImage?
     
     var menu: CocktailMenu? {
@@ -34,18 +34,15 @@ struct CocktailMenuDetailView: View {
                 Text("No cocktails here! Add one with the +")
             }
         }
-        .background(colorScheme == .light ? Color.white : Color.clear)
         .navigationTitle("Cocktails")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Menu {
                     Button("From Camera", action: {
-                        self.imagePickerSourceType = .camera
-                        self.showImagePicker = true
+                        self.showCameraPicker = true
                     })
                     Button("From Photo Library", action: {
-                        self.imagePickerSourceType = .photoLibrary
-                        self.showImagePicker = true
+                        self.showPhotoLibraryPicker = true
                     })
                     Button("Build Cocktail (coming soon)", action: {
                         // cocktail builder manual
@@ -57,8 +54,16 @@ struct CocktailMenuDetailView: View {
                 }
             }
         }
-        .sheet(isPresented: $showImagePicker) {
-            ImagePicker(selectedImage: $selectedImage, sourceType: imagePickerSourceType)
+        .sheet(isPresented: $showCameraPicker) {
+            ImagePicker(selectedImage: $selectedImage, sourceType: .camera)
+                .onDisappear {
+                    if let selectedImage = selectedImage {
+                        processSelectedImage(selectedImage)
+                    }
+                }
+        }
+        .sheet(isPresented: $showPhotoLibraryPicker) {
+            ImagePicker(selectedImage: $selectedImage, sourceType: .photoLibrary)
                 .onDisappear {
                     if let selectedImage = selectedImage {
                         processSelectedImage(selectedImage)
@@ -95,7 +100,7 @@ struct CocktailMenuDetailView_Previews: PreviewProvider {
                     mockViewModel.fetchAllMenus(userID: currUser.uid)
                 }
             
-            CocktailMenuDetailView(menu_id: 14)
+            CocktailMenuDetailView(menu_id: 15)
                 .environmentObject(CurrUser(uid: "8E2FC51E-58A6-469D-B932-D483DD9E10B5", email: "anishagrawal2003@gmail.com"))
                 .environmentObject(mockViewModel)
                 .environment(\.colorScheme, .dark)

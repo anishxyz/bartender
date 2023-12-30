@@ -72,6 +72,21 @@ class CocktailViewModel: ObservableObject {
         }
     }
     
+    func createCocktailMenu(fromImage file: Data?, base64Image: String?, userID: String, completion: (() -> Void)? = nil) {
+        menuNetworkManager.uploadMenuImage(userID: userID, file: file, base64Image: base64Image) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let menu):
+                    self?.menus.append(menu)
+                case .failure(let error):
+                    print("Error creating cocktails: \(error)")
+                    print(result)
+                }
+            }
+            completion?()
+        }
+    }
+    
     func deleteMenu(menuID: Int, userID: String, completion: (() -> Void)? = nil) {
         menuNetworkManager.deleteMenu(menuID: menuID, userID: userID) { [weak self] result in
             DispatchQueue.main.async {

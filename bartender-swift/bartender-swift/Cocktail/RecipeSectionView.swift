@@ -24,15 +24,21 @@ struct RecipeSectionView: View {
                         Text("\(step.index)")
                             .bold()
                             .foregroundColor(Color(UIColor.systemBackground))
-                            .frame(width: 28, height: 28)
+                            .font(.caption)
+                            .frame(width: 24, height: 24)
                             .background(Circle().fill(.orange).colorMultiply(.orange))
+                            .alignmentGuide(.firstTextBaseline) { _ in 12 } // Half of the frame height to center it
                             .padding(.trailing, 8)
                         Text(step.instruction)
+                            .font(.body) // Specify the same font size as the default body text or adjust as needed
+                            .alignmentGuide(.firstTextBaseline) { d in d[VerticalAlignment.center] }
+
                     }
                     .padding(.vertical, 2)
                 }
             }
             .padding()
+            .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color(UIColor.systemGray6))

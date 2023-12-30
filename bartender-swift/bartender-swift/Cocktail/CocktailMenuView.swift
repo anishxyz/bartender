@@ -24,6 +24,21 @@ struct CocktailMenuView: View {
         GridItem(.flexible())
     ]
     
+    // image stuff
+    @State private var showCameraPicker = false
+    @State private var showPhotoLibraryPicker = false
+    @State private var selectedImage: UIImage?
+    
+    func processSelectedImage(_ image: UIImage) {
+        // Convert UIImage to Data
+        if let imageData = image.jpegData(compressionQuality: 0.8) {
+            loadingState.startLoading()
+            viewModel.createCocktailMenu(fromImage: imageData, base64Image: nil, userID: currUser.uid) {
+                loadingState.stopLoading()
+            }
+        }
+    }
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -61,6 +76,22 @@ struct CocktailMenuView: View {
                 AddMenuSheetView(isPresented: $showingAddMenuSheet)
                     .environmentObject(viewModel)
                     .presentationDetents([.medium])
+            }
+            .sheet(isPresented: $showCameraPicker) {
+                ImagePicker(selectedImage: $selectedImage, sourceType: .camera)
+                    .onDisappear {
+                        if let selectedImage = selectedImage {
+                            processSelectedImage(selectedImage)
+                        }
+                    }
+            }
+            .sheet(isPresented: $showPhotoLibraryPicker) {
+                ImagePicker(selectedImage: $selectedImage, sourceType: .photoLibrary)
+                    .onDisappear {
+                        if let selectedImage = selectedImage {
+                            processSelectedImage(selectedImage)
+                        }
+                    }
             }
             .alert("Are you sure you want to delete this menu?", isPresented: $showingDeleteConfirmation) {
                 Button("Delete", role: .destructive) {
@@ -102,8 +133,11 @@ struct CocktailMenuView: View {
     
     private var addMenuToolbarItem: some View {
         Menu {
-            Button("From Camera (coming soon)", action: {
-                // Action for selecting 'From Camera'
+            Button("From Camera", action: {
+                self.showCameraPicker = true
+            })
+            Button("From Photo Library", action: {
+                self.showPhotoLibraryPicker = true
             })
             Button("Enter Manually", action: {
                 showingAddMenuSheet = true

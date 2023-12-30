@@ -15,6 +15,7 @@
 		B61B072A2B3EAD1300E04E46 /* IngredientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07292B3EAD1300E04E46 /* IngredientType.swift */; };
 		B61B072C2B3ED87100E04E46 /* IngredientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B072B2B3ED87100E04E46 /* IngredientsView.swift */; };
 		B61B072E2B3ED8B800E04E46 /* RecipeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B072D2B3ED8B800E04E46 /* RecipeSectionView.swift */; };
+		B61B07302B3FB59700E04E46 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B072F2B3FB59700E04E46 /* CustomColors.swift */; };
 		B660618C2B0D9556002F8DF2 /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618B2B0D9556002F8DF2 /* CellarView.swift */; };
 		B660618E2B0D97DE002F8DF2 /* CocktailMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */; };
 		B66061912B0D98A3002F8DF2 /* BuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66061902B0D98A3002F8DF2 /* BuilderView.swift */; };
@@ -62,6 +63,7 @@
 		B61B07292B3EAD1300E04E46 /* IngredientType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientType.swift; sourceTree = "<group>"; };
 		B61B072B2B3ED87100E04E46 /* IngredientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsView.swift; sourceTree = "<group>"; };
 		B61B072D2B3ED8B800E04E46 /* RecipeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSectionView.swift; sourceTree = "<group>"; };
+		B61B072F2B3FB59700E04E46 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		B660618B2B0D9556002F8DF2 /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
 		B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailMenuView.swift; sourceTree = "<group>"; };
 		B66061902B0D98A3002F8DF2 /* BuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				B61B067A2B3D654600E04E46 /* ImagePicker.swift */,
 				B61B067C2B3E490B00E04E46 /* ActivityIndicator.swift */,
 				B61B067E2B3E50D800E04E46 /* LoadingStateViewModel.swift */,
+				B61B072F2B3FB59700E04E46 /* CustomColors.swift */,
 			);
 			path = Auxiliary;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				B6B62A162B36BC010059E8C5 /* CocktailViewModel.swift in Sources */,
 				B61B072C2B3ED87100E04E46 /* IngredientsView.swift in Sources */,
 				B68CA5602B05F53900F83F80 /* HomeView.swift in Sources */,
+				B61B07302B3FB59700E04E46 /* CustomColors.swift in Sources */,
 				B68CA55E2B05F19200F83F80 /* RegistrationView.swift in Sources */,
 				B6B62A142B2EBAFC0059E8C5 /* BottleType.swift in Sources */,
 				B660618E2B0D97DE002F8DF2 /* CocktailMenuView.swift in Sources */,

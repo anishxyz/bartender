@@ -1,10 +1,14 @@
 from typing import Optional, List
 from datetime import datetime
 import uuid
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
 from pydantic import BaseModel
 from ..database import supabase
 from ..dependencies import get_user_id
+from ..llm_pipelines.cocktail_from_image import get_cocktails_from_image, cocktail_extraction
+from ..llm_pipelines.cocktails_db_helper import add_cocktail_from_image_db, post_process_db_res
+from ..llm_pipelines.helpers import process_image_data, format_cocktail_list
+from ..llm_pipelines.menu_generation_helper import generate_menu_name
 from ..schemas.cocktail_schemas import Menu, Cocktail, Ingredient, Section, Step
 
 
@@ -45,6 +49,39 @@ async def add_menu(menu_data: MenuCreate, user_id: str = Depends(get_user_id)):
     print(insert_query.data)
     return insert_query.data[0]
 
+
+@router.post("/create/ai")
+async def upload_menu_image(
+    file: Optional[UploadFile] = File(None),
+    base64_image: Optional[str] = Form(None),
+    user_id: str = Depends(get_user_id)
+):
+    image_data = await process_image_data(base64_image=base64_image, file=file)
+    cocktails = await cocktail_extraction(image_data)
+
+    # menu creation / insertion
+    cocktails_str = format_cocktail_list(cocktails)
+    menu_name = await generate_menu_name(cocktails_str)
+    temp_menu = {
+        'name': menu_name,
+        'uid': user_id,
+        'created_at': datetime.now().isoformat(),
+        'updated_at': datetime.now().isoformat(),
+    }
+    insert_query = supabase.table("menus").insert(temp_menu).execute()
+
+    res_menu = insert_query.data[0]
+    menu_id = res_menu['menu_id']
+
+    # generate cocktails
+    response = await get_cocktails_from_image(image_data, cocktails=cocktails)
+    sorted_response = sorted(response, key=lambda x: x['name'])
+    tails_db, ingrs_db, sects_db, steps_db = add_cocktail_from_image_db(user_id, menu_id, sorted_response)
+    final_cocktails_list = post_process_db_res(sorted_response, tails_db, ingrs_db, sects_db, steps_db)
+
+    res_menu['cocktails'] = final_cocktails_list
+
+    return res_menu
 
 @router.get("/id/{menu_id:int}", response_model=Menu)
 async def get_menu(menu_id: int, user_id: str = Depends(get_user_id)):

@@ -19,7 +19,7 @@ router = APIRouter()
 client = OpenAI()
 
 @router.post("/{menu_id:int}/ai")
-async def upload_cocktail(
+async def upload_cocktail_image(
     menu_id: int,
     file: Optional[UploadFile] = File(None),
     base64_image: Optional[str] = Form(None),

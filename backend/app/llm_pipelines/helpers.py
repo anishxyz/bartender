@@ -35,3 +35,21 @@ async def process_image_data(base64_image=None, file=None):
         raise HTTPException(status_code=400, detail="No image provided")
 
     return image_data
+
+def format_cocktail_list(cocktail_list):
+    """
+    Formats a list of cocktails, each with a name, list of ingredients, and notes, into a string.
+
+    :param cocktail_list: List of dictionaries, each representing a cocktail
+    :return: Formatted string representing the list of cocktails
+    """
+    formatted_string = ""
+
+    for cocktail in cocktail_list:
+        name = cocktail['name']
+        ingredients = ", ".join(cocktail['ingredients'])
+        notes = cocktail['notes']
+
+        formatted_string += f"Name: {name}\nIngredients: {ingredients}\nNotes: {notes}\n\n"
+
+    return formatted_string.strip()

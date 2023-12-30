@@ -9,9 +9,10 @@ from app.schemas.cellar_schemas import BottleType, IngredientType
 client = AsyncOpenAI()
 
 
-async def get_cocktails_from_image(image_data):
+async def get_cocktails_from_image(image_data, cocktails=None):
 
-    cocktails = await cocktail_extraction(image_data)
+    if not cocktails:
+        cocktails = await cocktail_extraction(image_data)
 
     print(cocktails)
 
@@ -203,3 +204,4 @@ async def generate_cocktail_instructions(cocktail_description):
 
     print(response.choices[0].message.tool_calls[0].function.arguments)
     return json.loads(response.choices[0].message.tool_calls[0].function.arguments)
+
