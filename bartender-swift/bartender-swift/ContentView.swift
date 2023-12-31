@@ -34,8 +34,8 @@ struct ContentView: View {
                 // Display a loading or intermediate view while checking authentication
                 LoadingView()
             } else {
-                if appUser != nil {
-                    HomeView()
+                if appUser != nil || (!currUser.uid.isEmpty && currUser.email != nil) {
+                    HomeView(appUser: $appUser)
                         .environmentObject(currUser)
                 } else {
                     SignInView(appUser: $appUser)
@@ -47,9 +47,11 @@ struct ContentView: View {
             Task {
                 do {
                     let sessionUser = try await AuthManager.shared.getCurrentSession()
-                    self.appUser = sessionUser
-                    self.currUser.uid = sessionUser.uid
-                    self.currUser.email = sessionUser.email
+                    DispatchQueue.main.async {
+                        self.appUser = sessionUser
+                        self.currUser.uid = sessionUser.uid
+                        self.currUser.email = sessionUser.email
+                    }
                 } catch {
                     // TODO: Handle errors
                 }
