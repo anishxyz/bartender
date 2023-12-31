@@ -12,10 +12,10 @@ struct CellarView: View {
     @EnvironmentObject var currUser: CurrUser
     
     @EnvironmentObject var viewModel: CellarViewModel
+    @StateObject var loadingState = LoadingStateViewModel()
     
     @State private var showingAddBottle = false
-    
-    @StateObject var loadingState = LoadingStateViewModel()
+    @State private var showingAddBarSheet = false
     
     var filteredCellar: [Bottle] {
         if let barID = viewModel.selectedBarID {
@@ -60,11 +60,11 @@ struct CellarView: View {
                                 }
                                 Section(header: Text("Bars").font(.headline)) {
                                     Button("Create", action: {
-                                        // Action for selecting 'From Camera'
+                                        showingAddBarSheet = true
                                     })
-                                    Button("Move Bottles", action: {
-                                        //
-                                    })
+//                                    Button("Move Bottles", action: {
+//
+//                                    })
                                 }
                             } label: {
                                 Image(systemName: "plus.circle.fill")
@@ -77,6 +77,12 @@ struct CellarView: View {
                 .sheet(isPresented: $showingAddBottle) {
                     AddBottleView()
                         .environmentObject(viewModel)
+                }
+                .sheet(isPresented: $showingAddBarSheet) {
+                    AddBarSheetView(isPresented: $showingAddBarSheet)
+                        .environmentObject(viewModel)
+                        .environmentObject(loadingState)
+                        .presentationDetents([.medium])
                 }
             }
         }

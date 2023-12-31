@@ -92,5 +92,23 @@ import SwiftUI
         }
     }
     
+    
+    func createBar(name: String, description: String?, userID: String, completion: (() -> Void)? = nil) {
+        BarNetworkManager.shared.createBar(name: name, description: description, userID: userID) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let newBar):
+                    self?.bars.append(newBar)
+                case .failure(let error):
+                    print("Error creating menu: \(error)")
+                    // TODO: HANDLE ERROR
+                }
+            }
+            completion?()
+        }
+    }
+    
+    
+    
 
 }
