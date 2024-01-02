@@ -1,10 +1,12 @@
 from typing import Optional, List
 from datetime import datetime
 import uuid
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, File, Form, UploadFile
 from pydantic import BaseModel
 from ..database import supabase
 from ..dependencies import get_user_id
+from ..llm_pipelines.cellar_from_image import bottle_extraction
+from ..llm_pipelines.helpers import process_image_data
 
 router = APIRouter()
 
@@ -66,6 +68,20 @@ async def add_bottle(bottle_data: BottleData, user_id: str = Depends(get_user_id
 
     print(response.data[0])
     return response.data[0]
+
+
+@router.post("/ai/bottle")
+async def add_bottle(
+    file: Optional[UploadFile] = File(None),
+    base64_image: Optional[str] = Form(None),
+    user_id: str = Depends(get_user_id)
+):
+    image_data = await process_image_data(base64_image=base64_image, file=file)
+    cellar_parse = await bottle_extraction(image_data)
+
+    print(cellar_parse)
+
+    return []
 
 
 class UpdateBottleData(BaseModel):

@@ -19,7 +19,7 @@ struct AddBottleView: View {
     @State private var quantity: Int = 1
     @State private var price: String = ""
     @State private var description: String = ""
-    @State private var bar_id: Int = -1
+    @State private var selectedBarIndex: Int = 0
 
     var body: some View {
         NavigationView {
@@ -46,6 +46,16 @@ struct AddBottleView: View {
                     TextField("Description (optional)", text: $description)
                 }
                 .listRowBackground(Color(UIColor.systemGray6))
+                
+                Section(header: Text("Select Bar")) {
+                    Picker("Bar", selection: $selectedBarIndex) {
+                        Text("None").tag(0)
+                        ForEach(viewModel.bars.indices, id: \.self) { index in
+                            Text(viewModel.bars[index].name).tag(index + 1)
+                        }
+                    }
+                }
+                .listRowBackground(Color(UIColor.systemGray6))
 
             }
             .scrollContentBackground(.hidden)
@@ -59,7 +69,8 @@ struct AddBottleView: View {
     }
     
     private func addBottle() {
-        let addBottleData = createAddBottleData(name: name, selectedType: selectedType, quantity: quantity, price: price, description: description, bar_id: bar_id)
+        let selectedBarId = selectedBarIndex > 0 ? viewModel.bars[selectedBarIndex - 1].bar_id : -1
+        let addBottleData = createAddBottleData(name: name, selectedType: selectedType, quantity: quantity, price: price, description: description, bar_id: selectedBarId)
         
         viewModel.addBottleToCellar(bottleData: addBottleData, forUserID: currUser.uid)
         presentationMode.wrappedValue.dismiss()
