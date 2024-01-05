@@ -81,7 +81,7 @@ async def add_bottle(
 
     print(cellar_parse)
 
-    return []
+    return cellar_parse
 
 
 class UpdateBottleData(BaseModel):
