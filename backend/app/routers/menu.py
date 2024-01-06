@@ -51,7 +51,7 @@ async def add_menu(menu_data: MenuCreate, user_id: str = Depends(get_user_id)):
     return insert_query.data[0]
 
 
-@router.post("/create/ai")
+@router.post("/ai/create")
 async def upload_menu_image(
     file: Optional[UploadFile] = File(None),
     base64_image: Optional[str] = Form(None),

@@ -82,7 +82,7 @@ struct MenuNetworkManager {
     }
     
     func uploadMenuImage(userID: String, file: Data?, base64Image: String?, completion: @escaping (Result<CocktailMenu, Error>) -> Void) {
-        let url = URL(string: "\(baseURL)/create/ai")!
+        let url = URL(string: "\(baseURL)/ai/create")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("Bearer \(userID)", forHTTPHeaderField: "Authorization")
