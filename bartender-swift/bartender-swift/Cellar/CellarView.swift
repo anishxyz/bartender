@@ -16,6 +16,7 @@ struct CellarView: View {
     
     @State private var showingAddBottle = false
     @State private var showingAddBarSheet = false
+    @State private var showingAddBottleFromImageSheet = false
     
     var filteredCellar: [Bottle] {
         if let barID = viewModel.selectedBarID {
@@ -51,8 +52,8 @@ struct CellarView: View {
                             ActivityIndicatorLS(loadingState: loadingState, style: .medium, color: UIColor.orange)
                             Menu {
                                 Section(header: Text("Bottles").font(.headline)) {
-                                    Button("From Camera", action: {
-                                        // Action for selecting 'From Camera'
+                                    Button("From Image", action: {
+                                        showingAddBottleFromImageSheet = true
                                     })
                                     Button("Enter Custom", action: {
                                         showingAddBottle = true
@@ -80,6 +81,12 @@ struct CellarView: View {
                 }
                 .sheet(isPresented: $showingAddBarSheet) {
                     AddBarSheetView(isPresented: $showingAddBarSheet)
+                        .environmentObject(viewModel)
+                        .environmentObject(loadingState)
+                        .presentationDetents([.medium])
+                }
+                .sheet(isPresented: $showingAddBottleFromImageSheet) {
+                    AddBottleImageView(isPresented: $showingAddBottleFromImageSheet)
                         .environmentObject(viewModel)
                         .environmentObject(loadingState)
                         .presentationDetents([.medium])
