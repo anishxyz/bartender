@@ -47,7 +47,6 @@ import SwiftUI
                 switch result {
                 case .success(let bars):
                     self?.bars = bars
-                    print(bars)
                 case .failure(let error):
                     print(error.localizedDescription)
                     // TODO: Handle the error

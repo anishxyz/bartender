@@ -9,7 +9,13 @@ import Foundation
 
 struct CellarNetworkManager {
     static let shared = CellarNetworkManager()
-    let baseURL = "http://127.0.0.1:8000/api/cellar"
+    
+    var baseURL: String {
+        // Get the root URL from the environment variable
+        let rootURL = ProcessInfo.processInfo.environment["ROOT_URL"] ?? "http://defaultroot.com"
+        
+        return rootURL + "/api/cellar"
+    }
 
     // Fetch all bottles from the cellar
     func fetchCellar(user_id: String, completion: @escaping (Result<[Bottle], Error>) -> Void) {

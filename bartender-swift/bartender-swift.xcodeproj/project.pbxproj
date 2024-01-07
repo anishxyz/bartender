@@ -20,6 +20,8 @@
 		B61B07342B41738600E04E46 /* BarDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07332B41738600E04E46 /* BarDropdownView.swift */; };
 		B61B07362B417A1900E04E46 /* AddBarSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07352B417A1900E04E46 /* AddBarSheetView.swift */; };
 		B61B07382B49674D00E04E46 /* AddBottleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07372B49674D00E04E46 /* AddBottleImageView.swift */; };
+		B61B073A2B4AB92600E04E46 /* Development.plist in Resources */ = {isa = PBXBuildFile; fileRef = B61B07392B4AB92600E04E46 /* Development.plist */; };
+		B61B073C2B4AB9CC00E04E46 /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B073B2B4AB9CC00E04E46 /* ConfigurationManager.swift */; };
 		B660618C2B0D9556002F8DF2 /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618B2B0D9556002F8DF2 /* CellarView.swift */; };
 		B660618E2B0D97DE002F8DF2 /* CocktailMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */; };
 		B66061912B0D98A3002F8DF2 /* BuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66061902B0D98A3002F8DF2 /* BuilderView.swift */; };
@@ -72,6 +74,8 @@
 		B61B07332B41738600E04E46 /* BarDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarDropdownView.swift; sourceTree = "<group>"; };
 		B61B07352B417A1900E04E46 /* AddBarSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBarSheetView.swift; sourceTree = "<group>"; };
 		B61B07372B49674D00E04E46 /* AddBottleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBottleImageView.swift; sourceTree = "<group>"; };
+		B61B07392B4AB92600E04E46 /* Development.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Development.plist; sourceTree = "<group>"; };
+		B61B073B2B4AB9CC00E04E46 /* ConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationManager.swift; sourceTree = "<group>"; };
 		B660618B2B0D9556002F8DF2 /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
 		B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailMenuView.swift; sourceTree = "<group>"; };
 		B66061902B0D98A3002F8DF2 /* BuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderView.swift; sourceTree = "<group>"; };
@@ -131,6 +135,7 @@
 				B61B067C2B3E490B00E04E46 /* ActivityIndicator.swift */,
 				B61B067E2B3E50D800E04E46 /* LoadingStateViewModel.swift */,
 				B61B072F2B3FB59700E04E46 /* CustomColors.swift */,
+				B61B073B2B4AB9CC00E04E46 /* ConfigurationManager.swift */,
 			);
 			path = Auxiliary;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 				B68CA5372B05D58B00F83F80 /* Info.plist */,
 				B68CA5342B05D58B00F83F80 /* bartender_swift.xcdatamodeld */,
 				B68CA52F2B05D58B00F83F80 /* Preview Content */,
+				B61B07392B4AB92600E04E46 /* Development.plist */,
 			);
 			path = "bartender-swift";
 			sourceTree = "<group>";
@@ -336,6 +342,7 @@
 			files = (
 				B68CA5312B05D58B00F83F80 /* Preview Assets.xcassets in Resources */,
 				B68CA52E2B05D58B00F83F80 /* Assets.xcassets in Resources */,
+				B61B073A2B4AB92600E04E46 /* Development.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B61B073C2B4AB9CC00E04E46 /* ConfigurationManager.swift in Sources */,
 				B66061912B0D98A3002F8DF2 /* BuilderView.swift in Sources */,
 				B68CA52C2B05D58A00F83F80 /* ContentView.swift in Sources */,
 				B61B06752B3D61CA00E04E46 /* NetworkManagerHelper.swift in Sources */,
@@ -500,6 +508,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

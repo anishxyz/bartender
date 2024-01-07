@@ -9,7 +9,12 @@ import Foundation
 
 struct CocktailNetworkManager {
     static let shared = CocktailNetworkManager()
-    let baseURL = "http://127.0.0.1:8000/api/cocktail"
+    var baseURL: String {
+        // Get the root URL from the environment variable
+        let rootURL = ProcessInfo.processInfo.environment["ROOT_URL"] ?? "http://defaultroot.com"
+        
+        return rootURL + "/api/cocktail"
+    }
     
     func uploadCocktailImage(menuID: Int, userID: String, file: Data?, base64Image: String?, completion: @escaping (Result<[Cocktail], Error>) -> Void) {
         let url = URL(string: "\(baseURL)/ai/\(menuID)")!
