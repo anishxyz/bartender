@@ -12,8 +12,7 @@ struct CellarNetworkManager {
     
     var baseURL: String {
         // Get the root URL from the environment variable
-        let rootURL = ProcessInfo.processInfo.environment["ROOT_URL"] ?? "http://defaultroot.com"
-        
+        let rootURL = ConfigurationManager.shared.rootURL ?? "http://defaultroot.com"
         return rootURL + "/api/cellar"
     }
 
