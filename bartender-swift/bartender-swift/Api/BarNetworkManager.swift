@@ -9,7 +9,12 @@ import Foundation
 
 struct BarNetworkManager {
     static let shared = BarNetworkManager()
-    let baseURL = "http://127.0.0.1:8000/api/bar"
+    var baseURL: String {
+        // Get the root URL from the environment variable
+        let rootURL = ProcessInfo.processInfo.environment["ROOT_URL"] ?? "http://defaultroot.com"
+        
+        return rootURL + "/api/bar"
+    }
 
     // Fetch all bottles from the cellar
     func fetchBars(user_id: String, completion: @escaping (Result<[Bar], Error>) -> Void) {

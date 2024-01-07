@@ -4,6 +4,7 @@ from fastapi import Header, HTTPException
 
 
 def get_user_id(authorization: Optional[str] = Header(None)):
+    print(authorization)
     if authorization is None:
         raise HTTPException(status_code=401, detail="Authorization header missing")
 
