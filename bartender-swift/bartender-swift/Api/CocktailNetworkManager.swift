@@ -9,10 +9,10 @@ import Foundation
 
 struct CocktailNetworkManager {
     static let shared = CocktailNetworkManager()
+    
     var baseURL: String {
         // Get the root URL from the environment variable
-        let rootURL = ProcessInfo.processInfo.environment["ROOT_URL"] ?? "http://defaultroot.com"
-        
+        let rootURL = ConfigurationManager.shared.rootURL ?? "https://bartender.api.anish.xyz"
         return rootURL + "/api/cocktail"
     }
     

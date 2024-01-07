@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>RootURL</key>
-	<string>http://bartender.api.anish.xyz</string>
+	<string>https://bartender.api.anish.xyz</string>
 </dict>
 </plist>
