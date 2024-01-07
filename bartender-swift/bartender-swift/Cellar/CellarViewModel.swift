@@ -77,6 +77,20 @@ import SwiftUI
         }
     }
 
+    func addBottlesToCellarImage(fromImage file: Data?, base64Image: String?, userID: String, barID: Int?, completion: (() -> Void)? = nil) {
+        CellarNetworkManager.shared.uploadBottlesImage(userID: userID, file: file, base64Image: base64Image, bar_id: barID) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let bottles):
+                    self?.cellar.insert(contentsOf: bottles, at: 0)
+                case .failure(let error):
+                    print("Error creating cocktails: \(error)")
+                    print(result)
+                }
+            }
+            completion?()
+        }
+    }
 
     func deleteBottleFromCellar(bottleID: Int, forUserID userID: String) {
         CellarNetworkManager.shared.deleteBottle(bottleID: bottleID, userID: userID) { [weak self] result in
@@ -91,6 +105,24 @@ import SwiftUI
             }
         }
     }
+    
+    
+    func createBar(name: String, description: String?, userID: String, completion: (() -> Void)? = nil) {
+        BarNetworkManager.shared.createBar(name: name, description: description, userID: userID) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let newBar):
+                    self?.bars.append(newBar)
+                case .failure(let error):
+                    print("Error creating menu: \(error)")
+                    // TODO: HANDLE ERROR
+                }
+            }
+            completion?()
+        }
+    }
+    
+    
     
 
 }

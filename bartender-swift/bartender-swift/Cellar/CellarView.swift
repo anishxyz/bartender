@@ -12,10 +12,11 @@ struct CellarView: View {
     @EnvironmentObject var currUser: CurrUser
     
     @EnvironmentObject var viewModel: CellarViewModel
+    @StateObject var loadingState = LoadingStateViewModel()
     
     @State private var showingAddBottle = false
-    
-    @StateObject var loadingState = LoadingStateViewModel()
+    @State private var showingAddBarSheet = false
+    @State private var showingAddBottleFromImageSheet = false
     
     var filteredCellar: [Bottle] {
         if let barID = viewModel.selectedBarID {
@@ -50,12 +51,22 @@ struct CellarView: View {
                         HStack {
                             ActivityIndicatorLS(loadingState: loadingState, style: .medium, color: UIColor.orange)
                             Menu {
-                                Button("From Camera (coming soon)", action: {
-                                    // Action for selecting 'From Camera'
-                                })
-                                Button("Enter Manually", action: {
-                                    showingAddBottle = true
-                                })
+                                Section(header: Text("Bottles").font(.headline)) {
+                                    Button("From Image", action: {
+                                        showingAddBottleFromImageSheet = true
+                                    })
+                                    Button("Enter Custom", action: {
+                                        showingAddBottle = true
+                                    })
+                                }
+                                Section(header: Text("Bars").font(.headline)) {
+                                    Button("Create", action: {
+                                        showingAddBarSheet = true
+                                    })
+//                                    Button("Move Bottles", action: {
+//
+//                                    })
+                                }
                             } label: {
                                 Image(systemName: "plus.circle.fill")
                                     .foregroundColor(.orange)
@@ -68,6 +79,18 @@ struct CellarView: View {
                     AddBottleView()
                         .environmentObject(viewModel)
                 }
+                .sheet(isPresented: $showingAddBarSheet) {
+                    AddBarSheetView(isPresented: $showingAddBarSheet)
+                        .environmentObject(viewModel)
+                        .environmentObject(loadingState)
+                        .presentationDetents([.medium])
+                }
+                .sheet(isPresented: $showingAddBottleFromImageSheet) {
+                    AddBottleImageView(isPresented: $showingAddBottleFromImageSheet)
+                        .environmentObject(viewModel)
+                        .environmentObject(loadingState)
+                        .presentationDetents([.medium])
+                }
             }
         }
     }
@@ -77,46 +100,6 @@ struct CellarView: View {
             let bottleID = viewModel.cellar[index].id
             viewModel.deleteBottleFromCellar(bottleID: bottleID, forUserID: currUser.uid)
         }
-    }
-}
-
-
-struct BarDropdownView: View {
-    var bars: [Bar]
-    var onSelect: (Bar?) -> Void
-    @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var viewModel: CellarViewModel
-
-    var body: some View {
-        HStack {
-            Menu {
-                Button("Full Cellar", action: {
-                    onSelect(nil)
-                })
-                .textCase(nil)
-                ForEach(bars, id: \.bar_id) { bar in
-                    Button(bar.name, action: {
-                        onSelect(bar)
-                    })
-                        .textCase(nil)
-                }
-            } label: {
-                HStack {
-                    Text("Bars")
-                        .bold()
-                    Image(systemName: "chevron.down") // System icon for the caret
-                }
-                .textCase(nil)
-                .padding(.vertical, 8)
-                .padding(.horizontal, 16)
-                .foregroundColor(colorScheme == .dark ? .black : .white)
-                .background(Color.orange.colorMultiply(.orange))
-                .clipShape(Capsule())
-            }
-            Spacer()
-        }
-        .padding(.leading, -18) // This value may need to be adjusted based on the default List padding
-        .padding(.bottom, 10)
     }
 }
 

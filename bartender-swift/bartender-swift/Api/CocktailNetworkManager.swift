@@ -12,7 +12,7 @@ struct CocktailNetworkManager {
     let baseURL = "http://127.0.0.1:8000/api/cocktail"
     
     func uploadCocktailImage(menuID: Int, userID: String, file: Data?, base64Image: String?, completion: @escaping (Result<[Cocktail], Error>) -> Void) {
-        let url = URL(string: "\(baseURL)/\(menuID)/ai")!
+        let url = URL(string: "\(baseURL)/ai/\(menuID)")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("Bearer \(userID)", forHTTPHeaderField: "Authorization")

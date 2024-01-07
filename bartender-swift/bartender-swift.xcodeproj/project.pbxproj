@@ -17,6 +17,9 @@
 		B61B072E2B3ED8B800E04E46 /* RecipeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B072D2B3ED8B800E04E46 /* RecipeSectionView.swift */; };
 		B61B07302B3FB59700E04E46 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B072F2B3FB59700E04E46 /* CustomColors.swift */; };
 		B61B07322B40248300E04E46 /* BarNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07312B40248300E04E46 /* BarNetworkManager.swift */; };
+		B61B07342B41738600E04E46 /* BarDropdownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07332B41738600E04E46 /* BarDropdownView.swift */; };
+		B61B07362B417A1900E04E46 /* AddBarSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07352B417A1900E04E46 /* AddBarSheetView.swift */; };
+		B61B07382B49674D00E04E46 /* AddBottleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B07372B49674D00E04E46 /* AddBottleImageView.swift */; };
 		B660618C2B0D9556002F8DF2 /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618B2B0D9556002F8DF2 /* CellarView.swift */; };
 		B660618E2B0D97DE002F8DF2 /* CocktailMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */; };
 		B66061912B0D98A3002F8DF2 /* BuilderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66061902B0D98A3002F8DF2 /* BuilderView.swift */; };
@@ -66,6 +69,9 @@
 		B61B072D2B3ED8B800E04E46 /* RecipeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSectionView.swift; sourceTree = "<group>"; };
 		B61B072F2B3FB59700E04E46 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		B61B07312B40248300E04E46 /* BarNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarNetworkManager.swift; sourceTree = "<group>"; };
+		B61B07332B41738600E04E46 /* BarDropdownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarDropdownView.swift; sourceTree = "<group>"; };
+		B61B07352B417A1900E04E46 /* AddBarSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBarSheetView.swift; sourceTree = "<group>"; };
+		B61B07372B49674D00E04E46 /* AddBottleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBottleImageView.swift; sourceTree = "<group>"; };
 		B660618B2B0D9556002F8DF2 /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
 		B660618D2B0D97DE002F8DF2 /* CocktailMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailMenuView.swift; sourceTree = "<group>"; };
 		B66061902B0D98A3002F8DF2 /* BuilderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderView.swift; sourceTree = "<group>"; };
@@ -143,6 +149,9 @@
 				B66061952B0DFED9002F8DF2 /* CellarViewModel.swift */,
 				B660619A2B15EAF1002F8DF2 /* BottleDetailView.swift */,
 				B6B62A112B2EB8BC0059E8C5 /* AddBottleView.swift */,
+				B61B07332B41738600E04E46 /* BarDropdownView.swift */,
+				B61B07352B417A1900E04E46 /* AddBarSheetView.swift */,
+				B61B07372B49674D00E04E46 /* AddBottleImageView.swift */,
 			);
 			path = Cellar;
 			sourceTree = "<group>";
@@ -291,7 +300,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1510;
 				TargetAttributes = {
 					B68CA5252B05D58A00F83F80 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -359,10 +368,12 @@
 				B6B62A142B2EBAFC0059E8C5 /* BottleType.swift in Sources */,
 				B660618E2B0D97DE002F8DF2 /* CocktailMenuView.swift in Sources */,
 				B66A2B042B3968A9000EFF6F /* AddMenuSheetView.swift in Sources */,
+				B61B07382B49674D00E04E46 /* AddBottleImageView.swift in Sources */,
 				B68CA5522B05E5F800F83F80 /* AuthManager.swift in Sources */,
 				B61B067B2B3D654600E04E46 /* ImagePicker.swift in Sources */,
 				B6B62A182B36C0680059E8C5 /* Cocktail.swift in Sources */,
 				B66061962B0DFED9002F8DF2 /* CellarViewModel.swift in Sources */,
+				B61B07362B417A1900E04E46 /* AddBarSheetView.swift in Sources */,
 				B66A2B062B397DF6000EFF6F /* CocktailMenuDetailView.swift in Sources */,
 				B6814B422B382A6300B3194D /* MenuNetworkManager.swift in Sources */,
 				B68CA52A2B05D58A00F83F80 /* bartender_swiftApp.swift in Sources */,
@@ -373,6 +384,7 @@
 				B61B067D2B3E490B00E04E46 /* ActivityIndicator.swift in Sources */,
 				B68CA5502B05E56F00F83F80 /* SignInViewModel.swift in Sources */,
 				B6DB39002B3961C6006F3221 /* MenuCardView.swift in Sources */,
+				B61B07342B41738600E04E46 /* BarDropdownView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +427,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -475,6 +488,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

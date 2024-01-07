@@ -16,6 +16,7 @@ struct SignInView: View {
     @State private var isRegistrationPresented = false
     
     @Binding var appUser: AppUser?
+    @EnvironmentObject var currUser: CurrUser
     
     var body: some View {
         VStack(spacing: 30) {
@@ -48,6 +49,8 @@ struct SignInView: View {
                     do {
                         let appUser = try await viewModel.signInWithEmail(email: email, password: password)
                         self.appUser = appUser
+                        currUser.uid = appUser.uid
+                        currUser.email = appUser.email
                     } catch {
                         print("issue with sign in")
                     }
@@ -72,6 +75,8 @@ struct SignInView: View {
                         do {
                             let appUser = try await viewModel.signInWithApple()
                             self.appUser = appUser
+                            currUser.uid = appUser.uid
+                            currUser.email = appUser.email
                         } catch {
                             print("error signing in")
                         }
@@ -96,6 +101,8 @@ struct SignInView: View {
                         do {
                             let appUser = try await viewModel.signInWithGoogle()
                             self.appUser = appUser
+                            currUser.uid = appUser.uid
+                            currUser.email = appUser.email
                         } catch {
                             print("error signing in")
                         }

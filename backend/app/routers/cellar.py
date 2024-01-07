@@ -1,10 +1,12 @@
 from typing import Optional, List
 from datetime import datetime
 import uuid
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, File, Form, UploadFile
 from pydantic import BaseModel
 from ..database import supabase
 from ..dependencies import get_user_id
+from ..llm_pipelines.cellar_from_image import bottle_extraction
+from ..llm_pipelines.helpers import process_image_data
 
 router = APIRouter()
 
@@ -25,7 +27,7 @@ class Cellar(BaseModel):
         orm_mode = True
 
 
-@router.get("/", response_model=List[Cellar])
+@router.get("", response_model=List[Cellar])
 async def get_cellar(user_id: str = Depends(get_user_id)):
     print(user_id)
     query = supabase.table("cellar").select("*").eq("uid", user_id)
@@ -66,6 +68,35 @@ async def add_bottle(bottle_data: BottleData, user_id: str = Depends(get_user_id
 
     print(response.data[0])
     return response.data[0]
+
+
+@router.post("/ai/bottle")
+async def add_bottle(
+    file: Optional[UploadFile] = File(None),
+    base64_image: Optional[str] = Form(None),
+    bar_id: Optional[int] = Form(None),
+    user_id: str = Depends(get_user_id)
+):
+    image_data = await process_image_data(base64_image=base64_image, file=file)
+    cellar_parse = await bottle_extraction(image_data)
+
+    for bottle in cellar_parse:
+        bottle["uid"] = user_id
+        bottle["created_at"] = datetime.now().isoformat()
+        bottle["last_updated"] = datetime.now().isoformat()
+        bottle["uid"] = user_id
+        bottle["qty"] = 1
+        bottle["current"] = True
+        if bar_id:
+            bottle["bar_id"] = bar_id
+
+    response = supabase.table("cellar").insert(cellar_parse).execute()
+
+    if not response.data:
+        raise HTTPException(status_code=500, detail="Failed to add bottles to cellar")
+
+    print(response.data)
+    return response.data
 
 
 class UpdateBottleData(BaseModel):
