@@ -67,6 +67,19 @@ enum BottleType: String, CaseIterable, Identifiable {
             return Color.gray
         }
     }
+    
+    var filledSymbolName: String {
+        "case.\(self.rawValue.lowercased()).fill"
+    }
+    
+    
+    var symbolFilled: Image {
+        Image(filledSymbolName)
+    }
+
+//    var symbolOutline: Image {
+//        Image(systemName: outlineSymbolName)
+//    }
 }
 
 

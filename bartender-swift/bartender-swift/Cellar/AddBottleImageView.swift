@@ -31,7 +31,8 @@ struct AddBottleImageView: View {
                     self.pickerSourceType = .photoLibrary
                     self.showImagePicker = true
                 }
-                .padding()
+                .buttonStyle(.bordered)
+                .tint(.orange)
                 .sheet(isPresented: $showImagePicker) {
                     CustomImagePicker(image: self.$inputImage, sourceType: self.pickerSourceType)
                 }
@@ -40,11 +41,13 @@ struct AddBottleImageView: View {
                     self.pickerSourceType = .camera
                     self.showImagePicker = true
                 }
-                .padding()
+                .buttonStyle(.bordered)
+                .tint(.orange)
                 .sheet(isPresented: $showImagePicker) {
                     CustomImagePicker(image: self.$inputImage, sourceType: self.pickerSourceType)
                 }
             }
+            .padding()
             
             Menu {
                 Picker("Select Bar", selection: $selectedBarId) {
@@ -56,29 +59,39 @@ struct AddBottleImageView: View {
             } label: {
                 Label("Select a Bar", systemImage: "cellar.three.bottles")
             }
-            .padding()
+            .padding(.bottom)
+            .buttonStyle(.bordered)
+            .tint(.orange)
 
-            // Display the selected bar
-            if let barId = selectedBarId {
-                Text("Selected Bar ID: \(barId)")
-                    .padding()
-            } else {
-                Text("No Bar Selected")
-                    .padding()
-            }
+//            // Display the selected bar
+//            if let barId = selectedBarId {
+//                Text("Selected Bar ID: \(barId)")
+//                    .padding()
+//            } else {
+//                Text("No Bar Selected")
+//                    .padding()
+//            }
 
 
             if let image = image {
                 image
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
+                    .aspectRatio(1, contentMode: .fill)
+                    .frame(width: 250, height: 250)
+                    .clipShape(RoundedRectangle(cornerRadius: 10)) // Rounded corners
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10) // Tinted border
+                            .stroke(Color.blue, lineWidth: 2) // Replace `Color.blue` with your preferred tint color
+                    )
                 Button("Submit") {
                     loadingState.startLoading()
                     submitBottleImage()
                 }
                 .padding()
+                .buttonStyle(.bordered)
+                .tint(.green)
             }
+            Spacer()
         }
         .onChange(of: inputImage) { _ in
             if let inputImage = inputImage {
