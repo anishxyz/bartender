@@ -39,20 +39,44 @@ struct BottleDetailView: View {
     }
 }
 
+//struct TypeTag: View {
+//    let type: BottleType
+//
+//    var body: some View {
+//        HStack {
+//            type.symbolFilled
+//                .foregroundColor(.white) // Sets the color of the icon
+//            Text(type.rawValue)
+//                .font(.caption)
+//                .fontWeight(.bold)
+//        }
+//        .padding(.horizontal, 8)
+//        .padding(.vertical, 4)
+//        .background(type.color.opacity(0.85)) // Use color from BottleType
+//        .foregroundColor(.white)
+//        .cornerRadius(8)
+//    }
+//}
+
 struct TypeTag: View {
     let type: BottleType
 
     var body: some View {
-        Text(type.rawValue)
-            .font(.caption)
-            .fontWeight(.bold)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(type.color) // Use color from BottleType
-            .foregroundColor(.white)
-            .cornerRadius(8)
+        HStack {
+            type.symbolFilled
+                .foregroundColor(type.color) // Apply the color as tint to the icon
+            Text(type.rawValue)
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(type.color) // Apply the color as tint to the text
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 5)
+        .background(type.color.opacity(0.2)) // Subdued background color
+        .cornerRadius(8)
     }
 }
+
 
 struct BottleDetailView_Previews: PreviewProvider {
     static var previews: some View {

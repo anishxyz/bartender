@@ -29,7 +29,12 @@ struct AddBottleView: View {
 
                     Picker("Type", selection: $selectedType) {
                         ForEach(BottleType.allCases) { type in
-                            Text(type.rawValue).tag(type)
+                            HStack {
+                                type.symbolFilled
+                                    .padding(.trailing, 8) 
+                                Text(type.rawValue)
+                            }
+                            .tag(type)
                         }
                     }
 
@@ -97,15 +102,15 @@ func createAddBottleData(name: String, selectedType: BottleType, quantity: Int, 
 }
 
 
-
-struct AddBottleView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            AddBottleView()
-                .preferredColorScheme(.light)
-
-            AddBottleView()
-                .preferredColorScheme(.dark)
-        }
-    }
-}
+//
+//struct AddBottleView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            AddBottleView()
+//                .preferredColorScheme(.light)
+//
+//            AddBottleView()
+//                .preferredColorScheme(.dark)
+//        }
+//    }
+//}
