@@ -76,12 +76,12 @@ struct AddBottleImageView: View {
             if let image = image {
                 image
                     .resizable()
-                    .aspectRatio(1, contentMode: .fill)
-                    .frame(width: 250, height: 250)
+                    .scaledToFill()
+                    .frame(width: 250, height: 250, alignment: .center)
                     .clipShape(RoundedRectangle(cornerRadius: 10)) // Rounded corners
                     .overlay(
                         RoundedRectangle(cornerRadius: 10) // Tinted border
-                            .stroke(Color.blue, lineWidth: 2) // Replace `Color.blue` with your preferred tint color
+                            .stroke(Color.orange, lineWidth: 2) 
                     )
                 Button("Submit") {
                     loadingState.startLoading()
