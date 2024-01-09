@@ -57,7 +57,7 @@ struct AddBottleImageView: View {
                     }
                 }
             } label: {
-                Label("Select a Bar", systemImage: "cellar.three.bottles")
+                Label("Select a Bar", image: "cellar.three.bottles.fill")
             }
             .padding(.bottom)
             .buttonStyle(.bordered)
@@ -81,7 +81,7 @@ struct AddBottleImageView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10)) // Rounded corners
                     .overlay(
                         RoundedRectangle(cornerRadius: 10) // Tinted border
-                            .stroke(Color.orange, lineWidth: 2) 
+                            .stroke(Color.orange, lineWidth: 2)
                     )
                 Button("Submit") {
                     loadingState.startLoading()

@@ -37,6 +37,8 @@ struct AddBottleView: View {
                             .tag(type)
                         }
                     }
+                    .buttonStyle(.bordered)
+                    .tint(.orange)
 
                     Stepper(value: $quantity, in: 1...100) {
                         Text("Quantity: \(quantity)")
