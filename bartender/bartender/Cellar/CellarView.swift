@@ -12,6 +12,8 @@ struct CellarView: View {
     @Environment(\.modelContext) private var modelContext
     @Query var bottles: [Bottle]
     
+    @State private var showingAddBottleSheet = false
+    
     var body: some View {
         NavigationStack {
             List {
@@ -19,6 +21,33 @@ struct CellarView: View {
                     BottleItemView(bottle: bottle)
                 }
             }
+            .navigationTitle("🍾 Cellar")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Section(header: Text("Bottle").font(.headline)) {
+                            Button("Add Bottle") {
+                                showingAddBottleSheet = true
+                            }
+                            Button("Add Bottle from Image") {
+                                // TODO: Add 
+                            }
+                        }
+                        Section(header: Text("Bar").font(.headline)) {
+                            Button("Add Bar") {
+                                // TODO: Add bar functionality
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .foregroundColor(.orange)
+                            .colorMultiply(.orange)
+                    }
+                }
+            }
+            .sheet(isPresented: $showingAddBottleSheet, content: {
+                AddBottleView()
+            })
         }
     }
 }
@@ -28,3 +57,10 @@ struct CellarView: View {
     ContentView()
         .modelContainer(previewContainer)
 }
+
+#Preview {
+    ContentView()
+        .modelContainer(previewContainer)
+        .preferredColorScheme(.dark)
+}
+

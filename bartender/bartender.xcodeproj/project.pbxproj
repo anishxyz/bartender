@@ -15,6 +15,8 @@
 		B6B2507B2BAFFFE500A3098D /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2507A2BAFFFE500A3098D /* Bar.swift */; };
 		B6B2507D2BB0017F00A3098D /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2507C2BB0017F00A3098D /* PreviewContainer.swift */; };
 		B6B2507F2BB0101B00A3098D /* BottleItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2507E2BB0101B00A3098D /* BottleItemView.swift */; };
+		B6B250812BB11EC600A3098D /* AddBottleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250802BB11EC600A3098D /* AddBottleView.swift */; };
+		B6B250842BB12EAA00A3098D /* VersionedSchemas.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250832BB12EAA00A3098D /* VersionedSchemas.swift */; };
 		B6D1A4EB2BAD2C530059942D /* bartenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1A4EA2BAD2C530059942D /* bartenderApp.swift */; };
 		B6D1A4ED2BAD2C530059942D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1A4EC2BAD2C530059942D /* ContentView.swift */; };
 		B6D1A4EF2BAD2C530059942D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1A4EE2BAD2C530059942D /* Item.swift */; };
@@ -31,6 +33,8 @@
 		B6B2507A2BAFFFE500A3098D /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
 		B6B2507C2BB0017F00A3098D /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		B6B2507E2BB0101B00A3098D /* BottleItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleItemView.swift; sourceTree = "<group>"; };
+		B6B250802BB11EC600A3098D /* AddBottleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBottleView.swift; sourceTree = "<group>"; };
+		B6B250832BB12EAA00A3098D /* VersionedSchemas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionedSchemas.swift; sourceTree = "<group>"; };
 		B6D1A4E72BAD2C530059942D /* bartender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bartender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6D1A4EA2BAD2C530059942D /* bartenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bartenderApp.swift; sourceTree = "<group>"; };
 		B6D1A4EC2BAD2C530059942D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -56,6 +60,7 @@
 				B6B250692BAD371400A3098D /* CellarView.swift */,
 				B6B250782BAFFC0800A3098D /* BottleEditor.swift */,
 				B6B2507E2BB0101B00A3098D /* BottleItemView.swift */,
+				B6B250802BB11EC600A3098D /* AddBottleView.swift */,
 			);
 			path = Cellar;
 			sourceTree = "<group>";
@@ -75,6 +80,7 @@
 				B6B250762BAD3C5300A3098D /* Bottle.swift */,
 				B6B2507A2BAFFFE500A3098D /* Bar.swift */,
 				B6B2507C2BB0017F00A3098D /* PreviewContainer.swift */,
+				B6B250832BB12EAA00A3098D /* VersionedSchemas.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -190,12 +196,14 @@
 			files = (
 				B6D1A4ED2BAD2C530059942D /* ContentView.swift in Sources */,
 				B6B250772BAD3C5300A3098D /* Bottle.swift in Sources */,
+				B6B250842BB12EAA00A3098D /* VersionedSchemas.swift in Sources */,
 				B6B2506A2BAD371400A3098D /* CellarView.swift in Sources */,
 				B6D1A4EF2BAD2C530059942D /* Item.swift in Sources */,
 				B6B2507D2BB0017F00A3098D /* PreviewContainer.swift in Sources */,
 				B6D1A4EB2BAD2C530059942D /* bartenderApp.swift in Sources */,
 				B6B2507F2BB0101B00A3098D /* BottleItemView.swift in Sources */,
 				B6B2506E2BAD384E00A3098D /* CocktailsView.swift in Sources */,
+				B6B250812BB11EC600A3098D /* AddBottleView.swift in Sources */,
 				B6B250792BAFFC0800A3098D /* BottleEditor.swift in Sources */,
 				B6B2507B2BAFFFE500A3098D /* Bar.swift in Sources */,
 				B6B250752BAD3BEE00A3098D /* BottleType.swift in Sources */,

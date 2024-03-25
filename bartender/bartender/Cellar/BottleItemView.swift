@@ -15,14 +15,19 @@ struct BottleItemView: View {
         VStack(alignment: .leading, spacing: 4) {
             Text(bottle.name)
                 .bold()
-            Text(bottle.info)
-                .font(.caption)
-                .lineLimit(1)
-                .truncationMode(.tail)
+            if let info = bottle.info {
+                Text(info)
+                    .font(.caption)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+            }
             HStack {
-                Text(bottle.type.rawValue)
+                HStack {
+                    Image(bottle.type.filledSymbolName)
+                    Text(bottle.type.rawValue)
+                }
                     .fontWeight(.bold)
-                    .foregroundColor(bottle.type.color)
+                    .foregroundColor(bottle.type.color.opacity(0.85))
                     .tagStyle(bgc: bottle.type.color.opacity(0.2))
                 Text("\(bottle.qty)")
                     .tagStyle(bgc: Color.secondary.opacity(0.1))
@@ -44,4 +49,13 @@ extension View {
             .clipShape(Capsule())
             .font(.caption)
     }
+}
+
+#Preview {
+    BottleItemView(bottle: exampleBottle)
+}
+
+#Preview {
+    BottleItemView(bottle: exampleBottle)
+        .preferredColorScheme(.dark)
 }

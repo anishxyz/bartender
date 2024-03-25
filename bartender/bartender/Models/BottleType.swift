@@ -72,7 +72,7 @@ enum BottleType: String, CaseIterable, Identifiable, Codable {
     }
     
     var outlinedSymbolName: String {
-        "case.\(self.rawValue.lowercased()).2"
+        "case.\(self.rawValue.lowercased())"
     }
     
     var symbolFilled: Image {

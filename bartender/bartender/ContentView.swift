@@ -14,7 +14,7 @@ struct ContentView: View {
         TabView {
             CellarView()
                 .tabItem {
-                    Label("Cellar", systemImage: "wineglass.fill")
+                    Label("Cellar", image: "cellar.six.bottles.fill")
                 }
             CocktailsView()
                 .tabItem {

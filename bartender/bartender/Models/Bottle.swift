@@ -14,10 +14,10 @@ class Bottle {
     var type: BottleType
     var qty: Int
     var price: Float?
-    var info: String
+    var info: String?
     var bar: Bar?
     
-    init(name: String, type: BottleType, qty: Int, price: Float? = nil, info: String, bar: Bar? = nil) {
+    init(name: String, type: BottleType, qty: Int, price: Float? = nil, info: String?, bar: Bar? = nil) {
         self.name = name
         self.type = type
         self.qty = qty
@@ -26,6 +26,8 @@ class Bottle {
         self.bar = bar
     }
 }
+
+var exampleBottle: Bottle = Bottle(name: "Don Julio 1942", type: .tequila, qty: 1, price: 750.00, info: "Tequila Don Julio was established in 1942 when Don Julio Gonzalez was only 17 years old. He produced tequila for the locals, family, and special occasions. In the early 1980’s Don Julio suffered a very bad stroke and in 1985 they threw him an enormous party to celebrate his recovery as well as his 60th birthday. The original bottles were tall like many other brands but Don Julio wanted his guests to be able to see each other while seated at tables for the party. The brand officially launched in 1987 and is now a staple in the premium Tequila category.")
 
 struct sampleBottles {
     static var contents: [Bottle] = [

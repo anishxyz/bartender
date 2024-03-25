@@ -10,6 +10,7 @@ import SwiftData
 
 @main
 struct bartenderApp: App {
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Bottle.self,
@@ -25,10 +26,11 @@ struct bartenderApp: App {
         }
     }()
 
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(for: [Bottle.self, Bar.self])
     }
 }
