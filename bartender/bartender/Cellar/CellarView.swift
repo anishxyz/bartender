@@ -13,6 +13,7 @@ struct CellarView: View {
     @Query var bottles: [Bottle]
     
     @State private var showingAddBottleSheet = false
+    @State private var showingAddBottleFromImageSheet = false
     
     var body: some View {
         NavigationStack {
@@ -30,7 +31,7 @@ struct CellarView: View {
                                 showingAddBottleSheet = true
                             }
                             Button("Add Bottle from Image") {
-                                // TODO: Add 
+                                showingAddBottleFromImageSheet = true
                             }
                         }
                         Section(header: Text("Bar").font(.headline)) {
@@ -47,6 +48,10 @@ struct CellarView: View {
             }
             .sheet(isPresented: $showingAddBottleSheet, content: {
                 AddBottleView()
+            })
+            .sheet(isPresented: $showingAddBottleFromImageSheet, content: {
+                AddBottleFromImageView()
+                    .presentationDetents([.medium, .large])
             })
         }
     }
