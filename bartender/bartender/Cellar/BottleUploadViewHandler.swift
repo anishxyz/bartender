@@ -13,19 +13,23 @@ enum SheetStep {
 }
 
 struct BottleUploadViewHandler: View {
-    @Binding var sheetStep: SheetStep?
+    @State var sheetStep: SheetStep? = .upload
     
     var body: some View {
+        
         switch sheetStep {
-        case .upload:
-            UploadImageView { bottles in
-                self.sheetStep = .review(bottles)
-            }
-        case .review(let bottles):
-            ReviewBottlesView(bottles: bottles)
-        case .none:
-            EmptyView()
+            case .upload:
+                GetBottlesFromImageView { bottles in
+                    self.sheetStep = .review(bottles)
+                }
+            case .review(let bottles):
+                AddBottlesView(bottles: bottles)
+            case .none:
+                EmptyView()
         }
     }
 }
 
+#Preview {
+    BottleUploadViewHandler()
+}

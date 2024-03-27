@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct AddMultipleBottlesView: View {
+struct AddBottlesView: View {
     var bottles: [Bottle]
 
     var body: some View {
