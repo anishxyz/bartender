@@ -50,7 +50,7 @@ struct CellarView: View {
                 AddBottleView()
             })
             .sheet(isPresented: $showingAddBottleFromImageSheet, content: {
-                AddBottleFromImageView()
+                GetBottlesFromImageView()
                     .presentationDetents([.medium, .large])
             })
         }

@@ -79,7 +79,8 @@ struct AddBottleView: View {
                         dismiss()
                     }) {
                         Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.gray)                    }
+                            .foregroundColor(.gray)
+                    }
                 }
             }
         }

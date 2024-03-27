@@ -15,7 +15,7 @@ class ImageToCellar {
         self.networkManager = OpenAINetworkManager()
     }
     
-    func analyzeImage(img: UIImage, completion: @escaping () -> Void) {
+    func analyzeImage(img: UIImage, completion: @escaping ([Bottle]) -> Void) {
         
         let base64Image = convertImageToBase64String(img: img)
         let bottleTypes = BottleType.allCases.map { $0.rawValue }.joined(separator: ", ")
@@ -56,18 +56,21 @@ class ImageToCellar {
                     if let firstChoice = chatCompletion.choices.first {
                         let content = firstChoice.message.content
                         
-                        if let tempBottles = decodeTempBottles(from: content) {
-                            for tempBottle in tempBottles {
-                                print("Name: \(tempBottle.name), Type: \(tempBottle.type.rawValue), Description: \(tempBottle.description)")
-                            }
+                        let tempBottles = decodeTempBottles(from: content) ?? []
+                        
+                        if tempBottles.isEmpty {
+                            completion([])
                         } else {
-                            print("Failed to decode beverages from the content.")
+                            let bottles = tempBottles.map { tempBottle in
+                                convertToBottle(tempBottle: tempBottle)
+                            }
+                            completion(bottles)
                         }
                     }
-                    completion()
+                    
                 case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
-                    completion()
+                    print("ImageToCellar Error: \(error.localizedDescription)")
+                    completion([])
                 }
             }
         }
@@ -108,4 +111,8 @@ func decodeTempBottles(from message: String) -> [TempBottle]? {
         print("Error decoding JSON: \(error)")
         return nil
     }
+}
+
+func convertToBottle(tempBottle: TempBottle) -> Bottle {
+    return Bottle(name: tempBottle.name, type: tempBottle.type, qty: 1, info: tempBottle.description)
 }
