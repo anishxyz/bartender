@@ -24,6 +24,7 @@ struct BottleUploadViewHandler: View {
                 }
             case .review(let bottles):
                 AddBottlesView(bottles: bottles)
+                    .interactiveDismissDisabled(true)
             case .none:
                 EmptyView()
         }

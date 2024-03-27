@@ -74,18 +74,18 @@ struct GetBottlesFromImageView: View {
                 
                 
                 Button(action: {
-//                    isAnalyzing = true
-//                    imageToCellar.analyzeImage(img: selectedImage) { bottles in
-//                        isAnalyzing = false
-//                        
-//                        if bottles.isEmpty {
-//                            showError = true
-//                        } else {
-////                            bottlesFound = bottles
-//                            onBottlesFound(bottles)
-//                        }
-//                    }
-                    onBottlesFound(sampleBottles.contents)
+                    isAnalyzing = true
+                    imageToCellar.analyzeImage(img: selectedImage) { bottles in
+                        isAnalyzing = false
+                        
+                        if bottles.isEmpty {
+                            showError = true
+                        } else {
+//                            bottlesFound = bottles
+                            onBottlesFound(bottles)
+                        }
+                    }
+//                    onBottlesFound(sampleBottles.contents)
                 }) {
                     if isAnalyzing {
                         ProgressView()
