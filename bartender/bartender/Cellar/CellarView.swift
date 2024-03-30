@@ -45,14 +45,15 @@ struct CellarView: View {
                             }
                         }
                         Section(header: Text("Bar").font(.headline)) {
-                            Button(action: {
-                                // TODO: Add bar functionality
-                            }) {
-                                HStack {
-                                    Text("Create Bar")
-                                    Image("cellar.three.bottles.fill")
-                                }
-                            }
+//                            Button(action: {
+//                                // TODO: Add bar functionality
+//                            }) {
+//                                HStack {
+//                                    Text("Create Bar")
+//                                    Image("cellar.three.bottles.fill")
+//                                }
+//                            }
+                            CreateBarButton()
                         }
                     } label: {
                         Image(systemName: "plus.circle.fill")
