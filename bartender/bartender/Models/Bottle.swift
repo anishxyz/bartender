@@ -10,7 +10,7 @@ import Foundation
 
 @Model
 class Bottle {
-    var name: String
+    @Attribute(.unique) var name: String
     var type: BottleType
     var qty: Int
     var price: Float?
@@ -37,7 +37,6 @@ struct sampleBottles {
         Bottle(name: "Grey Goose", type: .vodka, qty: 1, price: 40.00, info: "Grey Goose, crafted in France, is celebrated for its excellence. Made from fine French wheat and pure artesian water, it offers a clear, fresh, and elegantly aromatic experience."),
         Bottle(name: "Modicum Rutherford", type: .wine, qty: 1, price: 120.00, info: "Modicum Rutherford is an exquisite, limited-production wine from the prestigious Rutherford AVA in Napa Valley. Known for its depth, complexity, and balance, it embodies the essence of Rutherford terroir."),
         Bottle(name: "Dassai Beyond", type: .sake, qty: 1, price: 500.00, info: "Dassai Beyond is an unparalleled sake experience, transcending traditional classifications with its refined elegance, complexity, and depth. Crafted from the rare Yamada Nishiki rice, polished to an extreme, it represents the pinnacle of the brewery's pursuit of perfection."),
-        Bottle(name: "The Botanist Gin", type: .gin, qty: 1, price: 40.00, info: "The Botanist Gin, from the Isle of Islay, is a complex, flavorful gin made using 22 hand-foraged local botanicals. It stands out for its distinctive character, offering a rich and mellow taste, perfect for crafting exquisite cocktails."),
-        Bottle(name: "The Botanist Gin", type: .gin, qty: 1, price: 40.00, info: "The Botanist Gin, from the Isle of Islay, is a complex, flavorful gin made using 22 hand-foraged local botanicals.")
+        Bottle(name: "The Botanist Gin", type: .gin, qty: 1, price: 40.00, info: "The Botanist Gin, from the Isle of Islay, is a complex, flavorful gin made using 22 hand-foraged local botanicals. It stands out for its distinctive character, offering a rich and mellow taste, perfect for crafting exquisite cocktails.")
     ]
 }

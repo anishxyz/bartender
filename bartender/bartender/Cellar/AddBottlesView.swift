@@ -18,7 +18,6 @@ struct AddBottlesView: View {
         ScrollView {
             VStack {
                 HStack {
-                    Text("Toolbar")
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
@@ -31,6 +30,7 @@ struct AddBottlesView: View {
                     .buttonStyle(.bordered)
                     .tint(.red)
                     
+                    Spacer()
                     Button(action: {
                         // TODO: Fix error handling
                         do {
@@ -52,13 +52,15 @@ struct AddBottlesView: View {
                         HStack {
                             Image(systemName: "plus.circle.fill")
                                 .imageScale(.large)
-                            Text("Save")
+                            Text("Add to Cellar")
                         }
                     }
                     .buttonStyle(.bordered)
                     .tint(.green)
                 }
-                .padding(.top, 30)
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 22).fill(.gray).opacity(0.15))
+                .padding(.top, 24)
                 
                 ForEach($bottles.indices, id: \.self) { index in
                     EditBottleView(bottle: $bottles[index])

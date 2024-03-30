@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 class Bar {
-    var name: String
+    @Attribute(.unique) var name: String
     var info: String?
     @Relationship(deleteRule: .nullify, inverse: \Bottle.bar) var bottles: [Bottle]
     
