@@ -27,16 +27,31 @@ struct CellarView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Menu {
                         Section(header: Text("Bottle").font(.headline)) {
-                            Button("Add Bottle") {
+                            Button(action: {
                                 showingAddBottleSheet = true
+                            }) {
+                                HStack {
+                                    Text("Add Manually")
+                                    Image(systemName: "square.and.pencil")
+                                }
                             }
-                            Button("Add Bottle from Image") {
+                            Button(action: {
                                 showingAddBottleFromImageSheet = true
+                            }) {
+                                HStack {
+                                    Text("From Image")
+                                    Image(systemName: "photo")
+                                }
                             }
                         }
                         Section(header: Text("Bar").font(.headline)) {
-                            Button("Add Bar") {
+                            Button(action: {
                                 // TODO: Add bar functionality
+                            }) {
+                                HStack {
+                                    Text("Create Bar")
+                                    Image("cellar.three.bottles.fill")
+                                }
                             }
                         }
                     } label: {
