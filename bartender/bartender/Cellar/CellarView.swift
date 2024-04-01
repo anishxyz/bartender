@@ -75,10 +75,7 @@ struct CellarView: View {
             })
             .sheet(isPresented: $showingAddBarSheet, content: {
                 AddBarView()
-                    .padding(12)
-                    .background(RoundedRectangle(cornerRadius: 22).fill(.gray).opacity(0.15))
-                    .padding()
-                    .presentationDetents([.medium, .large])
+                    .presentationDetents([.medium])
                 
             })
         }
