@@ -12,9 +12,13 @@ struct CellarView: View {
     @Environment(\.modelContext) private var modelContext
     @Query var bottles: [Bottle]
     
+    // bottles
     @State private var showingAddBottleSheet = false
     @State private var showingAddBottleFromImageSheet = false
     
+    // bars
+    @State private var showingAddBarSheet = false
+
     var body: some View {
         NavigationStack {
             List {
@@ -45,15 +49,14 @@ struct CellarView: View {
                             }
                         }
                         Section(header: Text("Bar").font(.headline)) {
-//                            Button(action: {
-//                                // TODO: Add bar functionality
-//                            }) {
-//                                HStack {
-//                                    Text("Create Bar")
-//                                    Image("cellar.three.bottles.fill")
-//                                }
-//                            }
-                            CreateBarButton()
+                            Button(action: {
+                                showingAddBarSheet = true
+                            }) {
+                                HStack {
+                                    Text("Create Bar")
+                                    Image("cellar.three.bottles.fill")
+                                }
+                            }
                         }
                     } label: {
                         Image(systemName: "plus.circle.fill")
@@ -67,6 +70,14 @@ struct CellarView: View {
             })
             .sheet(isPresented: $showingAddBottleFromImageSheet, content: {
                 BottleUploadViewHandler()
+                    .presentationDetents([.medium, .large])
+                
+            })
+            .sheet(isPresented: $showingAddBarSheet, content: {
+                AddBarView()
+                    .padding(12)
+                    .background(RoundedRectangle(cornerRadius: 22).fill(.gray).opacity(0.15))
+                    .padding()
                     .presentationDetents([.medium, .large])
                 
             })
