@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct AddBarView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) var dismiss
     
     @State private var barName: String = ""
     @State private var barInfo: String = ""
@@ -41,7 +43,11 @@ struct AddBarView: View {
             Spacer()
             HStack {
                 Button(action: {
-                    // TODO: create bar functionality
+                    if !barName.isEmpty {
+                        let newBar = Bar(name: barName, info: barInfo)
+                        modelContext.insert(newBar)
+                        dismiss()
+                    }
                 }) {
                     HStack {
                         Image(systemName: "plus.circle.fill")

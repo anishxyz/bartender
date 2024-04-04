@@ -9,8 +9,17 @@ import SwiftUI
 import SwiftData
 
 struct CellarView: View {
+    
+    //swift data
     @Environment(\.modelContext) private var modelContext
-    @Query var bottles: [Bottle]
+    @Query(sort:
+            [SortDescriptor(\Bottle.created_at, order: .reverse),
+             SortDescriptor(\Bottle.name)]
+    ) var bottles: [Bottle]
+    @Query(sort:
+            [SortDescriptor(\Bar.created_at, order: .reverse),
+             SortDescriptor(\Bar.name)]
+    ) var bars: [Bar]
     
     // bottles
     @State private var showingAddBottleSheet = false
@@ -24,6 +33,11 @@ struct CellarView: View {
             List {
                 ForEach(bottles) { bottle in
                     BottleItemView(bottle: bottle)
+                        .swipeActions {
+                            Button("Delete", systemImage: "trash", role: .destructive) {
+                                modelContext.delete(bottle)
+                            }
+                        }
                 }
             }
             .navigationTitle("🍾 Cellar")

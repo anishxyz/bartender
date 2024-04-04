@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 struct BottleItemView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     var bottle: Bottle
     
     var body: some View {
@@ -28,12 +30,12 @@ struct BottleItemView: View {
                 }
                     .fontWeight(.bold)
                     .foregroundColor(bottle.type.color.opacity(0.85))
-                    .tagStyle(bgc: bottle.type.color.opacity(0.2))
+                    .tagStyle(bgc: bottle.type.color.opacity(colorScheme == .dark ? 0.3 : 0.2))
                 Text("\(bottle.qty)")
-                    .tagStyle(bgc: Color.secondary.opacity(0.1))
+                    .tagStyle(bgc: Color.secondary.opacity(0.2))
                 if let price = bottle.price {
                     Text(String(format: "$%.2f", price))
-                        .tagStyle(bgc: Color.secondary.opacity(0.1))
+                        .tagStyle(bgc: Color.secondary.opacity(0.2))
                 }
             }
         }
@@ -42,6 +44,7 @@ struct BottleItemView: View {
 }
 
 extension View {
+    
     func tagStyle(bgc: Color) -> some View {
         self.padding(.horizontal, 8)
             .padding(.vertical, 4)
