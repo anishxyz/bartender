@@ -13,11 +13,6 @@ struct AddBottleView: View {
     
     @State private var bottle: Bottle = Bottle(name: "", type: .wine, qty: 1)
 
-    @State private var name: String = ""
-    @State private var type: BottleType = .wine // Assuming BottleType is an enum and .red is a placeholder value
-    @State private var qty: Int = 1
-    @State private var price: String = ""
-    @State private var info: String = ""
 
     var body: some View {
         NavigationStack {
@@ -35,7 +30,6 @@ struct AddBottleView: View {
                 }
                 .buttonStyle(.bordered)
                 .tint(.green)
-                
             }
             .padding(12)
             .background(RoundedRectangle(cornerRadius: 22).fill(.gray).opacity(0.15))

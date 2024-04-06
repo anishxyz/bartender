@@ -9,13 +9,15 @@ import SwiftUI
 import SwiftData
 
 struct CellarView: View {
-    
-    //swift data
+
+    //swift data queries
     @Environment(\.modelContext) private var modelContext
+    
     @Query(sort:
             [SortDescriptor(\Bottle.created_at, order: .reverse),
              SortDescriptor(\Bottle.name)]
     ) var bottles: [Bottle]
+    
     @Query(sort:
             [SortDescriptor(\Bar.created_at, order: .reverse),
              SortDescriptor(\Bar.name)]
@@ -27,11 +29,27 @@ struct CellarView: View {
     
     // bars
     @State private var showingAddBarSheet = false
+    
+    // edit...fml
+    @State private var selection = Set<Bottle>()
+    @State var editMode: EditMode = .inactive
+    
+    
+    private func toggleEditMode() {
+        editMode = editMode.isEditing ? .inactive : .active
+    }
+
 
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(bottles) { bottle in
+//            VStack {
+//                ForEach(bars) { bar in
+//                    Text(bar.name)
+//                }
+//            }
+            
+            List(selection: $selection) {
+                ForEach(bottles, id: \.self) { bottle in
                     BottleItemView(bottle: bottle)
                         .swipeActions {
                             Button("Delete", systemImage: "trash", role: .destructive) {
@@ -40,6 +58,7 @@ struct CellarView: View {
                         }
                 }
             }
+            .environment(\.editMode, $editMode)
             .navigationTitle("🍾 Cellar")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -74,9 +93,20 @@ struct CellarView: View {
                         }
                     } label: {
                         Image(systemName: "plus.circle.fill")
-                            .foregroundColor(.orange)
-                            .colorMultiply(.orange)
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundStyle(Color.orange)
+                            .font(.system(size: 22))
                     }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: toggleEditMode) {
+                        Text(editMode.isEditing ? "Done" : "Edit")
+                            .bold()
+                            .font(.system(size: 14))
+                    }
+                    .clipShape(.capsule)
+                    .buttonStyle(.bordered)
+                    .tint(.orange)
                 }
             }
             .sheet(isPresented: $showingAddBottleSheet, content: {

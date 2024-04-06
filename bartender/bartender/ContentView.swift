@@ -18,7 +18,11 @@ struct ContentView: View {
                 }
             CocktailsView()
                 .tabItem {
-                    Label("Sent", systemImage: "tray.and.arrow.up.fill")
+                    Label("Cocktails", image: "cocktail.menu.fold.fill")
+                }
+            BartenderView()
+                .tabItem {
+                    Label("Bartender", image: "case.bartender.boston3.fill")
                 }
         }
     }

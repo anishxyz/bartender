@@ -10,6 +10,7 @@ import Foundation
 
 @Model
 class Bottle {
+    @Attribute(.unique) var id: UUID
     @Attribute(.unique) var name: String
     var type: BottleType
     var qty: Int
@@ -28,6 +29,7 @@ class Bottle {
         self.bar = bar
         self.created_at = Date()
         self.updated_at = Date()
+        self.id = UUID()
     }
 }
 
