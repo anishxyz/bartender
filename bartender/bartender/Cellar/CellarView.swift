@@ -81,6 +81,7 @@ struct CellarView: View {
             }
             .sheet(isPresented: $showingAddBottleSheet, content: {
                 AddBottleView()
+                    .presentationDetents([.medium])
             })
             .sheet(isPresented: $showingAddBottleFromImageSheet, content: {
                 BottleUploadViewHandler()

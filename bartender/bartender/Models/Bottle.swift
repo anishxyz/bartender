@@ -19,7 +19,7 @@ class Bottle {
     var created_at: Date
     var updated_at: Date
     
-    init(name: String, type: BottleType, qty: Int, price: Float? = nil, info: String?, bar: Bar? = nil) {
+    init(name: String, type: BottleType, qty: Int, price: Float? = nil, info: String? = nil, bar: Bar? = nil) {
         self.name = name
         self.type = type
         self.qty = qty

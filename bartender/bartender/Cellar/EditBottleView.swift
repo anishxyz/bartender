@@ -36,6 +36,8 @@ struct EditBottleView: View {
             
             Group {
                 VStack {
+                    // BarPicker(selectedBar: $bottle.bar) buggy
+                    
                     Stepper("Quantity: \(bottle.qty)", value: $bottle.qty, in: 1...100)
                         .bold()
                     

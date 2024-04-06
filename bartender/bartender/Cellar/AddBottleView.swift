@@ -10,6 +10,8 @@ import SwiftUI
 struct AddBottleView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var modelContext
+    
+    @State private var bottle: Bottle = Bottle(name: "", type: .wine, qty: 1)
 
     @State private var name: String = ""
     @State private var type: BottleType = .wine // Assuming BottleType is an enum and .red is a placeholder value
@@ -19,70 +21,28 @@ struct AddBottleView: View {
 
     var body: some View {
         NavigationStack {
-            Form {
-                Section {
-                    LabeledContent {
-                        TextField("Required", text: $name)
-                            .multilineTextAlignment(.trailing)
-                    } label: {
-                        Text("Name")
-                            .bold()
-                    }
-                    Picker("Type", selection: $type) {
-                        ForEach(BottleType.allCases, id: \.self) { type in
-                            Text(type.rawValue)
-                                .tag(type)
-                        }
-                    }
-                    .bold()
-                }
-                
-                Section {
-                    Stepper("Quantity: \(qty)", value: $qty, in: 1...100)
+            VStack {
+                EditBottleView(bottle: $bottle)
+
+                Button {
+                    modelContext.insert(bottle)
+                    dismiss()
+                } label: {
+                    Text("Save")
                         .bold()
-                    
-                    LabeledContent {
-                        TextField("Optional", text: $price)
-                            .multilineTextAlignment(.trailing)
-                            .keyboardType(.decimalPad)
-                    } label: {
-                        Text("Price")
-                            .bold()
-                    }
-                    
-                    LabeledContent {
-                        TextField("Optional", text: $info)
-                            .multilineTextAlignment(.trailing)
-                    } label: {
-                        Text("Description")
-                            .bold()
-                    }
-
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 40)
                 }
-
-                Section {
-                    Button("Save") {
-                        let finalPrice = Float(price) ?? nil
-                        let newBottle = Bottle(name: name, type: type, qty: qty, price: finalPrice, info: info)
-                        // TODO: Add to persistent data storage
-                        modelContext.insert(newBottle)
-                        dismiss()
-                    }
-                    .bold()
-                }
+                .buttonStyle(.bordered)
+                .tint(.green)
+                
             }
+            .padding(12)
+            .background(RoundedRectangle(cornerRadius: 22).fill(.gray).opacity(0.15))
+            .padding(.vertical)
+            .padding()
             .navigationTitle("Create Bottle")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.gray)
-                    }
-                }
-            }
         }
     }
 }
