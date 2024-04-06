@@ -28,3 +28,15 @@ class Bar {
         self.id = UUID()
     }
 }
+
+
+struct sampleBars {
+    static var contents: [Bar] = [
+        Bar(name: "Sunset Lounge", info: "A cozy place with a great view of the sunset."),
+        Bar(name: "The Oak", info: "Vintage vibes and a selection of fine whiskey."),
+        Bar(name: "Ruby Room", info: "Modern cocktails and live music."),
+        Bar(name: "The Cave", info: "An underground bar with a unique stone decor."),
+        Bar(name: "Blue Parrot", info: "Tropical drinks and a vibrant atmosphere."),
+        Bar(name: "Jazz Corner", info: "Smooth jazz and a relaxed setting."),
+    ]
+}

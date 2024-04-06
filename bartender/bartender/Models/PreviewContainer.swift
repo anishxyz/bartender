@@ -11,13 +11,19 @@ import SwiftData
 let previewContainer: ModelContainer = {
     do {
         let container = try ModelContainer(
-            for: Bottle.self,
+            for: Bottle.self, Bar.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         let modelContext = container.mainContext
+        
         if try modelContext.fetch(FetchDescriptor<Bottle>()).isEmpty {
             sampleBottles.contents.forEach { container.mainContext.insert($0) }
         }
+        
+        if try modelContext.fetch(FetchDescriptor<Bar>()).isEmpty {
+            sampleBars.contents.forEach { container.mainContext.insert($0) }
+        }
+        
         return container
     } catch {
         fatalError("Failed to create container")
