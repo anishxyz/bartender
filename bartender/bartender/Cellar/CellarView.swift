@@ -104,9 +104,8 @@ struct CellarView: View {
                             }
                         }
                 }
-                .searchable(text: $searchText)
-                
             }
+            .searchable(text: $searchText)
             .background(Color(UIColor.systemGroupedBackground))
             .scrollContentBackground(.hidden)
             .environment(\.editMode, $editMode)
