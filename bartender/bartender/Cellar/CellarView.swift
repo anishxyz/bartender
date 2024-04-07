@@ -41,12 +41,22 @@ struct CellarView: View {
     // edit...fml
     @State private var selection = Set<Bottle>()
     @State var editMode: EditMode = .inactive
-    
+    @State private var searchText = ""
     
     private func toggleEditMode() {
         editMode = editMode.isEditing ? .inactive : .active
     }
 
+    var filteredBottles: [Bottle] {
+        if searchText.isEmpty {
+            return bottles
+        } else {
+            return bottles.filter { bot in
+                bot.name.localizedCaseInsensitiveContains(searchText) ||
+                bot.type.rawValue.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
 
     var body: some View {
         NavigationStack {
@@ -86,7 +96,7 @@ struct CellarView: View {
                 }
 
                 
-                ForEach(bottles.filter { $0.bar == selectedBar || selectedBar == nil }, id: \.self) { bottle in
+                ForEach(filteredBottles.filter { $0.bar == selectedBar || selectedBar == nil }, id: \.self) { bottle in
                     BottleItemView(bottle: bottle)
                         .swipeActions {
                             Button("Delete", systemImage: "trash", role: .destructive) {
@@ -94,6 +104,7 @@ struct CellarView: View {
                             }
                         }
                 }
+                .searchable(text: $searchText)
                 
             }
             .background(Color(UIColor.systemGroupedBackground))
