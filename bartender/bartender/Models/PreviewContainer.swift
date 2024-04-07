@@ -23,7 +23,7 @@ let previewContainer: ModelContainer = {
         if try modelContext.fetch(FetchDescriptor<Bar>()).isEmpty {
             sampleBars.contents.forEach { container.mainContext.insert($0) }
         }
-        
+       
         return container
     } catch {
         fatalError("Failed to create container")

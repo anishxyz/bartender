@@ -29,6 +29,9 @@
 		B6B250A52BBA966100A3098D /* AddBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250A42BBA966100A3098D /* AddBarView.swift */; };
 		B6B520932BC10CBC0099C015 /* BarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520922BC10CBC0099C015 /* BarPicker.swift */; };
 		B6B520962BC1167E0099C015 /* BartenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520952BC1167E0099C015 /* BartenderView.swift */; };
+		B6B520982BC234CC0099C015 /* BottleToolbarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520972BC234CC0099C015 /* BottleToolbarSection.swift */; };
+		B6B5209B2BC236A30099C015 /* BarToolbarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B5209A2BC236A30099C015 /* BarToolbarSection.swift */; };
+		B6B5209E2BC23E330099C015 /* EditBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B5209D2BC23E330099C015 /* EditBarsView.swift */; };
 		B6D1A4EB2BAD2C530059942D /* bartenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1A4EA2BAD2C530059942D /* bartenderApp.swift */; };
 		B6D1A4ED2BAD2C530059942D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1A4EC2BAD2C530059942D /* ContentView.swift */; };
 		B6D1A4EF2BAD2C530059942D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1A4EE2BAD2C530059942D /* Item.swift */; };
@@ -61,6 +64,9 @@
 		B6B250A42BBA966100A3098D /* AddBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBarView.swift; sourceTree = "<group>"; };
 		B6B520922BC10CBC0099C015 /* BarPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarPicker.swift; sourceTree = "<group>"; };
 		B6B520952BC1167E0099C015 /* BartenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartenderView.swift; sourceTree = "<group>"; };
+		B6B520972BC234CC0099C015 /* BottleToolbarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleToolbarSection.swift; sourceTree = "<group>"; };
+		B6B5209A2BC236A30099C015 /* BarToolbarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarToolbarSection.swift; sourceTree = "<group>"; };
+		B6B5209D2BC23E330099C015 /* EditBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBarsView.swift; sourceTree = "<group>"; };
 		B6D1A4E72BAD2C530059942D /* bartender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bartender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6D1A4EA2BAD2C530059942D /* bartenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bartenderApp.swift; sourceTree = "<group>"; };
 		B6D1A4EC2BAD2C530059942D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -83,6 +89,7 @@
 		B6B250682BAD370000A3098D /* Cellar */ = {
 			isa = PBXGroup;
 			children = (
+				B6B520992BC236690099C015 /* CellarCreateToolbarSections */,
 				B6B250692BAD371400A3098D /* CellarView.swift */,
 				B6B2507E2BB0101B00A3098D /* BottleItemView.swift */,
 				B6B250802BB11EC600A3098D /* AddBottleView.swift */,
@@ -91,6 +98,7 @@
 				B6B2509C2BB3BFA000A3098D /* BottleUploadViewHandler.swift */,
 				B6B2509E2BB3C81100A3098D /* EditBottleView.swift */,
 				B6B250A42BBA966100A3098D /* AddBarView.swift */,
+				B6B5209D2BC23E330099C015 /* EditBarsView.swift */,
 			);
 			path = Cellar;
 			sourceTree = "<group>";
@@ -149,6 +157,15 @@
 				B6B520952BC1167E0099C015 /* BartenderView.swift */,
 			);
 			path = Bartender;
+			sourceTree = "<group>";
+		};
+		B6B520992BC236690099C015 /* CellarCreateToolbarSections */ = {
+			isa = PBXGroup;
+			children = (
+				B6B520972BC234CC0099C015 /* BottleToolbarSection.swift */,
+				B6B5209A2BC236A30099C015 /* BarToolbarSection.swift */,
+			);
+			path = CellarCreateToolbarSections;
 			sourceTree = "<group>";
 		};
 		B6D1A4DE2BAD2C530059942D = {
@@ -279,6 +296,7 @@
 				B6B2509D2BB3BFA000A3098D /* BottleUploadViewHandler.swift in Sources */,
 				B6B2506A2BAD371400A3098D /* CellarView.swift in Sources */,
 				B6D1A4EF2BAD2C530059942D /* Item.swift in Sources */,
+				B6B5209E2BC23E330099C015 /* EditBarsView.swift in Sources */,
 				B6B520932BC10CBC0099C015 /* BarPicker.swift in Sources */,
 				B6B250A12BB3DB4A00A3098D /* BottleTypePicker.swift in Sources */,
 				B6B2507D2BB0017F00A3098D /* PreviewContainer.swift in Sources */,
@@ -287,6 +305,8 @@
 				B6B2507F2BB0101B00A3098D /* BottleItemView.swift in Sources */,
 				B6B2508A2BB2824800A3098D /* ImageToCellar.swift in Sources */,
 				B6B250912BB286AE00A3098D /* GetBottlesFromImageView.swift in Sources */,
+				B6B520982BC234CC0099C015 /* BottleToolbarSection.swift in Sources */,
+				B6B5209B2BC236A30099C015 /* BarToolbarSection.swift in Sources */,
 				B6B2506E2BAD384E00A3098D /* CocktailsView.swift in Sources */,
 				B6B250812BB11EC600A3098D /* AddBottleView.swift in Sources */,
 				B6B2507B2BAFFFE500A3098D /* Bar.swift in Sources */,

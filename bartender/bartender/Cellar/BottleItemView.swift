@@ -28,14 +28,19 @@ struct BottleItemView: View {
                     Image(bottle.type.filledSymbolName)
                     Text(bottle.type.rawValue)
                 }
-                    .fontWeight(.bold)
-                    .foregroundColor(bottle.type.color.opacity(0.85))
-                    .tagStyle(bgc: bottle.type.color.opacity(colorScheme == .dark ? 0.3 : 0.2))
+                    .tagStyle(bgc: bottle.type.color)
+                if let bar = bottle.bar {
+                    Text("\(bar.name)")
+                        .tagStyle(bgc: .blue)
+                        .lineLimit(1)
+                }
                 Text("\(bottle.qty)")
-                    .tagStyle(bgc: Color.secondary.opacity(0.2))
+                    .tagStyle(bgc: Color.secondary)
+                    .lineLimit(1)
                 if let price = bottle.price {
                     Text(String(format: "$%.2f", price))
-                        .tagStyle(bgc: Color.secondary.opacity(0.2))
+                        .tagStyle(bgc: Color.secondary)
+                        .lineLimit(1)
                 }
             }
         }
@@ -46,9 +51,11 @@ struct BottleItemView: View {
 extension View {
     
     func tagStyle(bgc: Color) -> some View {
-        self.padding(.horizontal, 8)
+        self.fontWeight(.bold)
+            .foregroundColor(bgc.opacity(0.85))
+            .padding(.horizontal, 8)
             .padding(.vertical, 4)
-            .background(bgc)
+            .background(bgc.opacity(0.2))
             .clipShape(Capsule())
             .font(.caption)
     }

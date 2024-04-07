@@ -30,6 +30,7 @@ struct CellarView: View {
     
     // bars
     @State private var showingAddBarSheet = false
+    @State private var showingEditBarSheet = false
     @State private var selectedBar: Bar?
     
     let columns: [GridItem] = [
@@ -46,22 +47,34 @@ struct CellarView: View {
         editMode = editMode.isEditing ? .inactive : .active
     }
 
+    var menuItems: some View {
+            Group {
+                Button("Action 1", action: {})
+                Button("Action 2", action: {})
+                Button("Action 3", action: {})
+            }
+        }
 
     var body: some View {
         NavigationStack {
-            VStack {
-                List(selection: $selection) {
-                    
+            List(selection: $selection) {
+                if !bars.isEmpty {
                     Section {
                         LazyVGrid(columns: columns) {
                             ForEach(bars) { bar in
                                 Button(action: {
-                                    print("Tapped on \(bar.name)")
-                                    
-                                    if selectedBar == bar {
-                                        selectedBar = nil
+                                    if editMode == .inactive {
+                                        if selectedBar == bar {
+                                            selectedBar = nil
+                                        } else {
+                                            selectedBar = bar
+                                        }
                                     } else {
-                                        selectedBar = bar
+                                        for bottle in selection {
+                                            bottle.bar = bar
+                                        }
+                                        toggleEditMode()
+                                        try? modelContext.save()
                                     }
                                 }) {
                                     Text(bar.name)
@@ -70,95 +83,79 @@ struct CellarView: View {
                                         .frame(height: 40)
                                 }
                                 .buttonStyle(.bordered)
-                                .tint(selectedBar == bar ? .orange : .gray)
+                                .tint(selectedBar == bar ? .orange : .blue)
                             }
                         }
                         
                     }
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
+                }
 
-                    
-                    ForEach(bottles.filter { $0.bar == selectedBar || selectedBar == nil }, id: \.self) { bottle in
-                        BottleItemView(bottle: bottle)
-                            .swipeActions {
-                                Button("Delete", systemImage: "trash", role: .destructive) {
-                                    modelContext.delete(bottle)
-                                }
+                
+                ForEach(bottles.filter { $0.bar == selectedBar || selectedBar == nil }, id: \.self) { bottle in
+                    BottleItemView(bottle: bottle)
+                        .swipeActions {
+                            Button("Delete", systemImage: "trash", role: .destructive) {
+                                modelContext.delete(bottle)
                             }
-                    }
-                    
-                }
-                .scrollContentBackground(.hidden)
-                .environment(\.editMode, $editMode)
-                .navigationTitle("🍾 Cellar")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Menu {
-                            Section(header: Text("Bottle").font(.headline)) {
-                                Button(action: {
-                                    showingAddBottleSheet = true
-                                }) {
-                                    HStack {
-                                        Text("Add Manually")
-                                        Image(systemName: "square.and.pencil")
-                                    }
-                                }
-                                Button(action: {
-                                    showingAddBottleFromImageSheet = true
-                                }) {
-                                    HStack {
-                                        Text("From Image")
-                                        Image(systemName: "photo")
-                                    }
-                                }
-                            }
-                            Section(header: Text("Bar").font(.headline)) {
-                                Button(action: {
-                                    showingAddBarSheet = true
-                                }) {
-                                    HStack {
-                                        Text("Create Bar")
-                                        Image("cellar.three.bottles.fill")
-                                    }
-                                }
-                            }
-                        } label: {
-                            Image(systemName: "plus.circle.fill")
-                                .symbolRenderingMode(.hierarchical)
-                                .foregroundStyle(Color.orange)
-                                .font(.system(size: 22))
                         }
-                    }
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: toggleEditMode) {
-                            Text(editMode.isEditing ? "Done" : "Edit")
-                                .bold()
-                                .font(.system(size: 14))
-                        }
-                        .clipShape(.capsule)
-                        .buttonStyle(.bordered)
-                        .tint(.orange)
-                    }
                 }
-                .sheet(isPresented: $showingAddBottleSheet, content: {
-                    AddBottleView()
-                        .presentationDetents([.medium])
-                })
-                .sheet(isPresented: $showingAddBottleFromImageSheet, content: {
-                    BottleUploadViewHandler()
-                        .presentationDetents([.medium, .large])
-                    
-                })
-                .sheet(isPresented: $showingAddBarSheet, content: {
-                    AddBarView()
-                        .presentationDetents([.medium])
-                    
-                })
+                
             }
             .background(Color(UIColor.systemGroupedBackground))
+            .scrollContentBackground(.hidden)
+            .environment(\.editMode, $editMode)
+            .navigationTitle("🍷 Cellar")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        BottleToolbarSection(
+                            showingAddBottleSheet: $showingAddBottleSheet,
+                            showingAddBottleFromImageSheet: $showingAddBottleFromImageSheet
+                        )
+                        BarToolbarSection(
+                            showingAddBarSheet: $showingAddBarSheet,
+                            showingEditBarSheet: $showingEditBarSheet
+                        )
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundStyle(.orange)
+                            .font(.system(size: 22))
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: toggleEditMode) {
+                        Text(editMode.isEditing ? "Done" : "Edit")
+                            .bold()
+                            .font(.system(size: 14))
+                    }
+                    .clipShape(.capsule)
+                    .buttonStyle(.bordered)
+                    .tint(.orange)
+                }
+            }
+            .sheet(isPresented: $showingAddBottleSheet, content: {
+                AddBottleView()
+                    .presentationDetents([.medium])
+            })
+            .sheet(isPresented: $showingAddBottleFromImageSheet, content: {
+                BottleUploadViewHandler()
+                    .presentationDetents([.medium, .large])
+                
+            })
+            .sheet(isPresented: $showingAddBarSheet, content: {
+                AddBarView()
+                    .presentationDetents([.medium])
+                
+            })
+            .sheet(isPresented: $showingEditBarSheet, content: {
+                EditBarsView(bars: bars)
+                    .presentationDetents([.medium])
+                
+            })
         }
-        
     }
 }
 
