@@ -8,6 +8,7 @@ TODO
 
 Extensions
 - [ ] Automatic / manual price fetch in cellar
+- [ ] Info pages / splash screen instructions
 
 Known bugs
 - [ ] Delete bars does not nullify `bottle.bar` field live
