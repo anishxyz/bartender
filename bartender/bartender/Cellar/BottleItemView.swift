@@ -27,6 +27,7 @@ struct BottleItemView: View {
                 HStack {
                     Image(bottle.type.filledSymbolName)
                     Text(bottle.type.rawValue)
+                        .lineLimit(1)
                 }
                     .tagStyle(bgc: bottle.type.color)
                 if let bar = bottle.bar {
