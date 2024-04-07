@@ -19,6 +19,7 @@ struct EditBarsView: View {
                 Spacer()
                 Button {
                     modelContext.delete(bar)
+                    try? modelContext.save()
                 } label: {
                     Image(systemName: "trash.fill")
                         .foregroundStyle(.red)
@@ -27,6 +28,7 @@ struct EditBarsView: View {
             .swipeActions {
                 Button("Delete", systemImage: "trash", role: .destructive) {
                     modelContext.delete(bar)
+                    try? modelContext.save()
                 }
             }
         }

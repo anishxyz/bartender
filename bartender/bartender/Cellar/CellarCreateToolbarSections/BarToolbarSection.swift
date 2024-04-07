@@ -10,7 +10,6 @@ import SwiftUI
 
 struct BarToolbarSection: View {
     @Binding var showingAddBarSheet: Bool
-    @Binding var showingEditBarSheet: Bool
     
     var body: some View {
         Section(header: Text("Bar").font(.headline)) {
@@ -20,14 +19,6 @@ struct BarToolbarSection: View {
                 HStack {
                     Text("Create Bar")
                     Image("cellar.three.bottles.fill")
-                }
-            }
-            Button(action: {
-                showingEditBarSheet = true
-            }) {
-                HStack {
-                    Text("Edit Bars")
-                    Image(systemName: "slider.horizontal.2.square")
                 }
             }
         }

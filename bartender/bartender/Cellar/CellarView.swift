@@ -47,13 +47,6 @@ struct CellarView: View {
         editMode = editMode.isEditing ? .inactive : .active
     }
 
-    var menuItems: some View {
-            Group {
-                Button("Action 1", action: {})
-                Button("Action 2", action: {})
-                Button("Action 3", action: {})
-            }
-        }
 
     var body: some View {
         NavigationStack {
@@ -114,10 +107,7 @@ struct CellarView: View {
                             showingAddBottleSheet: $showingAddBottleSheet,
                             showingAddBottleFromImageSheet: $showingAddBottleFromImageSheet
                         )
-                        BarToolbarSection(
-                            showingAddBarSheet: $showingAddBarSheet,
-                            showingEditBarSheet: $showingEditBarSheet
-                        )
+                        BarToolbarSection(showingAddBarSheet: $showingAddBarSheet)
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .symbolRenderingMode(.hierarchical)
@@ -126,14 +116,11 @@ struct CellarView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: toggleEditMode) {
-                        Text(editMode.isEditing ? "Done" : "Edit")
-                            .bold()
-                            .font(.system(size: 14))
-                    }
-                    .clipShape(.capsule)
-                    .buttonStyle(.bordered)
-                    .tint(.orange)
+                    CellarEditToolbarButton(
+                        editMode: $editMode,
+                        showingEditBarSheet: $showingEditBarSheet,
+                        toggleEditMode: toggleEditMode
+                    )                    
                 }
             }
             .sheet(isPresented: $showingAddBottleSheet, content: {
