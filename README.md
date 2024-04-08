@@ -12,3 +12,4 @@ Extensions
 
 Known bugs
 - [ ] Delete bars does not nullify `bottle.bar` field live
+- [ ] updated_at fields are not updated

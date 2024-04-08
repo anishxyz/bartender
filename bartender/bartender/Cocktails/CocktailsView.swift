@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct CocktailsView: View {
+    
+    
+    
     var body: some View {
         Text("Cocktails")
     }

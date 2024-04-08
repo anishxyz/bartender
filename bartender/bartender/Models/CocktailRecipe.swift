@@ -22,7 +22,6 @@ class CocktailRecipe {
     var sections: [RecipeSection]
     
     var created_at: Date
-    var updated_at: Date
     
     init(name: String, info: String? = nil, menu: CocktailMenu? = nil, sections: [RecipeSection] = [], ingredients: [Ingredient] = []) {
         self.name = name
@@ -33,7 +32,6 @@ class CocktailRecipe {
         self.ingredients = ingredients
         
         self.created_at = Date()
-        self.updated_at = Date()
         self.id = UUID()
     }
 }
@@ -48,7 +46,6 @@ class Ingredient {
     var recipe: CocktailRecipe
     
     var created_at: Date
-    var updated_at: Date
     
     init(name: String, quantity: Float? = nil, units: IngredientUnitType, type: IngredientType, recipe: CocktailRecipe) {
         self.name = name
@@ -58,7 +55,6 @@ class Ingredient {
         self.recipe = recipe
         
         self.created_at = Date()
-        self.updated_at = Date()
         self.id = UUID()
     }
 }
@@ -73,7 +69,6 @@ class RecipeSection {
     var recipe: CocktailRecipe
     
     var created_at: Date
-    var updated_at: Date
 
     
     init(title: String? = nil, recipe: CocktailRecipe, steps: [RecipeStep] = []) {
@@ -83,7 +78,6 @@ class RecipeSection {
         self.steps = steps
         
         self.created_at = Date()
-        self.updated_at = Date()
         self.id = UUID()
     }
 }
@@ -97,7 +91,6 @@ class RecipeStep {
     var section: RecipeSection
     
     var created_at: Date
-    var updated_at: Date
     
     init(instruction: String, section: RecipeSection) {
         self.instruction = instruction
@@ -105,7 +98,6 @@ class RecipeStep {
         self.index = section.steps.count + 1
         
         self.created_at = Date()
-        self.updated_at = Date()
         self.id = UUID()
     }
 }
