@@ -8,28 +8,6 @@
 import SwiftData
 import Foundation
 
-@Model
-class CocktailMenu {
-    @Attribute(.unique) var id: UUID
-    @Attribute(.unique) var name: String
-    var info: String?
-    
-    @Relationship(deleteRule: .nullify, inverse: \CocktailRecipe.menu)
-    var recipes: [CocktailRecipe]
-    var created_at: Date
-    var updated_at: Date
-    
-    init(name: String, info: String? = nil, recipes: [CocktailRecipe] = []) {
-        self.name = name
-        self.info = info
-        self.recipes = recipes
-        
-        self.created_at = Date()
-        self.updated_at = Date()
-        self.id = UUID()
-    }
-    
-}
 
 @Model
 class CocktailRecipe {
@@ -37,13 +15,14 @@ class CocktailRecipe {
     @Attribute(.unique) var name: String
     var info: String?
     var menu: CocktailMenu?
-    var created_at: Date
-    var updated_at: Date
     
     @Relationship(deleteRule: .cascade, inverse: \Ingredient.recipe)
     var ingredients: [Ingredient]
     @Relationship(deleteRule: .cascade, inverse: \RecipeSection.recipe)
     var sections: [RecipeSection]
+    
+    var created_at: Date
+    var updated_at: Date
     
     init(name: String, info: String? = nil, menu: CocktailMenu? = nil, sections: [RecipeSection] = [], ingredients: [Ingredient] = []) {
         self.name = name
@@ -89,16 +68,19 @@ class RecipeSection {
     @Attribute(.unique) var id: UUID
     @Attribute(.unique) var name: String
     @Attribute(.unique) var index: Int
-    
+    @Relationship(deleteRule: .cascade, inverse: \RecipeStep.section)
+    var steps: [RecipeStep]
     var recipe: CocktailRecipe
     
     var created_at: Date
     var updated_at: Date
+
     
-    var steps: [RecipeStep]?
-    
-    init() {
-        
+    init(name: String, recipe: CocktailRecipe, steps: [RecipeStep] = []) {
+        self.name = name
+        self.recipe = recipe
+        self.index = recipe.sections.count + 1
+        self.steps = steps
         
         self.created_at = Date()
         self.updated_at = Date()
@@ -110,13 +92,21 @@ class RecipeSection {
 @Model
 class RecipeStep {
     @Attribute(.unique) var id: UUID
-    @Attribute(.unique) var name: String
+    @Attribute(.unique) var instruction: String
     @Attribute(.unique) var index: Int
-    
-    var recipe: CocktailRecipe
+    var section: RecipeSection
     
     var created_at: Date
     var updated_at: Date
     
-    var steps: [RecipeStep]?
+    init(instruction: String, section: RecipeSection) {
+        self.instruction = instruction
+        self.section = section
+        self.index = section.steps.count + 1
+        
+        self.created_at = Date()
+        self.updated_at = Date()
+        self.id = UUID()
+    }
 }
+
