@@ -66,7 +66,7 @@ class Ingredient {
 @Model
 class RecipeSection {
     @Attribute(.unique) var id: UUID
-    @Attribute(.unique) var name: String
+    @Attribute(.unique) var title: String?
     @Attribute(.unique) var index: Int
     @Relationship(deleteRule: .cascade, inverse: \RecipeStep.section)
     var steps: [RecipeStep]
@@ -76,8 +76,8 @@ class RecipeSection {
     var updated_at: Date
 
     
-    init(name: String, recipe: CocktailRecipe, steps: [RecipeStep] = []) {
-        self.name = name
+    init(title: String? = nil, recipe: CocktailRecipe, steps: [RecipeStep] = []) {
+        self.title = title
         self.recipe = recipe
         self.index = recipe.sections.count + 1
         self.steps = steps
@@ -108,5 +108,103 @@ class RecipeStep {
         self.updated_at = Date()
         self.id = UUID()
     }
+}
+
+class sampleRecipes {
+    
+    var spicyMargarita: CocktailRecipe
+    var newYorkSour: CocktailRecipe
+    var theGoldenHour: CocktailRecipe
+    var recipes: [CocktailRecipe]
+    
+    
+    init() {
+        
+        // Initialize spicyMargarita recipe
+        spicyMargarita = CocktailRecipe(name: "Spicy Margarita")
+        
+        // Initialize ingredients
+        let tequila = Ingredient(name: "Tequila", quantity: 2, units: "oz", type: .tequila, recipe: spicyMargarita)
+        let limeJuice = Ingredient(name: "Lime Juice", quantity: 1, units: "oz", type: .mixer, recipe: spicyMargarita)
+        let agaveSyrup = Ingredient(name: "Agave Syrup", quantity: 0.5, units: "oz", type: .mixer, recipe: spicyMargarita)
+        let jalapeno = Ingredient(name: "Jalapeno", quantity: 3, units: "slices", type: .garnish, recipe: spicyMargarita)
+        
+        // Initialize sections and steps
+        let preparationSection = RecipeSection(recipe: spicyMargarita)
+        let preparationSteps = [
+            RecipeStep(instruction: "Muddle the jalapeno slices in the shaker.", section: preparationSection),
+            RecipeStep(instruction: "Add tequila, lime juice, and agave syrup to shaker with ice.", section: preparationSection),
+            RecipeStep(instruction: "Shake well.", section: preparationSection),
+            RecipeStep(instruction: "Strain into a chilled glass.", section: preparationSection)
+        ]
+
+        // Assemble
+        spicyMargarita.ingredients.append(contentsOf: [tequila, limeJuice, agaveSyrup, jalapeno])
+        spicyMargarita.sections.append(preparationSection)
+        preparationSection.steps.append(contentsOf: preparationSteps)
+        
+        
+        // Initialize newYorkSour recipe
+        newYorkSour = CocktailRecipe(name: "New York Sour")
+                
+        // Ingredients
+        let whiskey = Ingredient(name: "Whiskey", quantity: 2, units: "oz", type: .whiskey, recipe: newYorkSour)
+        let lemonJuice = Ingredient(name: "Lemon Juice", quantity: 1, units: "oz", type: .mixer, recipe: newYorkSour)
+        let simpleSyrup = Ingredient(name: "Simple Syrup", quantity: 0.5, units: "oz", type: .mixer, recipe: newYorkSour)
+        let redWine = Ingredient(name: "Red Wine", quantity: 0.5, units: "oz", type: .mixer, recipe: newYorkSour)
+        
+        newYorkSour.ingredients.append(contentsOf: [whiskey, lemonJuice, simpleSyrup, redWine])
+
+        // Sections and Steps
+        let mixingSection = RecipeSection(title: "Mixing", recipe: newYorkSour)
+        mixingSection.steps.append(contentsOf: [
+            RecipeStep(instruction: "Combine whiskey, lemon juice, and simple syrup in a shaker.", section: mixingSection),
+            RecipeStep(instruction: "Fill the shaker with ice and shake until well chilled.", section: mixingSection),
+            RecipeStep(instruction: "Strain into a rocks glass filled with fresh ice.", section: mixingSection)
+        ])
+
+        let finishingTouchesSection = RecipeSection(title: "Finishing Touches", recipe: newYorkSour)
+        finishingTouchesSection.steps.append(contentsOf: [
+            RecipeStep(instruction: "Gently pour red wine over the back of a spoon so it floats on top of the drink.", section: finishingTouchesSection)
+        ])
+
+        newYorkSour.sections.append(contentsOf: [mixingSection, finishingTouchesSection])
+        
+        // Initialize theGoldenHour recipe
+        theGoldenHour = CocktailRecipe(name: "The Golden Hour")
+                
+        // Ingredients
+        let agedRum = Ingredient(name: "Aged Rum", quantity: 2, units: "oz", type: .rum, recipe: theGoldenHour)
+        let saffronSyrup = Ingredient(name: "Saffron-Infused Simple Syrup", quantity: 0.75, units: "oz", type: .mixer, recipe: theGoldenHour)
+        let champagne = Ingredient(name: "Champagne", quantity: 1, units: "oz", type: .mixer, recipe: theGoldenHour)
+        let lemonJuice2 = Ingredient(name: "Lemon Juice", quantity: 0.5, units: "oz", type: .mixer, recipe: theGoldenHour)
+        let eggWhite = Ingredient(name: "Egg White", quantity: 1, units: "unit", type: .other, recipe: theGoldenHour)
+        let goldLeaf = Ingredient(name: "Edible Gold Leaf", quantity: 1, units: "leaf", type: .garnish, recipe: theGoldenHour)
+        
+        theGoldenHour.ingredients.append(contentsOf: [agedRum, saffronSyrup, champagne, lemonJuice, eggWhite, goldLeaf])
+
+        // Preparation Sections
+        let mixingSection2 = RecipeSection(title: "Mixing", recipe: theGoldenHour)
+        mixingSection2.steps.append(contentsOf: [
+            RecipeStep(instruction: "In a shaker, combine aged rum, saffron-infused simple syrup, lemon juice, and egg white.", section: mixingSection2),
+            RecipeStep(instruction: "Dry shake (without ice) vigorously for 30 seconds to emulsify the egg white.", section: mixingSection2),
+            RecipeStep(instruction: "Add ice to the shaker and shake again until well chilled.", section: mixingSection2),
+            RecipeStep(instruction: "Strain into a coupe glass.", section: mixingSection2)
+        ])
+        
+        let finishingTouchesSection2 = RecipeSection(title: "Finishing Touches", recipe: theGoldenHour)
+        finishingTouchesSection2.steps.append(contentsOf: [
+            RecipeStep(instruction: "Top with champagne.", section: finishingTouchesSection2),
+            RecipeStep(instruction: "Carefully place an edible gold leaf on the foam for garnish.", section: finishingTouchesSection2)
+        ])
+        
+        theGoldenHour.sections.append(contentsOf: [mixingSection2, finishingTouchesSection2])
+        
+
+        // Initialize the recipes array with both cocktails
+        recipes = [spicyMargarita, newYorkSour, theGoldenHour]
+    }
+    
+    
 }
 
