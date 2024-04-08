@@ -43,14 +43,14 @@ class Ingredient {
     @Attribute(.unique) var id: UUID
     @Attribute(.unique) var name: String
     var quantity: Float?
-    var units: String?
+    var units: IngredientUnitType
     var type: IngredientType
     var recipe: CocktailRecipe
     
     var created_at: Date
     var updated_at: Date
     
-    init(name: String, quantity: Float? = nil, units: String? = nil, type: IngredientType, recipe: CocktailRecipe) {
+    init(name: String, quantity: Float? = nil, units: IngredientUnitType, type: IngredientType, recipe: CocktailRecipe) {
         self.name = name
         self.quantity = quantity
         self.units = units
@@ -117,17 +117,16 @@ class sampleRecipes {
     var theGoldenHour: CocktailRecipe
     var recipes: [CocktailRecipe]
     
-    
     init() {
         
         // Initialize spicyMargarita recipe
         spicyMargarita = CocktailRecipe(name: "Spicy Margarita")
         
         // Initialize ingredients
-        let tequila = Ingredient(name: "Tequila", quantity: 2, units: "oz", type: .tequila, recipe: spicyMargarita)
-        let limeJuice = Ingredient(name: "Lime Juice", quantity: 1, units: "oz", type: .mixer, recipe: spicyMargarita)
-        let agaveSyrup = Ingredient(name: "Agave Syrup", quantity: 0.5, units: "oz", type: .mixer, recipe: spicyMargarita)
-        let jalapeno = Ingredient(name: "Jalapeno", quantity: 3, units: "slices", type: .garnish, recipe: spicyMargarita)
+        let tequila = Ingredient(name: "Tequila", quantity: 2, units: .ounces, type: .tequila, recipe: spicyMargarita)
+        let limeJuice = Ingredient(name: "Lime Juice", quantity: 1, units: .ounces, type: .mixer, recipe: spicyMargarita)
+        let agaveSyrup = Ingredient(name: "Agave Syrup", quantity: 0.5, units: .ounces, type: .mixer, recipe: spicyMargarita)
+        let jalapeno = Ingredient(name: "Jalapeno", quantity: 3, units: .slices, type: .garnish, recipe: spicyMargarita)
         
         // Initialize sections and steps
         let preparationSection = RecipeSection(recipe: spicyMargarita)
@@ -148,10 +147,10 @@ class sampleRecipes {
         newYorkSour = CocktailRecipe(name: "New York Sour")
                 
         // Ingredients
-        let whiskey = Ingredient(name: "Whiskey", quantity: 2, units: "oz", type: .whiskey, recipe: newYorkSour)
-        let lemonJuice = Ingredient(name: "Lemon Juice", quantity: 1, units: "oz", type: .mixer, recipe: newYorkSour)
-        let simpleSyrup = Ingredient(name: "Simple Syrup", quantity: 0.5, units: "oz", type: .mixer, recipe: newYorkSour)
-        let redWine = Ingredient(name: "Red Wine", quantity: 0.5, units: "oz", type: .mixer, recipe: newYorkSour)
+        let whiskey = Ingredient(name: "Whiskey", quantity: 2, units: .ounces, type: .whiskey, recipe: newYorkSour)
+        let lemonJuice = Ingredient(name: "Lemon Juice", quantity: 1, units: .ounces, type: .mixer, recipe: newYorkSour)
+        let simpleSyrup = Ingredient(name: "Simple Syrup", quantity: 0.5, units: .ounces, type: .mixer, recipe: newYorkSour)
+        let redWine = Ingredient(name: "Red Wine", quantity: 0.5, units: .ounces, type: .mixer, recipe: newYorkSour)
         
         newYorkSour.ingredients.append(contentsOf: [whiskey, lemonJuice, simpleSyrup, redWine])
 
@@ -174,14 +173,14 @@ class sampleRecipes {
         theGoldenHour = CocktailRecipe(name: "The Golden Hour")
                 
         // Ingredients
-        let agedRum = Ingredient(name: "Aged Rum", quantity: 2, units: "oz", type: .rum, recipe: theGoldenHour)
-        let saffronSyrup = Ingredient(name: "Saffron-Infused Simple Syrup", quantity: 0.75, units: "oz", type: .mixer, recipe: theGoldenHour)
-        let champagne = Ingredient(name: "Champagne", quantity: 1, units: "oz", type: .mixer, recipe: theGoldenHour)
-        let lemonJuice2 = Ingredient(name: "Lemon Juice", quantity: 0.5, units: "oz", type: .mixer, recipe: theGoldenHour)
-        let eggWhite = Ingredient(name: "Egg White", quantity: 1, units: "unit", type: .other, recipe: theGoldenHour)
-        let goldLeaf = Ingredient(name: "Edible Gold Leaf", quantity: 1, units: "leaf", type: .garnish, recipe: theGoldenHour)
+        let agedRum = Ingredient(name: "Aged Rum", quantity: 2, units: .ounces, type: .rum, recipe: theGoldenHour)
+        let saffronSyrup = Ingredient(name: "Saffron-Infused Simple Syrup", quantity: 0.75, units: .ounces, type: .mixer, recipe: theGoldenHour)
+        let champagne = Ingredient(name: "Champagne", quantity: 1, units: .ounces, type: .mixer, recipe: theGoldenHour)
+        let lemonJuice2 = Ingredient(name: "Lemon Juice", quantity: 0.5, units: .ounces, type: .mixer, recipe: theGoldenHour)
+        let eggWhite = Ingredient(name: "Egg White", quantity: 1, units: .eggs, type: .other, recipe: theGoldenHour)
+        let goldLeaf = Ingredient(name: "Edible Gold Leaf", quantity: 1, units: .leaves, type: .garnish, recipe: theGoldenHour)
         
-        theGoldenHour.ingredients.append(contentsOf: [agedRum, saffronSyrup, champagne, lemonJuice, eggWhite, goldLeaf])
+        theGoldenHour.ingredients.append(contentsOf: [agedRum, saffronSyrup, champagne, lemonJuice2, eggWhite, goldLeaf])
 
         // Preparation Sections
         let mixingSection2 = RecipeSection(title: "Mixing", recipe: theGoldenHour)
