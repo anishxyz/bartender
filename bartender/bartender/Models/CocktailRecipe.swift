@@ -203,7 +203,4 @@ class sampleRecipes {
         // Initialize the recipes array with both cocktails
         recipes = [spicyMargarita, newYorkSour, theGoldenHour]
     }
-    
-    
 }
-

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum IngredientUnitType: String {
+enum IngredientUnitType: String, CaseIterable, Identifiable, Codable {
     case ounces = "oz"
     case milliliters = "ml"
     case tablespoons = "tbsp"
@@ -17,16 +17,18 @@ enum IngredientUnitType: String {
     case kilograms = "kg"
     case pounds = "lb"
     
-    case pod
-    case cups
-    case slices
-    case leaves
-    case dashes
-    case pinches
-    case sprigs
-    case sticks
-    case eggs
-    case pieces
-    case bottles
-    case units
+    case pod = "pod"
+    case cups = "cups"
+    case slices = "slices"
+    case leaves = "leaves"
+    case dashes = "dashes"
+    case pinches = "pinches"
+    case sprigs = "sprigs"
+    case sticks = "sticks"
+    case eggs = "eggs"
+    case pieces = "pieces"
+    case bottles = "bottles"
+    case units = "units"
+    
+    var id: String { self.rawValue }
 }
