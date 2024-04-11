@@ -6,12 +6,13 @@
 //
 
 import SwiftData
+import Foundation
 
 @MainActor
 let previewContainer: ModelContainer = {
     do {
         let container = try ModelContainer(
-            for: Bottle.self, Bar.self,
+            for: Bottle.self, Bar.self, CocktailMenu.self, CocktailRecipe.self, Ingredient.self, RecipeSection.self, RecipeStep.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         let modelContext = container.mainContext
@@ -23,6 +24,7 @@ let previewContainer: ModelContainer = {
         if try modelContext.fetch(FetchDescriptor<Bar>()).isEmpty {
             sampleBars.contents.forEach { container.mainContext.insert($0) }
         }
+        
         
         let bottles = sampleBottles.contents
         let bars = sampleBars.contents
@@ -37,9 +39,25 @@ let previewContainer: ModelContainer = {
             sampleBars.contents[bars.count - 2].bottles = Array(bottles[firstBarBottlesCount..<(firstBarBottlesCount + secondBarBottlesCount)])
             sampleBars.contents[bars.count - 3].bottles = Array(bottles[(firstBarBottlesCount + secondBarBottlesCount)...])
         }
+        
+        if try modelContext.fetch(FetchDescriptor<CocktailMenu>()).isEmpty {
+            container.mainContext.insert(sampleCocktailMenu.menu)
+        }
+        
+        
+        if try modelContext.fetch(FetchDescriptor<CocktailRecipe>()).isEmpty {
+            spicyMargarita.setupRelationships()
+            newYorkSour.setupRelationships()
+            goldenHour.setupRelationships()
+            
+            container.mainContext.insert(spicyMargarita.recipe)
+            container.mainContext.insert(newYorkSour.recipe)
+            container.mainContext.insert(goldenHour.recipe)
+        }
        
         return container
     } catch {
         fatalError("Failed to create container")
     }
 }()
+

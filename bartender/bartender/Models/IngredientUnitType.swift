@@ -14,8 +14,6 @@ enum IngredientUnitType: String, CaseIterable, Identifiable, Codable {
     case teaspoons = "tsp"
     case grams = "g"
     case miligrams = "mg"
-    case kilograms = "kg"
-    case pounds = "lb"
     
     case pod = "pod"
     case cups = "cups"

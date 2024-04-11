@@ -14,15 +14,15 @@ struct CellarView: View {
     //swift data queries
     @Environment(\.modelContext) private var modelContext
     
-    @Query(sort:
-            [SortDescriptor(\Bottle.created_at, order: .reverse),
-             SortDescriptor(\Bottle.name)]
-    ) var bottles: [Bottle]
+    @Query(sort: [
+        SortDescriptor(\Bottle.created_at, order: .reverse),
+        SortDescriptor(\Bottle.name)
+    ]) var bottles: [Bottle]
     
-    @Query(sort:
-            [SortDescriptor(\Bar.created_at, order: .reverse),
-             SortDescriptor(\Bar.name)]
-    ) var bars: [Bar]
+    @Query(sort: [
+        SortDescriptor(\Bar.created_at, order: .reverse),
+        SortDescriptor(\Bar.name)
+    ]) var bars: [Bar]
     
     // bottles
     @State private var showingAddBottleSheet = false
