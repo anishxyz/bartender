@@ -11,33 +11,32 @@ import SwiftData
 struct CocktailsView: View {
     
     @Query(sort:
-            [SortDescriptor(\CocktailMenu.created_at, order: .reverse),
+            [SortDescriptor(\CocktailMenu.created_at),
              SortDescriptor(\CocktailMenu.name)]
     ) var menus: [CocktailMenu]
     
-    @Query(sort:
-            [SortDescriptor(\CocktailRecipe.created_at, order: .reverse),
-             SortDescriptor(\CocktailRecipe.name)]
-    ) var recipes: [CocktailRecipe]
-    
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+        
     var body: some View {
-        Text("\(menus[0].name)")
-        List {
-            ForEach(recipes) { menu in
-                Text("\(menu.name)")
-                ForEach(menu.ingredients) { ing in
-                    Text("\(ing.name)")
-                }
-                ForEach(menu.sections) { sect in
-                    if let tit = sect.title {
-                        Text("\(tit)")
-                    }
-                    ForEach(sect.steps) { stepp in
-                        Text("\(stepp.instruction)")
+        NavigationView {
+            ScrollView {
+                LazyVGrid(columns: columns, spacing: 20) {
+                    ForEach(menus, id: \.id) { menu in
+                        NavigationLink(destination: MenuDetailView(menu: menu)) {
+                            MenuItemView(menu: menu)
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(.orange)
                     }
                 }
+                .padding()
             }
-        }        
+            .navigationTitle("Cocktail Menus")
+            .background(Color(UIColor.systemGroupedBackground))
+        }
     }
 }
 
@@ -45,4 +44,19 @@ struct CocktailsView: View {
 #Preview {
     CocktailsView()
         .modelContainer(previewContainer)
+}
+
+
+struct MenuDetailView: View {
+    var menu: CocktailMenu
+    
+    var body: some View {
+        List {
+            ForEach(menu.recipes) { recipe in
+                Text(recipe.name)
+            }
+        }
+        .navigationTitle(menu.name)
+        .background(Color(UIColor.systemGroupedBackground))
+    }
 }

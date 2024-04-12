@@ -16,10 +16,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Cellar", image: "cellar.six.bottles.fill")
                 }
-//            CocktailsView()
-//                .tabItem {
-//                    Label("Cocktails", image: "cocktail.menu.fold.fill")
-//                }
+            CocktailsView()
+                .tabItem {
+                    Label("Cocktails", image: "cocktail.menu.fold.fill")
+                }
             BartenderView()
                 .tabItem {
                     Label("Bartender", image: "case.bartender.boston3.fill")

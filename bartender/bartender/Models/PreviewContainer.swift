@@ -40,8 +40,12 @@ let previewContainer: ModelContainer = {
             sampleBars.contents[bars.count - 3].bottles = Array(bottles[(firstBarBottlesCount + secondBarBottlesCount)...])
         }
         
+        
         if try modelContext.fetch(FetchDescriptor<CocktailMenu>()).isEmpty {
+            sampleCocktailMenu.setupRelationships()
+            
             container.mainContext.insert(sampleCocktailMenu.menu)
+            container.mainContext.insert(sampleCocktailMenu.menu2)
         }
         
         

@@ -34,6 +34,7 @@ class CocktailMenu {
 struct sampleCocktailMenu {
     
     static var menu: CocktailMenu = CocktailMenu(name: "Anish's Cocktails")
+    static var menu2: CocktailMenu = CocktailMenu(name: "Part Two")
     
     static func setupRelationships() {
         spicyMargarita.setupRelationships()
@@ -44,6 +45,18 @@ struct sampleCocktailMenu {
             spicyMargarita.recipe,
             newYorkSour.recipe,
             goldenHour.recipe
+        ]
+        
+        espressoMartini.setupRelationships()
+        mojito.setupRelationships()
+        oldFashioned.setupRelationships()
+        theNebula.setupRelationships()
+        
+        menu2.recipes = [
+            espressoMartini.recipe,
+            mojito.recipe,
+            oldFashioned.recipe,
+            theNebula.recipe
         ]
     }
 }

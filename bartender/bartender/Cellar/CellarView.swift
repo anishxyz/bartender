@@ -20,7 +20,7 @@ struct CellarView: View {
     ]) var bottles: [Bottle]
     
     @Query(sort: [
-        SortDescriptor(\Bar.created_at, order: .reverse),
+        SortDescriptor(\Bar.created_at),
         SortDescriptor(\Bar.name)
     ]) var bars: [Bar]
     
