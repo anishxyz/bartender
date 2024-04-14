@@ -43,6 +43,10 @@ struct CellarView: View {
     @State var editMode: EditMode = .inactive
     @State private var searchText = ""
     
+    // selection
+    @State private var showingBottleDetailsSheet = false
+    @State private var selectedBottle: Bottle?
+    
     private func toggleEditMode() {
         editMode = editMode.isEditing ? .inactive : .active
     }
@@ -98,6 +102,12 @@ struct CellarView: View {
                 
                 ForEach(filteredBottles.filter { $0.bar == selectedBar || selectedBar == nil }, id: \.self) { bottle in
                     BottleItemView(bottle: bottle)
+                        .onTapGesture {
+                                if editMode == .inactive {
+                                    selectedBottle = bottle
+                                    showingBottleDetailsSheet = true
+                                }
+                            }
                         .swipeActions {
                             Button("Delete", systemImage: "trash", role: .destructive) {
                                 modelContext.delete(bottle)
@@ -152,6 +162,10 @@ struct CellarView: View {
                     .presentationDetents([.medium])
                 
             })
+            .sheet(isPresented: $showingBottleDetailsSheet) {
+                Text("hello")
+                    .presentationDetents([.medium])
+            }
         }
     }
 }

@@ -45,18 +45,3 @@ struct CocktailsView: View {
     CocktailsView()
         .modelContainer(previewContainer)
 }
-
-
-struct MenuDetailView: View {
-    var menu: CocktailMenu
-    
-    var body: some View {
-        List {
-            ForEach(menu.recipes) { recipe in
-                Text(recipe.name)
-            }
-        }
-        .navigationTitle(menu.name)
-        .background(Color(UIColor.systemGroupedBackground))
-    }
-}
