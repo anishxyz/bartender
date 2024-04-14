@@ -44,8 +44,8 @@ struct CellarView: View {
     @State private var searchText = ""
     
     // selection
-    @State private var showingBottleDetailsSheet = false
-    @State private var selectedBottle: Bottle?
+    @State private var showingBottleDetailSheet = false
+    @State private var selectedBottle: Bottle? = nil
     
     private func toggleEditMode() {
         editMode = editMode.isEditing ? .inactive : .active
@@ -93,7 +93,6 @@ struct CellarView: View {
                                 .tint(selectedBar == bar ? .orange : .blue)
                             }
                         }
-                        
                     }
                     .listRowBackground(Color.clear)
                     .listRowInsets(EdgeInsets())
@@ -101,18 +100,18 @@ struct CellarView: View {
 
                 
                 ForEach(filteredBottles.filter { $0.bar == selectedBar || selectedBar == nil }, id: \.self) { bottle in
-                    BottleItemView(bottle: bottle)
-                        .onTapGesture {
-                                if editMode == .inactive {
-                                    selectedBottle = bottle
-                                    showingBottleDetailsSheet = true
+                    Button(action: {
+                        self.showingBottleDetailSheet = true
+                        self.selectedBottle = bottle
+                    }) {
+                        BottleItemView(bottle: bottle)
+                            .swipeActions {
+                                Button("Delete", systemImage: "trash", role: .destructive) {
+                                    modelContext.delete(bottle)
                                 }
                             }
-                        .swipeActions {
-                            Button("Delete", systemImage: "trash", role: .destructive) {
-                                modelContext.delete(bottle)
-                            }
-                        }
+                    }
+                    .foregroundColor(.primary)
                 }
             }
             .searchable(text: $searchText)
@@ -160,12 +159,14 @@ struct CellarView: View {
             .sheet(isPresented: $showingEditBarSheet, content: {
                 EditBarsView(bars: bars)
                     .presentationDetents([.medium])
+            })
+            .sheet(isPresented: $showingBottleDetailSheet, content: {
+                if let bottle = selectedBottle {
+                    Text(bottle.name)
+                        .presentationDetents([.medium])
+                }
                 
             })
-            .sheet(isPresented: $showingBottleDetailsSheet) {
-                Text("hello")
-                    .presentationDetents([.medium])
-            }
         }
     }
 }
