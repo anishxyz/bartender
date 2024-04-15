@@ -10,8 +10,8 @@
 		B6B2506A2BAD371400A3098D /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250692BAD371400A3098D /* CellarView.swift */; };
 		B6B2506E2BAD384E00A3098D /* CocktailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2506D2BAD384E00A3098D /* CocktailsView.swift */; };
 		B6B250752BAD3BEE00A3098D /* BottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250742BAD3BEE00A3098D /* BottleType.swift */; };
-		B6B250772BAD3C5300A3098D /* Bottle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250762BAD3C5300A3098D /* Bottle.swift */; };
-		B6B2507B2BAFFFE500A3098D /* Bar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2507A2BAFFFE500A3098D /* Bar.swift */; };
+		B6B250772BAD3C5300A3098D /* BottleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250762BAD3C5300A3098D /* BottleModel.swift */; };
+		B6B2507B2BAFFFE500A3098D /* BarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2507A2BAFFFE500A3098D /* BarModel.swift */; };
 		B6B2507D2BB0017F00A3098D /* PreviewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2507C2BB0017F00A3098D /* PreviewContainer.swift */; };
 		B6B2507F2BB0101B00A3098D /* BottleItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2507E2BB0101B00A3098D /* BottleItemView.swift */; };
 		B6B250812BB11EC600A3098D /* AddBottleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250802BB11EC600A3098D /* AddBottleView.swift */; };
@@ -33,9 +33,9 @@
 		B6B5209B2BC236A30099C015 /* BarToolbarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B5209A2BC236A30099C015 /* BarToolbarSection.swift */; };
 		B6B5209E2BC23E330099C015 /* EditBarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B5209D2BC23E330099C015 /* EditBarsView.swift */; };
 		B6B520A02BC292030099C015 /* CellarEditToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B5209F2BC292030099C015 /* CellarEditToolbarButton.swift */; };
-		B6B520A22BC366240099C015 /* CocktailRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520A12BC366240099C015 /* CocktailRecipe.swift */; };
+		B6B520A22BC366240099C015 /* CocktailRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520A12BC366240099C015 /* CocktailRecipeModel.swift */; };
 		B6B520A42BC369A80099C015 /* IngredientType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520A32BC369A80099C015 /* IngredientType.swift */; };
-		B6B520A62BC371C50099C015 /* CocktailMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520A52BC371C50099C015 /* CocktailMenu.swift */; };
+		B6B520A62BC371C50099C015 /* CocktailMenuModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520A52BC371C50099C015 /* CocktailMenuModel.swift */; };
 		B6B520A82BC3C8600099C015 /* IngredientUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520A72BC3C8600099C015 /* IngredientUnitType.swift */; };
 		B6B520AA2BC8F9EC0099C015 /* SampleRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520A92BC8F9EC0099C015 /* SampleRecipes.swift */; };
 		B6B520AC2BC908C70099C015 /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520AB2BC908C70099C015 /* MenuItemView.swift */; };
@@ -53,8 +53,8 @@
 		B6B250692BAD371400A3098D /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
 		B6B2506D2BAD384E00A3098D /* CocktailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailsView.swift; sourceTree = "<group>"; };
 		B6B250742BAD3BEE00A3098D /* BottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleType.swift; sourceTree = "<group>"; };
-		B6B250762BAD3C5300A3098D /* Bottle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bottle.swift; sourceTree = "<group>"; };
-		B6B2507A2BAFFFE500A3098D /* Bar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bar.swift; sourceTree = "<group>"; };
+		B6B250762BAD3C5300A3098D /* BottleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleModel.swift; sourceTree = "<group>"; };
+		B6B2507A2BAFFFE500A3098D /* BarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarModel.swift; sourceTree = "<group>"; };
 		B6B2507C2BB0017F00A3098D /* PreviewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewContainer.swift; sourceTree = "<group>"; };
 		B6B2507E2BB0101B00A3098D /* BottleItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleItemView.swift; sourceTree = "<group>"; };
 		B6B250802BB11EC600A3098D /* AddBottleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBottleView.swift; sourceTree = "<group>"; };
@@ -78,9 +78,9 @@
 		B6B5209A2BC236A30099C015 /* BarToolbarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarToolbarSection.swift; sourceTree = "<group>"; };
 		B6B5209D2BC23E330099C015 /* EditBarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBarsView.swift; sourceTree = "<group>"; };
 		B6B5209F2BC292030099C015 /* CellarEditToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarEditToolbarButton.swift; sourceTree = "<group>"; };
-		B6B520A12BC366240099C015 /* CocktailRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecipe.swift; sourceTree = "<group>"; };
+		B6B520A12BC366240099C015 /* CocktailRecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailRecipeModel.swift; sourceTree = "<group>"; };
 		B6B520A32BC369A80099C015 /* IngredientType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientType.swift; sourceTree = "<group>"; };
-		B6B520A52BC371C50099C015 /* CocktailMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailMenu.swift; sourceTree = "<group>"; };
+		B6B520A52BC371C50099C015 /* CocktailMenuModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailMenuModel.swift; sourceTree = "<group>"; };
 		B6B520A72BC3C8600099C015 /* IngredientUnitType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientUnitType.swift; sourceTree = "<group>"; };
 		B6B520A92BC8F9EC0099C015 /* SampleRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRecipes.swift; sourceTree = "<group>"; };
 		B6B520AB2BC908C70099C015 /* MenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
@@ -138,16 +138,13 @@
 		B6B250732BAD3BD200A3098D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B6B250742BAD3BEE00A3098D /* BottleType.swift */,
-				B6B250762BAD3C5300A3098D /* Bottle.swift */,
-				B6B2507A2BAFFFE500A3098D /* Bar.swift */,
-				B6B2507C2BB0017F00A3098D /* PreviewContainer.swift */,
-				B6B250832BB12EAA00A3098D /* VersionedSchemas.swift */,
-				B6B520A12BC366240099C015 /* CocktailRecipe.swift */,
-				B6B520A32BC369A80099C015 /* IngredientType.swift */,
-				B6B520A52BC371C50099C015 /* CocktailMenu.swift */,
-				B6B520A72BC3C8600099C015 /* IngredientUnitType.swift */,
-				B6B520A92BC8F9EC0099C015 /* SampleRecipes.swift */,
+				B6B520B52BCCF25F0099C015 /* Migrations */,
+				B6B520B42BCCF24B0099C015 /* SampleData */,
+				B6B520B32BCCF2240099C015 /* Enums */,
+				B6B250762BAD3C5300A3098D /* BottleModel.swift */,
+				B6B2507A2BAFFFE500A3098D /* BarModel.swift */,
+				B6B520A12BC366240099C015 /* CocktailRecipeModel.swift */,
+				B6B520A52BC371C50099C015 /* CocktailMenuModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,6 +193,33 @@
 				B6B5209F2BC292030099C015 /* CellarEditToolbarButton.swift */,
 			);
 			path = CellarCreateToolbarSections;
+			sourceTree = "<group>";
+		};
+		B6B520B32BCCF2240099C015 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				B6B520A72BC3C8600099C015 /* IngredientUnitType.swift */,
+				B6B520A32BC369A80099C015 /* IngredientType.swift */,
+				B6B250742BAD3BEE00A3098D /* BottleType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		B6B520B42BCCF24B0099C015 /* SampleData */ = {
+			isa = PBXGroup;
+			children = (
+				B6B520A92BC8F9EC0099C015 /* SampleRecipes.swift */,
+				B6B2507C2BB0017F00A3098D /* PreviewContainer.swift */,
+			);
+			path = SampleData;
+			sourceTree = "<group>";
+		};
+		B6B520B52BCCF25F0099C015 /* Migrations */ = {
+			isa = PBXGroup;
+			children = (
+				B6B250832BB12EAA00A3098D /* VersionedSchemas.swift */,
+			);
+			path = Migrations;
 			sourceTree = "<group>";
 		};
 		B6D1A4DE2BAD2C530059942D = {
@@ -320,7 +344,7 @@
 				B6B2509F2BB3C81100A3098D /* EditBottleView.swift in Sources */,
 				B6D1A4ED2BAD2C530059942D /* ContentView.swift in Sources */,
 				B6B250A52BBA966100A3098D /* AddBarView.swift in Sources */,
-				B6B250772BAD3C5300A3098D /* Bottle.swift in Sources */,
+				B6B250772BAD3C5300A3098D /* BottleModel.swift in Sources */,
 				B6B520AA2BC8F9EC0099C015 /* SampleRecipes.swift in Sources */,
 				B6B2508F2BB285E700A3098D /* ImagePicker.swift in Sources */,
 				B6B2508C2BB2832D00A3098D /* NetworkHelpers.swift in Sources */,
@@ -336,19 +360,19 @@
 				B6B520B02BCB9E660099C015 /* RecipeDetailView.swift in Sources */,
 				B6B2507D2BB0017F00A3098D /* PreviewContainer.swift in Sources */,
 				B6D1A4EB2BAD2C530059942D /* bartenderApp.swift in Sources */,
-				B6B520A22BC366240099C015 /* CocktailRecipe.swift in Sources */,
+				B6B520A22BC366240099C015 /* CocktailRecipeModel.swift in Sources */,
 				B6B520962BC1167E0099C015 /* BartenderView.swift in Sources */,
 				B6B2507F2BB0101B00A3098D /* BottleItemView.swift in Sources */,
 				B6B2508A2BB2824800A3098D /* ImageToCellar.swift in Sources */,
 				B6B520AC2BC908C70099C015 /* MenuItemView.swift in Sources */,
-				B6B520A62BC371C50099C015 /* CocktailMenu.swift in Sources */,
+				B6B520A62BC371C50099C015 /* CocktailMenuModel.swift in Sources */,
 				B6B250912BB286AE00A3098D /* GetBottlesFromImageView.swift in Sources */,
 				B6B520982BC234CC0099C015 /* BottleToolbarSection.swift in Sources */,
 				B6B5209B2BC236A30099C015 /* BarToolbarSection.swift in Sources */,
 				B6B520B22BCCEC480099C015 /* IngredientsView.swift in Sources */,
 				B6B2506E2BAD384E00A3098D /* CocktailsView.swift in Sources */,
 				B6B250812BB11EC600A3098D /* AddBottleView.swift in Sources */,
-				B6B2507B2BAFFFE500A3098D /* Bar.swift in Sources */,
+				B6B2507B2BAFFFE500A3098D /* BarModel.swift in Sources */,
 				B6B520A82BC3C8600099C015 /* IngredientUnitType.swift in Sources */,
 				B6B250752BAD3BEE00A3098D /* BottleType.swift in Sources */,
 			);
