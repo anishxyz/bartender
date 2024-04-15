@@ -101,8 +101,8 @@ struct CellarView: View {
                 
                 ForEach(filteredBottles.filter { $0.bar == selectedBar || selectedBar == nil }, id: \.self) { bottle in
                     Button(action: {
-//                        self.selectedBottle = bottle
-//                        self.showingBottleDetailSheet = true
+                        self.selectedBottle = bottle
+                        self.showingBottleDetailSheet = true
                     }) {
                         BottleItemView(bottle: bottle)
                             .swipeActions {
@@ -160,14 +160,17 @@ struct CellarView: View {
                 EditBarsView(bars: bars)
                     .presentationDetents([.medium])
             })
-//            .sheet(isPresented: $showingBottleDetailSheet, onDismiss: {
-//                selectedBottle = nil
-//            }) {
-//                if let bottle = selectedBottle {
-//                    Text(bottle.name)
-//                        .presentationDetents([.medium])
-//                }
-//            }
+            .sheet(isPresented: $showingBottleDetailSheet, onDismiss: {
+                selectedBottle = nil
+            }) {
+                if let bottle = selectedBottle {
+                    Text(bottle.name)
+                        .presentationDetents([.medium])
+                } else {
+                    Text("Selected bottle: \(selectedBottle?.name ?? "None")")
+                        .presentationDetents([.medium])
+                }
+            }
         }
     }
 }

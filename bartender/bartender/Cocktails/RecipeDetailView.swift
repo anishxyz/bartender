@@ -13,13 +13,13 @@ struct RecipeDetailView: View {
     var recipe: CocktailRecipe
     
     var body: some View {
-        List {
-            ForEach(recipe.ingredients) { recipe in
-                Text(recipe.name)
-            }
-            ForEach(recipe.sections) { section in
-                if let title = section.title {
-                    Text(title)
+        ScrollView {
+            VStack {
+                IngredientsView(ingredients: recipe.ingredients)
+                ForEach(recipe.sections) { section in
+                    if let title = section.title {
+                        Text(title)
+                    }
                 }
             }
         }
