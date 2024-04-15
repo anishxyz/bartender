@@ -34,7 +34,7 @@ struct spicyMargarita: CocktailRecipeProtocol {
         RecipeStep(instruction: "Strain into a chilled glass.")
     ]
     
-    static var recipeSections = [RecipeSection(title: "Preparation")]
+    static var recipeSections = [RecipeSection(title: "Preparation", index: 1)]
     
     static func setupRelationships() {
         recipe.ingredients = ingredients
@@ -63,8 +63,8 @@ struct newYorkSour: CocktailRecipeProtocol {
     ]
     
     static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Mixing"),
-        RecipeSection(title: "Finishing Touches")
+        RecipeSection(title: "Mixing", index: 1),
+        RecipeSection(title: "Finishing Touches", index: 2)
     ]
     
     static func setupRelationships() {
@@ -99,8 +99,8 @@ struct goldenHour: CocktailRecipeProtocol {
     ]
     
     static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Mixing"),
-        RecipeSection(title: "Finishing Touches")
+        RecipeSection(title: "Mixing", index: 1),
+        RecipeSection(title: "Finishing Touches", index: 2)
     ]
     
     static func setupRelationships() {
@@ -131,7 +131,7 @@ struct espressoMartini: CocktailRecipeProtocol {
     ]
     
     static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Preparation")
+        RecipeSection(title: "Preparation", index: 1)
     ]
     
     static func setupRelationships() {
@@ -163,8 +163,8 @@ struct mojito: CocktailRecipeProtocol {
     ]
     
     static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Mixing"),
-        RecipeSection(title: "Finishing Touches")
+        RecipeSection(title: "Mixing", index: 1),
+        RecipeSection(title: "Finishing Touches", index: 2)
     ]
     
     static func setupRelationships() {
@@ -196,9 +196,9 @@ struct oldFashioned: CocktailRecipeProtocol {
     ]
     
     static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Muddling"),
-        RecipeSection(title: "Mixing"),
-        RecipeSection(title: "Garnishing")
+        RecipeSection(title: "Muddling", index: 1),
+        RecipeSection(title: "Mixing", index: 2),
+        RecipeSection(title: "Garnishing", index: 3)
     ]
     
     static func setupRelationships() {
@@ -234,8 +234,8 @@ struct theNebula: CocktailRecipeProtocol {
     ]
     
     static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Mixing"),
-        RecipeSection(title: "Presentation")
+        RecipeSection(title: "Mixing", index: 1),
+        RecipeSection(title: "Presentation", index: 2)
     ]
     
     static func setupRelationships() {

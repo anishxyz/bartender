@@ -34,6 +34,15 @@ class CocktailRecipe {
         self.created_at = Date()
         self.id = UUID()
     }
+    
+    var sortedSections: [RecipeSection] {
+        return sections.sorted {
+            if $0.index == $1.index {
+                return ($0.title ?? "") < ($1.title ?? "")
+            }
+            return $0.index < $1.index
+        }
+    }
 }
 
 @Model
@@ -73,6 +82,15 @@ class RecipeSection {
         self.steps = steps
         
         self.id = UUID()
+    }
+    
+    var sortedSteps: [RecipeStep] {
+        return steps.sorted {
+            if $0.index == $1.index {
+                return $0.instruction < $1.instruction
+            }
+            return $0.index < $1.index
+        }
     }
 
     func _reindexSteps() {
