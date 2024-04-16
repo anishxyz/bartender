@@ -15,15 +15,18 @@ struct CocktailsView: View {
              SortDescriptor(\CocktailMenu.name)]
     ) var menus: [CocktailMenu]
     
+    // toolbar
+    @State private var showingCreateMenuSheet = false
+    
     let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
+        GridItem(.flexible(), spacing: 14),
+        GridItem(.flexible(), spacing: 14)
     ]
         
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
+                LazyVGrid(columns: columns, spacing: 14) {
                     ForEach(menus, id: \.id) { menu in
                         NavigationLink(destination: MenuDetailView(menu: menu)) {
                             MenuItemView(menu: menu)
@@ -36,6 +39,30 @@ struct CocktailsView: View {
             }
             .navigationTitle("Cocktail Menus")
             .background(Color(UIColor.systemGroupedBackground))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        Button(action: {
+                            showingCreateMenuSheet = true
+                        }) {
+                            HStack {
+                                Text("Create Menu")
+                                Image(systemName: "square.and.pencil")
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundStyle(.orange)
+                            .font(.system(size: 22))
+                    }
+                }
+            }
+            .sheet(isPresented: $showingCreateMenuSheet, content: {
+                CreateMenuView()
+                    .presentationDetents([.medium])
+                
+            })
         }
     }
 }

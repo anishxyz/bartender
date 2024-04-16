@@ -43,6 +43,7 @@
 		B6B520B02BCB9E660099C015 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520AF2BCB9E660099C015 /* RecipeDetailView.swift */; };
 		B6B520B22BCCEC480099C015 /* IngredientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520B12BCCEC480099C015 /* IngredientsView.swift */; };
 		B6B520B72BCCF2F60099C015 /* RecipeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520B62BCCF2F60099C015 /* RecipeSectionView.swift */; };
+		B6B520B92BCE1B040099C015 /* CreateMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520B82BCE1B040099C015 /* CreateMenuView.swift */; };
 		B6D1A4EB2BAD2C530059942D /* bartenderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1A4EA2BAD2C530059942D /* bartenderApp.swift */; };
 		B6D1A4ED2BAD2C530059942D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1A4EC2BAD2C530059942D /* ContentView.swift */; };
 		B6D1A4EF2BAD2C530059942D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1A4EE2BAD2C530059942D /* Item.swift */; };
@@ -89,6 +90,7 @@
 		B6B520AF2BCB9E660099C015 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		B6B520B12BCCEC480099C015 /* IngredientsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsView.swift; sourceTree = "<group>"; };
 		B6B520B62BCCF2F60099C015 /* RecipeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeSectionView.swift; sourceTree = "<group>"; };
+		B6B520B82BCE1B040099C015 /* CreateMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMenuView.swift; sourceTree = "<group>"; };
 		B6D1A4E72BAD2C530059942D /* bartender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bartender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6D1A4EA2BAD2C530059942D /* bartenderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bartenderApp.swift; sourceTree = "<group>"; };
 		B6D1A4EC2BAD2C530059942D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 				B6B520AF2BCB9E660099C015 /* RecipeDetailView.swift */,
 				B6B520B12BCCEC480099C015 /* IngredientsView.swift */,
 				B6B520B62BCCF2F60099C015 /* RecipeSectionView.swift */,
+				B6B520B82BCE1B040099C015 /* CreateMenuView.swift */,
 			);
 			path = Cocktails;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				B6B2507B2BAFFFE500A3098D /* BarModel.swift in Sources */,
 				B6B520A82BC3C8600099C015 /* IngredientUnitType.swift in Sources */,
 				B6B520B72BCCF2F60099C015 /* RecipeSectionView.swift in Sources */,
+				B6B520B92BCE1B040099C015 /* CreateMenuView.swift in Sources */,
 				B6B250752BAD3BEE00A3098D /* BottleType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
