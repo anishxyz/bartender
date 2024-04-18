@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 
 struct EditBottleView: View {
     @Binding var bottle: Bottle
