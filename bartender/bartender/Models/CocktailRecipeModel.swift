@@ -18,29 +18,34 @@ class CocktailRecipe {
     
     @Relationship(deleteRule: .cascade, inverse: \Ingredient.recipe)
     var ingredients: [Ingredient]
-    @Relationship(deleteRule: .cascade, inverse: \RecipeSection.recipe)
-    var sections: [RecipeSection]
+    @Relationship(deleteRule: .cascade, inverse: \RecipeStep.recipe)
+    var steps: [RecipeStep]
     
     var created_at: Date
     
-    init(name: String, info: String? = nil, menu: CocktailMenu? = nil, sections: [RecipeSection] = [], ingredients: [Ingredient] = []) {
+    init(name: String, info: String? = nil, menu: CocktailMenu? = nil, steps: [RecipeStep] = [], ingredients: [Ingredient] = []) {
         self.name = name
         self.info = info
         self.menu = menu
-        
-        self.sections = sections
+        self.steps = steps
         self.ingredients = ingredients
         
         self.created_at = Date()
         self.id = UUID()
     }
     
-    var sortedSections: [RecipeSection] {
-        return sections.sorted {
+    var sortedSteps: [RecipeStep] {
+        return steps.sorted {
             if $0.index == $1.index {
-                return ($0.title ?? "") < ($1.title ?? "")
+                return $0.instruction < $1.instruction
             }
             return $0.index < $1.index
+        }
+    }
+    
+    func _reindexSteps() {
+        for (newIndex, step) in steps.enumerated() {
+            step.index = newIndex + 1
         }
     }
 }
@@ -65,52 +70,17 @@ class Ingredient {
     }
 }
 
-@Model
-class RecipeSection {
-    @Attribute(.unique) var id: UUID
-    @Relationship(deleteRule: .cascade, inverse: \RecipeStep.section)
-    var steps: [RecipeStep]
-    var title: String?
-    var index: Int
-    var recipe: CocktailRecipe?
-    
-    
-    init(title: String? = nil, recipe: CocktailRecipe? = nil, steps: [RecipeStep] = [], index: Int = 0) {
-        self.title = title
-        self.recipe = recipe
-        self.index = index
-        self.steps = steps
-        
-        self.id = UUID()
-    }
-    
-    var sortedSteps: [RecipeStep] {
-        return steps.sorted {
-            if $0.index == $1.index {
-                return $0.instruction < $1.instruction
-            }
-            return $0.index < $1.index
-        }
-    }
-
-    func _reindexSteps() {
-        for (newIndex, step) in steps.enumerated() {
-            step.index = newIndex + 1
-        }
-    }
-}
-
 
 @Model
 class RecipeStep {
     @Attribute(.unique) var id: UUID
     var index: Int
     var instruction: String
-    var section: RecipeSection?
+    var recipe: CocktailRecipe?
         
-    init(instruction: String, section: RecipeSection? = nil, index: Int = 0) {
+    init(instruction: String, recipe: CocktailRecipe? = nil, index: Int = 0) {
         self.instruction = instruction
-        self.section = section
+        self.recipe = recipe
         self.index = index
         
         self.id = UUID()

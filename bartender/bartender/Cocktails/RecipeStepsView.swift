@@ -1,29 +1,25 @@
 //
-//  RecipeSectionView.swift
+//  RecipeStepsView.swift
 //  bartender
 //
-//  Created by Anish Agrawal on 4/15/24.
+//  Created by Anish Agrawal on 4/19/24.
 //
 
 import Foundation
 import SwiftUI
 
-
-struct RecipeSectionView: View {
-    var section: RecipeSection
+struct RecipeStepsView: View {
+    var steps: [RecipeStep]
 
     var body: some View {
         VStack(alignment: .leading) {
-            
-            if let title = section.title {
-                Text(title)
-                    .font(.subheadline)
-                    .bold()
-                    .padding(.bottom, 5)
-            }
+            Text("Recipe Steps")
+                .font(.subheadline)
+                .bold()
+                .padding(.bottom, 5)
             
             VStack(alignment: .leading) {
-                ForEach(Array(section.sortedSteps.enumerated()), id: \.element.id) { index, step in
+                ForEach(Array(steps.enumerated()), id: \.element.id) { index, step in
                     HStack(alignment: .top) {
                         Circle()
                             .strokeBorder(Color.orange, lineWidth: 2)

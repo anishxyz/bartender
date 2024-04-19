@@ -16,12 +16,7 @@ struct RecipeDetailView: View {
         ScrollView {
             VStack {
                 IngredientsView(ingredients: recipe.ingredients)
-                
-                // TODO: solve cascading increase issue
-                ForEach(recipe.sortedSections, id: \.id) { section in
-                    RecipeSectionView(section: section)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
+                RecipeStepsView(steps: recipe.steps)
             }
         }
         .navigationTitle(recipe.name)

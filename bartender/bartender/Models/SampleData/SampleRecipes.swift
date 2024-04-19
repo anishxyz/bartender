@@ -12,12 +12,11 @@ protocol CocktailRecipeProtocol {
     static var recipe: CocktailRecipe { get }
     static var ingredients: [Ingredient] { get }
     static var recipeSteps: [RecipeStep] { get }
-    static var recipeSections: [RecipeSection] { get }
 }
 
 
 struct spicyMargarita: CocktailRecipeProtocol {
-    
+
     static var recipe: CocktailRecipe = CocktailRecipe(name: "Spicy Margarita")
     
     static var ingredients: [Ingredient] = [
@@ -33,13 +32,10 @@ struct spicyMargarita: CocktailRecipeProtocol {
         RecipeStep(instruction: "Shake well."),
         RecipeStep(instruction: "Strain into a chilled glass.")
     ]
-    
-    static var recipeSections = [RecipeSection(title: "Preparation", index: 1)]
-    
+        
     static func setupRelationships() {
         recipe.ingredients = ingredients
-        recipe.sections = recipeSections
-        recipeSections[0].steps = recipeSteps
+        recipe.steps = recipeSteps
     }
 }
 
@@ -62,16 +58,9 @@ struct newYorkSour: CocktailRecipeProtocol {
         RecipeStep(instruction: "Gently pour red wine over the back of a spoon so it floats on top of the drink.")
     ]
     
-    static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Mixing", index: 1),
-        RecipeSection(title: "Finishing Touches", index: 2)
-    ]
-    
     static func setupRelationships() {
         recipe.ingredients = ingredients
-        recipe.sections = recipeSections
-        recipeSections[0].steps = Array(recipeSteps.prefix(3))
-        recipeSections[1].steps = Array(recipeSteps.suffix(1))
+        recipe.steps = recipeSteps
     }
 }
 
@@ -97,17 +86,10 @@ struct goldenHour: CocktailRecipeProtocol {
         RecipeStep(instruction: "Top with champagne."),
         RecipeStep(instruction: "Carefully place an edible gold leaf on the foam for garnish.")
     ]
-    
-    static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Mixing", index: 1),
-        RecipeSection(title: "Finishing Touches", index: 2)
-    ]
-    
+        
     static func setupRelationships() {
         recipe.ingredients = ingredients
-        recipe.sections = recipeSections
-        recipeSections[0].steps = Array(recipeSteps.prefix(4))
-        recipeSections[1].steps = Array(recipeSteps.suffix(2))
+        recipe.steps = recipeSteps
     }
 }
 
@@ -124,20 +106,15 @@ struct espressoMartini: CocktailRecipeProtocol {
     ]
     
     static var recipeSteps: [RecipeStep] = [
-        RecipeStep(instruction: "Combine vodka, coffee liqueur, espresso, and simple syrup in a shaker."),
-        RecipeStep(instruction: "Fill shaker with ice and shake vigorously."),
-        RecipeStep(instruction: "Strain into a chilled cocktail glass."),
-        RecipeStep(instruction: "Garnish with three coffee beans.")
-    ]
-    
-    static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Preparation", index: 1)
+        RecipeStep(instruction: "Combine vodka, coffee liqueur, espresso, and simple syrup in a shaker.", index: 1),
+        RecipeStep(instruction: "Fill shaker with ice and shake vigorously.", index: 2),
+        RecipeStep(instruction: "Strain into a chilled cocktail glass.", index: 3),
+        RecipeStep(instruction: "Garnish with three coffee beans.", index: 4)
     ]
     
     static func setupRelationships() {
         recipe.ingredients = ingredients
-        recipe.sections = recipeSections
-        recipeSections[0].steps = recipeSteps
+        recipe.steps = recipeSteps
     }
 }
 
@@ -162,16 +139,9 @@ struct mojito: CocktailRecipeProtocol {
         RecipeStep(instruction: "Garnish with a sprig of mint and a lime wedge.")
     ]
     
-    static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Mixing", index: 1),
-        RecipeSection(title: "Finishing Touches", index: 2)
-    ]
-    
     static func setupRelationships() {
         recipe.ingredients = ingredients
-        recipe.sections = recipeSections
-        recipeSections[0].steps = Array(recipeSteps.prefix(4))
-        recipeSections[1].steps = Array(recipeSteps.suffix(1))
+        recipe.steps = recipeSteps
     }
 }
 
@@ -195,18 +165,9 @@ struct oldFashioned: CocktailRecipeProtocol {
         RecipeStep(instruction: "Garnish with an orange twist.")
     ]
     
-    static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Muddling", index: 1),
-        RecipeSection(title: "Mixing", index: 2),
-        RecipeSection(title: "Garnishing", index: 3)
-    ]
-    
     static func setupRelationships() {
         recipe.ingredients = ingredients
-        recipe.sections = recipeSections
-        recipeSections[0].steps = [recipeSteps[0], recipeSteps[1]]
-        recipeSections[1].steps = [recipeSteps[2], recipeSteps[3]]
-        recipeSections[2].steps = [recipeSteps[4]]
+        recipe.steps = recipeSteps
     }
 }
 
@@ -233,15 +194,8 @@ struct theNebula: CocktailRecipeProtocol {
         RecipeStep(instruction: "Sprinkle edible silver dust over the top for a sparkling finish.")
     ]
     
-    static var recipeSections: [RecipeSection] = [
-        RecipeSection(title: "Mixing", index: 1),
-        RecipeSection(title: "Presentation", index: 2)
-    ]
-    
     static func setupRelationships() {
         recipe.ingredients = ingredients
-        recipe.sections = recipeSections
-        recipeSections[0].steps = [recipeSteps[0], recipeSteps[1]]
-        recipeSections[1].steps = [recipeSteps[2], recipeSteps[3], recipeSteps[4]]
+        recipe.steps = recipeSteps
     }
 }

@@ -12,7 +12,7 @@ import Foundation
 let previewContainer: ModelContainer = {
     do {
         let container = try ModelContainer(
-            for: Bottle.self, Bar.self, CocktailMenu.self, CocktailRecipe.self, Ingredient.self, RecipeSection.self, RecipeStep.self,
+            for: Bottle.self, Bar.self, CocktailMenu.self, CocktailRecipe.self, Ingredient.self, RecipeStep.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         let modelContext = container.mainContext
@@ -24,7 +24,6 @@ let previewContainer: ModelContainer = {
         if try modelContext.fetch(FetchDescriptor<Bar>()).isEmpty {
             sampleBars.contents.forEach { container.mainContext.insert($0) }
         }
-        
         
         let bottles = sampleBottles.contents
         let bars = sampleBars.contents

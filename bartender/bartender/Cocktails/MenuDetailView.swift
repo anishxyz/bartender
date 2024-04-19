@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 
 struct MenuDetailView: View {
@@ -33,7 +34,7 @@ struct MenuDetailView: View {
                         showingCreateCocktailRecipeSheet = true
                     }) {
                         HStack {
-                            Text("Create Menu")
+                            Text("Create Cocktail Recipe")
                             Image(systemName: "square.and.pencil")
                         }
                     }
@@ -51,4 +52,16 @@ struct MenuDetailView: View {
             
         })
     }
+}
+
+#Preview {
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: CocktailMenu.self, configurations: config)
+    
+    sampleCocktailMenu.setupRelationships()
+    
+    container.mainContext.insert(sampleCocktailMenu.menu)
+
+    return MenuDetailView(menu: sampleCocktailMenu.menu)
+        .modelContainer(container)
 }
