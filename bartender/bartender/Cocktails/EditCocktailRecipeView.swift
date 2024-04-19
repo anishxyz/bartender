@@ -12,48 +12,42 @@ struct EditCocktailRecipeView: View {
     @Binding var recipe: CocktailRecipe
     
     var body: some View {
-        VStack {
-            VStack(alignment: .leading, spacing: 10) {
-                Group {
-                    VStack {
-                        LabeledContent {
-                            TextField("Required", text: $recipe.name)
-                                .multilineTextAlignment(.trailing)
-                        } label: {
-                            Text("Recipe Name")
-                                .bold()
-                        }
-                        Divider()
-                        HStack {
-                            Text("Menu").bold()
-                            Spacer()
-                        }
-                    }
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).fill(.gray).opacity(0.1))
-                }
-                
-                Group {
-                    
-                    VStack(alignment: .leading) {
-                        Text("Description")
+        VStack(alignment: .leading, spacing: 10) {
+            Group {
+                VStack {
+                    LabeledContent {
+                        TextField("Required", text: $recipe.name)
+                            .multilineTextAlignment(.trailing)
+                    } label: {
+                        Text("Recipe Name")
                             .bold()
-                        TextField("Optional", text: Binding<String>(
-                            get: { recipe.info ?? "" },
-                            set: { recipe.info = $0.isEmpty ? nil : $0 }
-                        ), axis: .vertical)
-                        .lineLimit(6)
                     }
-                    
+                    Divider()
+                    HStack {
+                        Text("Menu").bold()
+                        Spacer()
+                    }
                 }
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 10).fill(.gray).opacity(0.1))
             }
-            .padding(12)
-            .background(RoundedRectangle(cornerRadius: 22).fill(.gray).opacity(0.15))
-            .padding()
             
-            Spacer()
+            Group {
+                
+                VStack(alignment: .leading) {
+                    Text("Description")
+                        .bold()
+                    TextField("Optional", text: Binding<String>(
+                        get: { recipe.info ?? "" },
+                        set: { recipe.info = $0.isEmpty ? nil : $0 }
+                    ), axis: .vertical)
+                    .lineLimit(6)
+                }
+                
+            }
+            .padding()
+            .background(RoundedRectangle(cornerRadius: 10).fill(.gray).opacity(0.1))
+            
         }
     }
 }

@@ -50,6 +50,7 @@
 		B6D1A4EF2BAD2C530059942D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D1A4EE2BAD2C530059942D /* Item.swift */; };
 		B6D1A4F12BAD2C540059942D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6D1A4F02BAD2C540059942D /* Assets.xcassets */; };
 		B6D1A4F42BAD2C540059942D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6D1A4F32BAD2C540059942D /* Preview Assets.xcassets */; };
+		B6EEAEDD2BD239F8001B8EA3 /* CreateCocktailRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EEAEDC2BD239F8001B8EA3 /* CreateCocktailRecipeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		B6D1A4EE2BAD2C530059942D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		B6D1A4F02BAD2C540059942D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6D1A4F32BAD2C540059942D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B6EEAEDC2BD239F8001B8EA3 /* CreateCocktailRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCocktailRecipeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				B6B520B12BCCEC480099C015 /* IngredientsView.swift */,
 				B6B520B82BCE1B040099C015 /* CreateMenuView.swift */,
 				B6B520BA2BD0CE830099C015 /* EditCocktailRecipeView.swift */,
+				B6EEAEDC2BD239F8001B8EA3 /* CreateCocktailRecipeView.swift */,
 				B6B520BC2BD22E020099C015 /* RecipeStepsView.swift */,
 			);
 			path = Cocktails;
@@ -377,6 +380,7 @@
 				B6B2508A2BB2824800A3098D /* ImageToCellar.swift in Sources */,
 				B6B520AC2BC908C70099C015 /* MenuItemView.swift in Sources */,
 				B6B520A62BC371C50099C015 /* CocktailMenuModel.swift in Sources */,
+				B6EEAEDD2BD239F8001B8EA3 /* CreateCocktailRecipeView.swift in Sources */,
 				B6B250912BB286AE00A3098D /* GetBottlesFromImageView.swift in Sources */,
 				B6B520982BC234CC0099C015 /* BottleToolbarSection.swift in Sources */,
 				B6B5209B2BC236A30099C015 /* BarToolbarSection.swift in Sources */,
