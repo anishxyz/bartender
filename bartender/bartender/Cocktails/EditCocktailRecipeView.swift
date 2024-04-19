@@ -80,20 +80,8 @@ struct MenuPicker: View {
     }
 }
 
-//struct EditRecipeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        // Mock data for the preview
-//        let sampleMenu = CocktailMenu(name: "Summer Specials")
-//        let sampleIngredient = Ingredient(name: "Vodka", quantity: 50, units: .milliliters, type: .vodka)
-//        let sampleStep = RecipeStep(instruction: "Mix ingredients gently.", index: 1)
-//        let sampleSection = RecipeSection(title: "Mixing", steps: [sampleStep], index: 1)
-//        
-//        let sampleRecipe = CocktailRecipe(name: "Tropical Sunrise", info: "A refreshing tropical cocktail.", menu: sampleMenu, sections: [sampleSection], ingredients: [sampleIngredient])
-//
-//        return EditRecipeView(recipe: .constant(sampleRecipe))
-//    }
-//}
 
 #Preview {
-    EditCocktailRecipeView(recipe: .constant(CocktailRecipe(name: "hello")))
+    EditCocktailRecipeView(recipe: $spicyMargarita.recipe)
+        .modelContainer(previewContainer)
 }
