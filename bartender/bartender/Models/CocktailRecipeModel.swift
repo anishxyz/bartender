@@ -12,14 +12,12 @@ import Foundation
 @Model
 class CocktailRecipe {
     @Attribute(.unique) var id: UUID
-    @Attribute(.unique) var name: String
+    var name: String
     var info: String?
     var menu: CocktailMenu?
     
-    @Relationship(deleteRule: .cascade, inverse: \Ingredient.recipe)
-    var ingredients: [Ingredient]
-    @Relationship(deleteRule: .cascade, inverse: \RecipeStep.recipe)
-    var steps: [RecipeStep]
+    @Relationship(deleteRule: .cascade, inverse: \Ingredient.recipe) var ingredients: [Ingredient]
+    @Relationship(deleteRule: .cascade, inverse: \RecipeStep.recipe) var steps: [RecipeStep]
     
     var created_at: Date
     

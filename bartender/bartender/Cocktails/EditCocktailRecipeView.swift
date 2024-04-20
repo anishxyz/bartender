@@ -12,6 +12,11 @@ struct EditCocktailRecipeView: View {
     @Environment(\.modelContext) private var modelContext
     
     @Binding var recipe: CocktailRecipe
+    
+    
+    private func deleteIngredients(at offsets: IndexSet) {
+        recipe.ingredients.remove(atOffsets: offsets)
+    }
 
     
     var body: some View {
@@ -37,11 +42,11 @@ struct EditCocktailRecipeView: View {
                     .bold()
                 
                 VStack(alignment: .leading) {
-                    Button {
-                        let newIngredient = Ingredient(name: "", units: .ounces, type: .other, recipe: recipe)
-                        modelContext.insert(newIngredient)
+                    Button(action: {
+                        let newIngredient = Ingredient(name: "", units: .ounces, type: .other)
                         recipe.ingredients.append(newIngredient)
-                    } label: {
+                        
+                    }) {
                         HStack {
                             Image(systemName: "plus.circle.fill")
                             Text("Add New Ingredient")
@@ -53,17 +58,16 @@ struct EditCocktailRecipeView: View {
                     .buttonStyle(.bordered)
                     .tint(.green)
                     
-                    ForEach(Array($recipe.ingredients.enumerated()), id: \.element.id) { index, $ingredient in
-                        IngredientEditor(ingredient: $ingredient)
+                    ForEach(Array(recipe.sortedIngredients(false).enumerated()), id: \.element.id) { index, ingredient in
+                        IngredientEditor(ingredient: Binding(
+                            get: { self.recipe.ingredients[index] },
+                            set: { self.recipe.ingredients[index] = $0 }
+                        ))
                         if index < recipe.ingredients.count - 1 {
                             Divider()
                         }
                     }
-                    .onDelete { indices in
-                        indices.forEach { index in
-                            recipe.ingredients.remove(at: index)
-                        }
-                    }
+                    .onDelete(perform: deleteIngredients)
                 }
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 10).fill(.gray).opacity(0.1))
