@@ -34,6 +34,14 @@ class CocktailRecipe {
         self.id = UUID()
     }
     
+    var sortedIngredients: (_ ascending: Bool) -> [Ingredient] {
+        return { ascending in
+            return self.ingredients.sorted {
+                ascending ? $0.created_at < $1.created_at : $0.created_at > $1.created_at
+            }
+        }
+    }
+    
     var sortedSteps: [RecipeStep] {
         return steps.sorted {
             if $0.index == $1.index {
@@ -53,11 +61,12 @@ class CocktailRecipe {
 @Model
 class Ingredient {
     @Attribute(.unique) var id: UUID
-    @Attribute(.unique) var name: String
+    var name: String
     var quantity: Float?
     var units: IngredientUnitType
     var type: IngredientType
     var recipe: CocktailRecipe?
+    var created_at: Date
         
     init(name: String, quantity: Float? = nil, units: IngredientUnitType, type: IngredientType, recipe: CocktailRecipe? = nil) {
         self.name = name
@@ -66,6 +75,7 @@ class Ingredient {
         self.type = type
         self.recipe = recipe
         
+        self.created_at = Date()
         self.id = UUID()
     }
 }

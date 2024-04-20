@@ -1,15 +1,16 @@
 //
-//  BottleTypePicker.swift
+//  IngredientTypePicker.swift
 //  bartender
 //
-//  Created by Anish Agrawal on 3/27/24.
+//  Created by Anish Agrawal on 4/19/24.
 //
 
+import Foundation
 import SwiftUI
 
-struct BottleTypePicker: View {
-    @Binding var selectedType: BottleType
-    let options: [BottleType] = BottleType.allCases
+struct IngredientTypePicker: View {
+    @Binding var selectedType: IngredientType
+    let options: [IngredientType] = IngredientType.allCases
 
     var body: some View {
         Menu {
@@ -41,5 +42,5 @@ struct BottleTypePicker: View {
 }
 
 #Preview {
-    BottleTypePicker(selectedType: .constant(.wine))
+    IngredientTypePicker(selectedType: .constant(.garnish))
 }

@@ -35,6 +35,6 @@ struct bartenderApp: App {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: [Bottle.self, Bar.self])
+        .modelContainer(for: [Bottle.self, Bar.self, CocktailMenu.self, CocktailRecipe.self, Ingredient.self, RecipeStep.self])
     }
 }

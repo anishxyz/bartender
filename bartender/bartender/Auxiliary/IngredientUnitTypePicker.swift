@@ -1,15 +1,16 @@
 //
-//  BottleTypePicker.swift
+//  IngredientUnitTypePicker.swift
 //  bartender
 //
-//  Created by Anish Agrawal on 3/27/24.
+//  Created by Anish Agrawal on 4/20/24.
 //
 
+import Foundation
 import SwiftUI
 
-struct BottleTypePicker: View {
-    @Binding var selectedType: BottleType
-    let options: [BottleType] = BottleType.allCases
+struct IngredientUnitTypePicker: View {
+    @Binding var selectedType: IngredientUnitType
+    let options: [IngredientUnitType] = IngredientUnitType.allCases
 
     var body: some View {
         Menu {
@@ -18,7 +19,7 @@ struct BottleTypePicker: View {
                     self.selectedType = option
                 }) {
                     HStack {
-                        Text(option.rawValue.capitalized)
+                        Text(option.rawValue)
                         if selectedType == option {
                             Spacer()
                             Image(systemName: "checkmark")
@@ -30,7 +31,7 @@ struct BottleTypePicker: View {
         } label: {
             Button(action: {}) {
                 HStack {
-                    Text(selectedType.rawValue.capitalized)
+                    Text(selectedType.rawValue)
                     Image(systemName: "chevron.up.chevron.down")
                 }
             }
@@ -41,5 +42,5 @@ struct BottleTypePicker: View {
 }
 
 #Preview {
-    BottleTypePicker(selectedType: .constant(.wine))
+    IngredientUnitTypePicker(selectedType: .constant(.ounces))
 }

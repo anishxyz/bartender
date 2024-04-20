@@ -9,10 +9,13 @@ import SwiftUI
 import SwiftData
 
 struct EditCocktailRecipeView: View {
+    @Environment(\.modelContext) private var modelContext
+    
     @Binding var recipe: CocktailRecipe
+
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 16) {
             Group {
                 VStack {
                     LabeledContent {
@@ -22,10 +25,44 @@ struct EditCocktailRecipeView: View {
                         Text("Recipe Name")
                             .bold()
                     }
-                    Divider()
-                    HStack {
-                        Text("Menu").bold()
-                        Spacer()
+                }
+                .padding()
+                .background(RoundedRectangle(cornerRadius: 10).fill(.gray).opacity(0.1))
+            }
+            
+            Group {
+                Text("Ingredients")
+                    .padding(.leading, 16)
+                    .font(.subheadline)
+                    .bold()
+                
+                VStack(alignment: .leading) {
+                    Button {
+                        let newIngredient = Ingredient(name: "", units: .ounces, type: .other, recipe: recipe)
+                        modelContext.insert(newIngredient)
+                        recipe.ingredients.append(newIngredient)
+                    } label: {
+                        HStack {
+                            Image(systemName: "plus.circle.fill")
+                            Text("Add New Ingredient")
+                        }
+                        .bold()
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 40)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.green)
+                    
+                    ForEach(Array($recipe.ingredients.enumerated()), id: \.element.id) { index, $ingredient in
+                        IngredientEditor(ingredient: $ingredient)
+                        if index < recipe.ingredients.count - 1 {
+                            Divider()
+                        }
+                    }
+                    .onDelete { indices in
+                        indices.forEach { index in
+                            recipe.ingredients.remove(at: index)
+                        }
                     }
                 }
                 .padding()
@@ -33,9 +70,8 @@ struct EditCocktailRecipeView: View {
             }
             
             Group {
-                
                 VStack(alignment: .leading) {
-                    Text("Description")
+                    Text("Notes")
                         .bold()
                     TextField("Optional", text: Binding<String>(
                         get: { recipe.info ?? "" },
@@ -48,6 +84,37 @@ struct EditCocktailRecipeView: View {
             .padding()
             .background(RoundedRectangle(cornerRadius: 10).fill(.gray).opacity(0.1))
             
+        }
+    }
+}
+
+
+struct IngredientEditor: View {
+    @Binding var ingredient: Ingredient
+    
+    private let decimalFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 0 // Minimum decimal places
+        formatter.maximumFractionDigits = 2 // Maximum decimal places
+        return formatter
+    }()
+    
+    var body: some View {
+        VStack(spacing: 8) {
+            HStack {
+                TextField("Name", text: $ingredient.name)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                IngredientTypePicker(selectedType: $ingredient.type)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+            HStack {
+                TextField("Quantity", value: $ingredient.quantity, formatter: decimalFormatter)
+                    .keyboardType(.decimalPad)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                IngredientUnitTypePicker(selectedType: $ingredient.units)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
         }
     }
 }
