@@ -13,12 +13,6 @@ struct EditCocktailRecipeView: View {
     
     @Binding var recipe: CocktailRecipe
     
-    
-    private func deleteIngredients(at offsets: IndexSet) {
-        recipe.ingredients.remove(atOffsets: offsets)
-    }
-
-    
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Group {
@@ -58,16 +52,14 @@ struct EditCocktailRecipeView: View {
                     .buttonStyle(.bordered)
                     .tint(.green)
                     
-                    ForEach(Array(recipe.sortedIngredients(false).enumerated()), id: \.element.id) { index, ingredient in
-                        IngredientEditor(ingredient: Binding(
-                            get: { self.recipe.ingredients[index] },
-                            set: { self.recipe.ingredients[index] = $0 }
-                        ))
+                    ForEach(Array($recipe.ingredients.enumerated()), id: \.element.id) { index, ingredient in
+                        
+                        IngredientEditor(ingredient: $recipe.ingredients[index])
+                        
                         if index < recipe.ingredients.count - 1 {
                             Divider()
                         }
                     }
-                    .onDelete(perform: deleteIngredients)
                 }
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 10).fill(.gray).opacity(0.1))
