@@ -45,7 +45,9 @@ struct CreateMenuView: View {
             .padding(12)
             .background(RoundedRectangle(cornerRadius: 22).fill(.gray).opacity(0.15))
             .padding()
+            
             Spacer()
+            
             HStack {
                 Button(action: {
                     if !menu.name.isEmpty {

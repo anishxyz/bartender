@@ -12,10 +12,9 @@ import SwiftData
 
 struct MenuDetailView: View {
     var menu: CocktailMenu
-    
+        
     // toolbar
     @State private var showingCreateCocktailRecipeSheet = false
-    @State private var newRecipe = CocktailRecipe(name: "")
     
     var body: some View {
         List {
@@ -47,7 +46,7 @@ struct MenuDetailView: View {
             }
         }
         .sheet(isPresented: $showingCreateCocktailRecipeSheet, content: {
-            EditCocktailRecipeView(recipe: $newRecipe)
+            CreateCocktailRecipeView()
                 .presentationDetents([.medium])
             
         })

@@ -94,3 +94,13 @@ class RecipeStep {
         self.id = UUID()
     }
 }
+
+
+@Observable
+class ObservedModel<T: PersistentModel> {
+    let wrapped: T
+    
+    init(wrapped: T) {
+        self.wrapped = wrapped
+    }
+}

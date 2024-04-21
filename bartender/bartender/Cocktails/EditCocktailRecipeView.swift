@@ -11,7 +11,7 @@ import SwiftData
 struct EditCocktailRecipeView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @Binding var recipe: CocktailRecipe
+    @Bindable var recipe: CocktailRecipe
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -37,6 +37,7 @@ struct EditCocktailRecipeView: View {
                 
                 VStack(alignment: .leading) {
                     Button(action: {
+                    
                         let newIngredient = Ingredient(name: "", units: .ounces, type: .other)
                         recipe.ingredients.append(newIngredient)
                         
@@ -52,14 +53,10 @@ struct EditCocktailRecipeView: View {
                     .buttonStyle(.bordered)
                     .tint(.green)
                     
-                    ForEach(Array($recipe.ingredients.enumerated()), id: \.element.id) { index, ingredient in
-                        
+                    ForEach(Array(recipe.ingredients.enumerated()), id: \.element.id) { index, ingredient in
                         IngredientEditor(ingredient: $recipe.ingredients[index])
-                        
-                        if index < recipe.ingredients.count - 1 {
-                            Divider()
-                        }
                     }
+                    
                 }
                 .padding()
                 .background(RoundedRectangle(cornerRadius: 10).fill(.gray).opacity(0.1))
@@ -125,6 +122,6 @@ struct IngredientEditor: View {
     container.mainContext.insert(spicyMargarita.recipe)
     
 
-    return EditCocktailRecipeView(recipe: .constant(spicyMargarita.recipe))
+    return EditCocktailRecipeView(recipe: spicyMargarita.recipe)
         .modelContainer(container)
 }

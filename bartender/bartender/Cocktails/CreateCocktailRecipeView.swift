@@ -18,7 +18,7 @@ struct CreateCocktailRecipeView: View {
     
     var body: some View {
         VStack {
-            EditCocktailRecipeView(recipe: $recipe)
+            EditCocktailRecipeView(recipe: recipe)
             
             Button {
                 modelContext.insert(recipe)
