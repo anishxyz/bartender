@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B66FC1792BDF3833008D7322 /* ImageToRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FC1782BDF3833008D7322 /* ImageToRecipes.swift */; };
 		B6B2506A2BAD371400A3098D /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250692BAD371400A3098D /* CellarView.swift */; };
 		B6B2506E2BAD384E00A3098D /* CocktailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2506D2BAD384E00A3098D /* CocktailsView.swift */; };
 		B6B250752BAD3BEE00A3098D /* BottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250742BAD3BEE00A3098D /* BottleType.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B66FC1782BDF3833008D7322 /* ImageToRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToRecipes.swift; sourceTree = "<group>"; };
 		B6B250692BAD371400A3098D /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
 		B6B2506D2BAD384E00A3098D /* CocktailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailsView.swift; sourceTree = "<group>"; };
 		B6B250742BAD3BEE00A3098D /* BottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleType.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				B6B250892BB2824800A3098D /* ImageToCellar.swift */,
+				B66FC1782BDF3833008D7322 /* ImageToRecipes.swift */,
 			);
 			path = LLM_Pipelines;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				B6B2506E2BAD384E00A3098D /* CocktailsView.swift in Sources */,
 				B6B250812BB11EC600A3098D /* AddBottleView.swift in Sources */,
 				B6B2507B2BAFFFE500A3098D /* BarModel.swift in Sources */,
+				B66FC1792BDF3833008D7322 /* ImageToRecipes.swift in Sources */,
 				B6B520A82BC3C8600099C015 /* IngredientUnitType.swift in Sources */,
 				B6B520B92BCE1B040099C015 /* CreateMenuView.swift in Sources */,
 				B6B250752BAD3BEE00A3098D /* BottleType.swift in Sources */,

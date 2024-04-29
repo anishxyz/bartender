@@ -28,21 +28,21 @@ struct MenuDetailView: View {
         .background(Color(UIColor.systemGroupedBackground))
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Menu {
-                    Button(action: {
-                        showingCreateCocktailRecipeSheet = true
-                    }) {
-                        HStack {
-                            Text("Create Cocktail Recipe")
-                            Image(systemName: "square.and.pencil")
-                        }
-                    }
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .symbolRenderingMode(.hierarchical)
-                        .foregroundStyle(.orange)
-                        .font(.system(size: 22))
-                }
+//                Menu {
+//                    Button(action: {
+//                        showingCreateCocktailRecipeSheet = true
+//                    }) {
+//                        HStack {
+//                            Text("Create Cocktail Recipe")
+//                            Image(systemName: "square.and.pencil")
+//                        }
+//                    }
+//                } label: {
+//                    Image(systemName: "plus.circle.fill")
+//                        .symbolRenderingMode(.hierarchical)
+//                        .foregroundStyle(.orange)
+//                        .font(.system(size: 22))
+//                }
             }
         }
         .sheet(isPresented: $showingCreateCocktailRecipeSheet, content: {
