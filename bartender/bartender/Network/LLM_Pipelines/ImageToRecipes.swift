@@ -23,7 +23,7 @@ class ImageToMenu {
             "content": [
                 [
                     "type": "text",
-                    "text": "You are a professional, michelin-star rated bartender. Your job is to assist with detecting cocktails in an image and extracting detailed information about them."
+                    "text": "You are a professional, michelin-star rated bartender. Your job is to assist reverse engineer cocktail recipes from a cocktail menu at a restaurant"
                 ]
             ]
         ]
@@ -33,7 +33,7 @@ class ImageToMenu {
             "content": [
                 [
                     "type": "text",
-                    "text": "I want to know what cocktails are in this image. Please return a JSON array of objects, each of which has the following attributes: name, description, and ingredients."
+                    "text": "I want to know what cocktails are in this menu. To help reverse engineer them, I need the following information: name, ingredients, description. The name should be as shown on the menu (if not present make a relevant name). The description should include anything relevant from the menu that could help me make the drink."
                 ],
                 [
                     "type": "image_url",
@@ -44,13 +44,63 @@ class ImageToMenu {
             ]
         ]
         
+        let tools: [[String: Any]] = [
+            [
+                "type": "function",
+                "function": [
+                    "name": "submit_cocktail_menu_description",
+                    "description": "Submit descriptions of cocktails on a menu",
+                    "parameters": [
+                        "type": "object",
+                        "properties": [
+                            "menu_name": [
+                                "type": "string",
+                                "description": "Name of cocktail menu being described"
+                            ],
+                            "cocktails": [
+                                "type": "array",
+                                "description": "array of cocktails found in menu",
+                                "items": [
+                                    "type": "object",
+                                    "properties": [
+                                        "name": [
+                                          "type": "string",
+                                          "description": "Name of cocktail from menu (if not provided make a relevant name)",
+                                        ],
+                                        "ingredients": [
+                                          "type": "string",
+                                          "description": "List of all ingredients needed to make the drink as described on menu",
+                                        ],
+                                        "description": [
+                                          "type": "string",
+                                          "description": "Relevant information about the cocktail from the menu that would assist in making the drink",
+                                        ],
+                                    ],
+                                    "required": ["name", "ingredients", "description"]
+                                ]
+                            ]
+                        ],
+                        "required": ["menu_name", "cocktails"]
+                    ]
+                ]
+            ]
+        ]
+        
+        let tool_choice: ToolChoice = ToolChoice.dictionaryValue([
+            "type": "function",
+            "function": [
+                "name": "submit_cocktail_menu_description"
+            ]
+        ])
+        
         let messages: [[String: Any]] = [systemMessage, userMessage]
         
-        networkManager.ChatCompletionV1(with: "gpt-4-vision-preview", messages: messages, maxTokens: 4096, temperature: 0) { result in
+        networkManager.ChatCompletionV1(with: "gpt-4-turbo-2024-04-09", messages: messages, tools: tools, toolChoice: tool_choice) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let chatCompletion):
                     if let firstChoice = chatCompletion.choices.first {
+                        print(firstChoice.message.content)
                         let content = firstChoice.message.content
                         let tempMenuDetails = decodeTempMenuDetails(from: content) ?? []
                         if tempMenuDetails.isEmpty {

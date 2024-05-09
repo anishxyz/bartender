@@ -19,7 +19,7 @@ class OpenAINetworkManager {
         return key
     }
     
-    func ChatCompletionV1(with model: String, messages: [[String: Any]], maxTokens: Int? = nil, tools:  [[String: Any]]? = nil, toolChoice:  [[String: Any]]? = nil,
+    func ChatCompletionV1(with model: String, messages: [[String: Any]], maxTokens: Int? = nil, tools:  [[String: Any]]? = nil, toolChoice:  ToolChoice? = nil,
                           temperature: Float? = nil, completion: @escaping (Result<ChatCompletion, Error>) -> Void) {
         
         // Creating the URL request
@@ -165,4 +165,9 @@ struct JSONNull: Codable {
         var container = encoder.singleValueContainer()
         try container.encodeNil()
     }
+}
+
+enum ToolChoice {
+    case stringValue(String)
+    case dictionaryValue([String: Any])
 }
