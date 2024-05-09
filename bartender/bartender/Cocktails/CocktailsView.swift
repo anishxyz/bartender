@@ -17,6 +17,7 @@ struct CocktailsView: View {
     
     // toolbar
     @State private var showingCreateMenuSheet = false
+    @State private var showingUploadMenuFromImageSheet = false
     
     let columns = [
         GridItem(.flexible(), spacing: 14),
@@ -50,6 +51,14 @@ struct CocktailsView: View {
                                 Image(systemName: "square.and.pencil")
                             }
                         }
+                        Button(action: {
+                            showingUploadMenuFromImageSheet = true
+                        }) {
+                            HStack {
+                                Text("From Image")
+                                Image(systemName: "square.and.pencil")
+                            }
+                        }
                     } label: {
                         Image(systemName: "plus.circle.fill")
                             .symbolRenderingMode(.hierarchical)
@@ -60,6 +69,13 @@ struct CocktailsView: View {
             }
             .sheet(isPresented: $showingCreateMenuSheet, content: {
                 CreateMenuView()
+                    .presentationDetents([.medium])
+                
+            })
+            .sheet(isPresented: $showingUploadMenuFromImageSheet, content: {
+                CreateMenuFromImageView{ bottles in
+                    print(bottles)
+                }
                     .presentationDetents([.medium])
                 
             })

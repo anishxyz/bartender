@@ -43,7 +43,12 @@ class OpenAINetworkManager {
         }
         
         if let toolChoice = toolChoice {
-            body["tool_choice"] = toolChoice
+            switch toolChoice {
+            case .stringValue(let value):
+                body["tool_choice"] = value
+            case .dictionaryValue(let value):
+                body["tool_choice"] = value
+            }
         }
         
         if let temperature = temperature {
@@ -92,7 +97,8 @@ class OpenAINetworkManager {
                 print(chatCompletion)
                 // For example, to print the content of the first choice message
                 if let firstChoice = chatCompletion.choices.first {
-                    print(firstChoice.message.content)
+                    let content = firstChoice.message.content ?? ""
+                    print(content)
                 }
             case .failure(let error):
                 // Handle the error
@@ -131,12 +137,23 @@ struct Choice: Codable {
 
 struct Message: Codable {
     let role: String
-    let content: String
-    let toolCalls: [[String: String]]?
+    let content: String?
+    let toolCalls: [ToolCall]?
 
     private enum CodingKeys: String, CodingKey {
         case role, content, toolCalls = "tool_calls"
     }
+}
+
+struct ToolCall: Codable {
+    let id: String
+    let type: String
+    let function: ToolFunction
+}
+
+struct ToolFunction: Codable {
+    let name: String
+    let arguments: String
 }
 
 struct Usage: Codable {

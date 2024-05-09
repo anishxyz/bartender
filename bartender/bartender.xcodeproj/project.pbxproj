@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B66FC1792BDF3833008D7322 /* ImageToRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FC1782BDF3833008D7322 /* ImageToRecipes.swift */; };
+		B66FC17B2BEC9CEB008D7322 /* CreateMenuFromImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FC17A2BEC9CEB008D7322 /* CreateMenuFromImageView.swift */; };
 		B6B2506A2BAD371400A3098D /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250692BAD371400A3098D /* CellarView.swift */; };
 		B6B2506E2BAD384E00A3098D /* CocktailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2506D2BAD384E00A3098D /* CocktailsView.swift */; };
 		B6B250752BAD3BEE00A3098D /* BottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250742BAD3BEE00A3098D /* BottleType.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		B66FC1782BDF3833008D7322 /* ImageToRecipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToRecipes.swift; sourceTree = "<group>"; };
+		B66FC17A2BEC9CEB008D7322 /* CreateMenuFromImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMenuFromImageView.swift; sourceTree = "<group>"; };
 		B6B250692BAD371400A3098D /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
 		B6B2506D2BAD384E00A3098D /* CocktailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailsView.swift; sourceTree = "<group>"; };
 		B6B250742BAD3BEE00A3098D /* BottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleType.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				B6B520BA2BD0CE830099C015 /* EditCocktailRecipeView.swift */,
 				B6EEAEDC2BD239F8001B8EA3 /* CreateCocktailRecipeView.swift */,
 				B6B520BC2BD22E020099C015 /* RecipeStepsView.swift */,
+				B66FC17A2BEC9CEB008D7322 /* CreateMenuFromImageView.swift */,
 			);
 			path = Cocktails;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				B6B520A42BC369A80099C015 /* IngredientType.swift in Sources */,
 				B6B2509F2BB3C81100A3098D /* EditBottleView.swift in Sources */,
 				B6D1A4ED2BAD2C530059942D /* ContentView.swift in Sources */,
+				B66FC17B2BEC9CEB008D7322 /* CreateMenuFromImageView.swift in Sources */,
 				B6B250A52BBA966100A3098D /* AddBarView.swift in Sources */,
 				B6B250772BAD3C5300A3098D /* BottleModel.swift in Sources */,
 				B6B520AA2BC8F9EC0099C015 /* SampleRecipes.swift in Sources */,

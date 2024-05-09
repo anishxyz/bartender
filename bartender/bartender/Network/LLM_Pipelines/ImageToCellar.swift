@@ -54,7 +54,7 @@ class ImageToCellar {
                 case .success(let chatCompletion):
 
                     if let firstChoice = chatCompletion.choices.first {
-                        let content = firstChoice.message.content
+                        let content = firstChoice.message.content ?? ""
                         
                         let tempBottles = decodeTempBottles(from: content) ?? []
                         

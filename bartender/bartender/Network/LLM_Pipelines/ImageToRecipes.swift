@@ -100,14 +100,28 @@ class ImageToMenu {
                 switch result {
                 case .success(let chatCompletion):
                     if let firstChoice = chatCompletion.choices.first {
-                        print(firstChoice.message.content)
-                        let content = firstChoice.message.content
-                        let tempMenuDetails = decodeTempMenuDetails(from: content) ?? []
-                        if tempMenuDetails.isEmpty {
+                        guard let toolCalls = firstChoice.message.toolCalls, !toolCalls.isEmpty else {
+                            print("No tool calls available.")
                             completion([])
-                        } else {
-                            completion(tempMenuDetails)
+                            return
                         }
+                        
+                        let firstToolCall = toolCalls[0]
+                        let functionArgs = firstToolCall.function.arguments
+                        
+                        print("args", functionArgs)
+                        
+                        if let jsonData = functionArgs.data(using: .utf8) {
+                            if let tempMenuDetail = decodeTempMenuDetails(from: jsonData) {
+                                completion([tempMenuDetail])
+                            } else {
+                                completion([])
+                            }
+                        } else {
+                            print("Failed to convert function arguments to Data.")
+                            completion([])
+                        }
+
                     }
                     
                 case .failure(let error):
@@ -125,30 +139,22 @@ class ImageToMenu {
 
 }
 
-struct TempMenuDetail: Codable {
+struct TempCocktailDetail: Codable {
     let name: String
     let description: String
-    let ingredients: [String]
+    let ingredients: String
 }
 
-func decodeTempMenuDetails(from message: String) -> [TempMenuDetail]? {
-    let startTag = "```json"
-    let endTag = "```"
-    
-    guard let startRange = message.range(of: startTag),
-          let endRange = message.range(of: endTag, range: startRange.upperBound..<message.endIndex) else {
-        print("JSON tags not found.")
-        return nil
-    }
-    
-    let jsonStartIndex = message.index(startRange.upperBound, offsetBy: 1)
-    let jsonEndIndex = message.index(endRange.lowerBound, offsetBy: -1)
-    let jsonString = String(message[jsonStartIndex..<jsonEndIndex])
-    
+struct TempMenuDetail: Codable {
+    let menu_name: String
+    let cocktails: [TempCocktailDetail]
+}
+
+
+func decodeTempMenuDetails(from jsonData: Data) -> TempMenuDetail? {
     let decoder = JSONDecoder()
     do {
-        let jsonData = Data(jsonString.utf8)
-        let tempMenuDetails = try decoder.decode([TempMenuDetail].self, from: jsonData)
+        let tempMenuDetails = try decoder.decode(TempMenuDetail.self, from: jsonData)
         return tempMenuDetails
     } catch {
         print("Error decoding JSON: \(error)")
