@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftData
 
 class ImageToMenu {
     private var networkManager: OpenAINetworkManager
@@ -15,7 +16,7 @@ class ImageToMenu {
         self.networkManager = OpenAINetworkManager()
     }
     
-    func convertToMenu(img: UIImage) async -> CocktailMenu? {
+    func convertToMenu(img: UIImage, context: ModelContext) async -> CocktailMenu? {
         guard let tempMenuDetail = await self._analyzeImageForCocktailDescriptions(img: img) else {
             return nil
         }
@@ -55,7 +56,16 @@ class ImageToMenu {
             }
         }
         
-        print("here", finalRecipes)
+        print("here1", finalRecipes)
+        DispatchQueue.main.async {
+            for recipe in finalRecipes {
+                context.insert(recipe)
+            }
+            context.insert(newMenu)
+            newMenu.recipes = finalRecipes
+        }
+        
+        print("here2", newMenu)
         return newMenu
     }
     

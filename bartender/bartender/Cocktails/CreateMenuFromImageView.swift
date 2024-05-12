@@ -7,8 +7,11 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 struct CreateMenuFromImageView: View {
+    @Environment(\.modelContext) private var modelContext
+    
     @State private var showImagePicker = false
     @State private var imagePickerSourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var selectedImage: UIImage?
@@ -95,7 +98,7 @@ struct CreateMenuFromImageView: View {
                     
                     isAnalyzing = true
                     do {
-                        if let tempMenu = await imageToMenu.convertToMenu(img: selectedImage) {
+                        if let tempMenu = await imageToMenu.convertToMenu(img: selectedImage, context: modelContext) {
                             onMenuFound(tempMenu)
                         } else {
                             showError = true
