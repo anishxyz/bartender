@@ -90,7 +90,7 @@ struct CreateMenuFromImageView: View {
                             .frame(maxWidth: .infinity)
                             .frame(height: 40)
                     } else {
-                        Text("Get Bottles")
+                        Text("Generate Menu")
                             .bold()
                             .frame(maxWidth: .infinity)
                             .frame(height: 40)
