@@ -67,6 +67,10 @@ enum BottleType: String, CaseIterable, Identifiable, Codable {
         }
     }
     
+    static var list: [String] {
+        return BottleType.allCases.map { $0.rawValue }
+    }
+    
     var filledSymbolName: String {
         "case.\(self.rawValue.lowercased()).fill"
     }

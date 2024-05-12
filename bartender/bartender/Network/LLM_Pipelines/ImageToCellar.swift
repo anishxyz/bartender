@@ -48,7 +48,7 @@ class ImageToCellar {
         
         let messages: [[String: Any]] = [systemMessage, userMessage]
         
-        networkManager.ChatCompletionV1(with: "gpt-4-turbo-2024-04-09", messages: messages, temperature: 0) { result in
+        networkManager.chatCompletionV1(with: "gpt-4-turbo-2024-04-09", messages: messages, temperature: 0) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let chatCompletion):

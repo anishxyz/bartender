@@ -19,9 +19,9 @@ struct CreateMenuFromImageView: View {
         
     private var imageToMenu = ImageToMenu()
     
-    var onMenuFound: (TempMenuDetail) -> Void
+    var onMenuFound: (CocktailMenu) -> Void
     
-    public init(onMenuFound: @escaping (TempMenuDetail) -> Void) {
+    public init(onMenuFound: @escaping (CocktailMenu) -> Void) {
         self.onMenuFound = onMenuFound
     }
 
@@ -74,7 +74,7 @@ struct CreateMenuFromImageView: View {
                 
                 Button(action: {
                     isAnalyzing = true
-                    imageToMenu.analyzeImageForCocktailDescriptions(img: selectedImage) { tempMenu in
+                    imageToMenu.convertToMenu(img: selectedImage) { tempMenu in
                         isAnalyzing = false
                         
                         if let menu = tempMenu {

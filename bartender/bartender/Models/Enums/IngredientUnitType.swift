@@ -29,4 +29,8 @@ enum IngredientUnitType: String, CaseIterable, Identifiable, Codable {
     case units = "units"
     
     var id: String { self.rawValue }
+    
+    static var list: [String] {
+        return IngredientUnitType.allCases.map { $0.rawValue }
+    }
 }

@@ -15,15 +15,42 @@ class ImageToMenu {
         self.networkManager = OpenAINetworkManager()
     }
     
-    func analyzeImageForCocktailDescriptions(img: UIImage, completion: @escaping (TempMenuDetail?) -> Void) {
-        let base64Image = convertImageToBase64String(img: img)
+    func convertToMenu(img: UIImage, completion: @escaping (CocktailMenu?) -> Void) {
+        _analyzeImageForCocktailDescriptions(img: img) { tempMenuDetail in
+            
+            if let tempMenuDetail = tempMenuDetail {
+                let newMenu = CocktailMenu(name: tempMenuDetail.menu_name)
+                
+                completion(newMenu)
+            } else {
+                completion(nil)
+            }
+            
+        }
+    }
+    
+    func _descriptionToRecipe(cocktailDetails: TempCocktailDetail) {
+        
+        let cocktailName = cocktailDetails.name
+        let ingredients = cocktailDetails.ingredients
+        let description = cocktailDetails.description
+        
+        let formattedPrompt = """
+        The cocktail name is: \(cocktailName)
+
+        Ingredients are:
+        \(ingredients)
+
+        Description:
+        \(description)
+        """
         
         let systemMessage: [String: Any] = [
             "role": "system",
             "content": [
                 [
                     "type": "text",
-                    "text": "You are a professional, michelin-star rated bartender. Your job is to assist reverse engineer cocktail recipes from a cocktail menu at a restaurant"
+                    "text": "You are a professional, michelin-star rated bartender. Your job is to assist in reverse engineering cocktail recipes from a cocktail description"
                 ]
             ]
         ]
@@ -33,102 +60,199 @@ class ImageToMenu {
             "content": [
                 [
                     "type": "text",
-                    "text": "I want to know what cocktails are in this menu. To help reverse engineer them, I need the following information: name, ingredients, description. The name should be as shown on the menu (if not present make a relevant name). The description should include anything relevant from the menu that could help me make the drink."
-                ],
-                [
-                    "type": "image_url",
-                    "image_url": [
-                        "url": "data:image/jpeg;base64,\(base64Image)"
-                    ]
+                    "text": """
+I need your help to make a cocktail recipe from the following information I have. Be concise and clear about how to make it.
+
+\(formattedPrompt)
+"""
                 ]
             ]
         ]
+        
         
         let tools: [[String: Any]] = [
             [
                 "type": "function",
                 "function": [
-                    "name": "submit_cocktail_menu_description",
-                    "description": "Submit descriptions of cocktails on a menu",
+                    "name": "submit_cocktail",
+                    "description": "Submit cocktail details",
                     "parameters": [
                         "type": "object",
                         "properties": [
-                            "menu_name": [
+                            "name": [
                                 "type": "string",
-                                "description": "Name of cocktail menu being described"
+                                "description": "Name of cocktail"
                             ],
-                            "cocktails": [
+                            "ingredients": [
                                 "type": "array",
-                                "description": "array of cocktails found in menu",
+                                "description": "array of ingredients needed to make cocktail",
                                 "items": [
                                     "type": "object",
                                     "properties": [
                                         "name": [
                                           "type": "string",
-                                          "description": "Name of cocktail from menu (if not provided make a relevant name)",
+                                          "description": "Name of cocktail ingredient",
                                         ],
-                                        "ingredients": [
-                                          "type": "string",
-                                          "description": "List of all ingredients needed to make the drink as described on menu",
+                                        "quantity": [
+                                          "type": "number",
+                                          "description": "quantity of ingredient (number only)",
                                         ],
-                                        "description": [
+                                        "units": [
                                           "type": "string",
-                                          "description": "Relevant information about the cocktail from the menu that would assist in making the drink",
+                                          "enum": IngredientUnitType.list,
+                                          "description": "units of quantity for cocktail ingredient",
+                                        ],
+                                        "type": [
+                                          "type": "string",
+                                          "enum": IngredientType.list,
+                                          "description": "type of ingredient",
                                         ],
                                     ],
-                                    "required": ["name", "ingredients", "description"]
+                                    "required": ["name", "quantity", "units", "type"]
+                                ]
+                            ],
+                            "recipe_steps": [
+                                "type": "array",
+                                "description": "array of recipe steps to make the cocktail",
+                                "items": [
+                                    "type": "object",
+                                    "properties": [
+                                        "index": [
+                                          "type": "number",
+                                          "description": "index of the recipe step",
+                                        ],
+                                        "instruction": [
+                                          "type": "string",
+                                          "description": "instruction for this step of the recipe",
+                                        ],
+                                    ],
+                                    "required": ["index", "instruction"]
                                 ]
                             ]
                         ],
-                        "required": ["menu_name", "cocktails"]
+                        "required": ["name", "ingredients", "recipe_steps"]
                     ]
                 ]
             ]
         ]
         
-        let tool_choice: ToolChoice = ToolChoice.dictionaryValue([
-            "type": "function",
-            "function": [
-                "name": "submit_cocktail_menu_description"
-            ]
-        ])
         
-        let messages: [[String: Any]] = [systemMessage, userMessage]
-        
-        networkManager.ChatCompletionV1(with: "gpt-4-turbo-2024-04-09", messages: messages, tools: tools, toolChoice: tool_choice) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let chatCompletion):
-                    if let firstChoice = chatCompletion.choices.first {
-                        guard let toolCalls = firstChoice.message.toolCalls, !toolCalls.isEmpty else {
-                            print("No tool calls available.")
-                            completion(nil)
-                            return
-                        }
-                        
-                        let firstToolCall = toolCalls[0]
-                        let functionArgs = firstToolCall.function.arguments
-                                                
-                        if let jsonData = functionArgs.data(using: .utf8) {
-                            if let tempMenuDetail = decodeTempMenuDetails(from: jsonData) {
-                                completion(tempMenuDetail)
-                            } else {
-                                completion(nil)
-                            }
-                        } else {
-                            print("Failed to convert function arguments to Data.")
-                            completion(nil)
-                        }
-
-                    }
-                    
-                case .failure(let error):
-                    print("ImageToMenu Error: \(error.localizedDescription)")
-                    completion(nil)
-                }
-            }
-        }
     }
+    
+    func _analyzeImageForCocktailDescriptions(img: UIImage, completion: @escaping (TempMenuDetail?) -> Void) {
+       let base64Image = convertImageToBase64String(img: img)
+       
+       let systemMessage: [String: Any] = [
+           "role": "system",
+           "content": [
+               [
+                   "type": "text",
+                   "text": "You are a professional, michelin-star rated bartender. Your job is to assist in reverse engineering cocktail recipes from a cocktail menu at a restaurant"
+               ]
+           ]
+       ]
+       
+       let userMessage: [String: Any] = [
+           "role": "user",
+           "content": [
+               [
+                   "type": "text",
+                   "text": "I want to know what cocktails are in this menu. To help reverse engineer them, I need the following information: name, ingredients, description. The name should be as shown on the menu (if not present make a relevant name). The description should include anything relevant from the menu that could help me make the drink."
+               ],
+               [
+                   "type": "image_url",
+                   "image_url": [
+                       "url": "data:image/jpeg;base64,\(base64Image)"
+                   ]
+               ]
+           ]
+       ]
+       
+       let tools: [[String: Any]] = [
+           [
+               "type": "function",
+               "function": [
+                   "name": "submit_cocktail_menu_description",
+                   "description": "Submit descriptions of cocktails on a menu",
+                   "parameters": [
+                       "type": "object",
+                       "properties": [
+                           "menu_name": [
+                               "type": "string",
+                               "description": "Name of cocktail menu being described"
+                           ],
+                           "cocktails": [
+                               "type": "array",
+                               "description": "array of cocktails found in menu",
+                               "items": [
+                                   "type": "object",
+                                   "properties": [
+                                       "name": [
+                                         "type": "string",
+                                         "description": "Name of cocktail from menu (if not provided make a relevant name)",
+                                       ],
+                                       "ingredients": [
+                                         "type": "string",
+                                         "description": "List of all ingredients needed to make the drink as described on menu",
+                                       ],
+                                       "description": [
+                                         "type": "string",
+                                         "description": "Relevant information about the cocktail from the menu that would assist in making the drink",
+                                       ],
+                                   ],
+                                   "required": ["name", "ingredients", "description"]
+                               ]
+                           ]
+                       ],
+                       "required": ["menu_name", "cocktails"]
+                   ]
+               ]
+           ]
+       ]
+       
+       let tool_choice: ToolChoice = ToolChoice.dictionaryValue([
+           "type": "function",
+           "function": [
+               "name": "submit_cocktail_menu_description"
+           ]
+       ])
+       
+       let messages: [[String: Any]] = [systemMessage, userMessage]
+       
+       networkManager.chatCompletionV1(with: "gpt-4-turbo-2024-04-09", messages: messages, tools: tools, toolChoice: tool_choice) { result in
+           DispatchQueue.main.async {
+               switch result {
+               case .success(let chatCompletion):
+                   if let firstChoice = chatCompletion.choices.first {
+                       guard let toolCalls = firstChoice.message.toolCalls, !toolCalls.isEmpty else {
+                           print("No tool calls available.")
+                           completion(nil)
+                           return
+                       }
+                       
+                       let firstToolCall = toolCalls[0]
+                       let functionArgs = firstToolCall.function.arguments
+                                               
+                       if let jsonData = functionArgs.data(using: .utf8) {
+                           if let tempMenuDetail = decodeTempMenuDetails(from: jsonData) {
+                               completion(tempMenuDetail)
+                           } else {
+                               completion(nil)
+                           }
+                       } else {
+                           print("Failed to convert function arguments to Data.")
+                           completion(nil)
+                       }
+
+                   }
+                   
+               case .failure(let error):
+                   print("ImageToMenu Error: \(error.localizedDescription)")
+                   completion(nil)
+               }
+           }
+       }
+   }
     
     func convertDetailsToCocktailRecipe(details: [TempMenuDetail], completion: @escaping ([TempMenuDetail]) -> Void) {
         

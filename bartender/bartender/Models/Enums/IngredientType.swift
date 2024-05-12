@@ -85,6 +85,10 @@ enum IngredientType: String, CaseIterable, Identifiable, Codable {
         }
     }
     
+    static var list: [String] {
+        return IngredientType.allCases.map { $0.rawValue }
+    }
+    
     var filledSymbolName: String {
         switch self {
         case .ice:

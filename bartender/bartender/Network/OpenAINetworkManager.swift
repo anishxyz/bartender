@@ -13,99 +13,77 @@ class OpenAINetworkManager {
     
     // Your OpenAI API Key
     private var apiKey: String {
-        guard let key = Bundle.main.object(forInfoDictionaryKey: "OPENAI_API_KEY") as? String, !key.isEmpty else {
-            fatalError("API Key not found in Info.plist")
+        struct Static {
+            static let key: String = {
+                guard let key = Bundle.main.object(forInfoDictionaryKey: "OPENAI_API_KEY") as? String, !key.isEmpty else {
+                    fatalError("API Key not found in Info.plist")
+                }
+                return key
+            }()
         }
-        return key
+        return Static.key
     }
+
     
-    func ChatCompletionV1(with model: String, messages: [[String: Any]], maxTokens: Int? = nil, tools:  [[String: Any]]? = nil, toolChoice:  ToolChoice? = nil,
-                          temperature: Float? = nil, completion: @escaping (Result<ChatCompletion, Error>) -> Void) {
-        
-        // Creating the URL request
+    private func createRequest(model: String, messages: [[String: Any]], maxTokens: Int?, tools: [[String: Any]]?, toolChoice: ToolChoice?, temperature: Float?) throws -> URLRequest {
         var request = URLRequest(url: baseURL.appendingPathComponent("/v1/chat/completions"))
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         
-        // Constructing the body
-        var body: [String: Any] = [
-            "model": model,
-            "messages": messages
-        ]
-        
-        if let maxTokens = maxTokens {
-            body["max_tokens"] = maxTokens
-        }
-        
-        if let tools = tools {
-            body["tools"] = tools
-        }
-        
+        var body: [String: Any] = ["model": model, "messages": messages]
+        if let maxTokens = maxTokens { body["max_tokens"] = maxTokens }
+        if let tools = tools { body["tools"] = tools }
         if let toolChoice = toolChoice {
             switch toolChoice {
-            case .stringValue(let value):
-                body["tool_choice"] = value
-            case .dictionaryValue(let value):
-                body["tool_choice"] = value
+            case .stringValue(let value): body["tool_choice"] = value
+            case .dictionaryValue(let value): body["tool_choice"] = value
             }
         }
+        if let temperature = temperature { body["temperature"] = temperature }
         
-        if let temperature = temperature {
-            body["temperature"] = temperature
-        }
+        let jsonData = try JSONSerialization.data(withJSONObject: body, options: [])
+        request.httpBody = jsonData
+        return request
+    }
     
-        // Attempt to serialize the body to JSON
+    func chatCompletionV1(with model: String, messages: [[String: Any]], maxTokens: Int? = nil, tools: [[String: Any]]? = nil, toolChoice: ToolChoice? = nil, temperature: Float? = nil, completion: @escaping (Result<ChatCompletion, Error>) -> Void) {
         do {
-            let jsonData = try JSONSerialization.data(withJSONObject: body, options: [])
-            request.httpBody = jsonData
+            let request = try createRequest(model: model, messages: messages, maxTokens: maxTokens, tools: tools, toolChoice: toolChoice, temperature: temperature)
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                if let error = error {
+                    completion(.failure(error))
+                    return
+                }
+                
+                guard let data = data else {
+                    completion(.failure(NSError(domain: "OpenAINetworkManagerError", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received."])))
+                    return
+                }
+                
+                do {
+                    let chatCompletion = try JSONDecoder().decode(ChatCompletion.self, from: data)
+                    completion(.success(chatCompletion))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
         } catch {
             completion(.failure(error))
-            return
-        }
-        
-        // Perform the request
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(NSError(domain: "OpenAINetworkManagerError", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data received."])))
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let chatCompletion = try decoder.decode(ChatCompletion.self, from: data)
-                completion(.success(chatCompletion)) // Pass the decoded object to the completion handler
-            } catch {
-                completion(.failure(error))
-            }
-        }
-        
-        task.resume()
-    }
-    
-    // Example usage
-    func fetchChatCompletion(with model: String, messages: [[String: Any]], maxTokens: Int? = nil) {
-        ChatCompletionV1(with: model, messages: messages, maxTokens: maxTokens) { result in
-            switch result {
-            case .success(let chatCompletion):
-                // Use the chatCompletion object directly
-                print(chatCompletion)
-                // For example, to print the content of the first choice message
-                if let firstChoice = chatCompletion.choices.first {
-                    let content = firstChoice.message.content ?? ""
-                    print(content)
-                }
-            case .failure(let error):
-                // Handle the error
-                print("Error: \(error.localizedDescription)")
-            }
         }
     }
+
+//    func chatCompletionV1Async(with model: String, messages: [[String: Any]], maxTokens: Int? = nil, tools: [[String: Any]]? = nil, toolChoice: ToolChoice? = nil, temperature: Float? = nil) async throws -> ChatCompletion {
+//        let request = try createRequest(model: model, messages: messages, maxTokens: maxTokens, tools: tools, toolChoice: toolChoice, temperature: temperature)
+//        let (data, response) = try await URLSession.shared.data(for: request)
+//        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+//            throw NetworkError.network(description: "HTTP request failed with status code: \((response as? HTTPURLResponse)?.statusCode ?? 0)")
+//        }
+//        // data is non-optional, so it does not need to be unwrapped
+//        return try JSONDecoder().decode(ChatCompletion.self, from: data)
+//    }
+
 }
 
 struct ChatCompletion: Codable {
@@ -187,4 +165,10 @@ struct JSONNull: Codable {
 enum ToolChoice {
     case stringValue(String)
     case dictionaryValue([String: Any])
+}
+
+enum NetworkError: Error {
+    case noData
+    case network(description: String)
+    case decoding(description: String)
 }
