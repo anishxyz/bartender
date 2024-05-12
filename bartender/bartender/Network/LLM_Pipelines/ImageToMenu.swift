@@ -15,7 +15,7 @@ class ImageToMenu {
         self.networkManager = OpenAINetworkManager()
     }
     
-    func analyzeImageForCocktailDescriptions(img: UIImage, completion: @escaping ([TempMenuDetail]) -> Void) {
+    func analyzeImageForCocktailDescriptions(img: UIImage, completion: @escaping (TempMenuDetail?) -> Void) {
         let base64Image = convertImageToBase64String(img: img)
         
         let systemMessage: [String: Any] = [
@@ -102,31 +102,29 @@ class ImageToMenu {
                     if let firstChoice = chatCompletion.choices.first {
                         guard let toolCalls = firstChoice.message.toolCalls, !toolCalls.isEmpty else {
                             print("No tool calls available.")
-                            completion([])
+                            completion(nil)
                             return
                         }
                         
                         let firstToolCall = toolCalls[0]
                         let functionArgs = firstToolCall.function.arguments
-                        
-                        print("args", functionArgs)
-                        
+                                                
                         if let jsonData = functionArgs.data(using: .utf8) {
                             if let tempMenuDetail = decodeTempMenuDetails(from: jsonData) {
-                                completion([tempMenuDetail])
+                                completion(tempMenuDetail)
                             } else {
-                                completion([])
+                                completion(nil)
                             }
                         } else {
                             print("Failed to convert function arguments to Data.")
-                            completion([])
+                            completion(nil)
                         }
 
                     }
                     
                 case .failure(let error):
                     print("ImageToMenu Error: \(error.localizedDescription)")
-                    completion([])
+                    completion(nil)
                 }
             }
         }
