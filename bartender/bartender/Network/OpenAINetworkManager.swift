@@ -74,15 +74,15 @@ class OpenAINetworkManager {
         }
     }
 
-//    func chatCompletionV1Async(with model: String, messages: [[String: Any]], maxTokens: Int? = nil, tools: [[String: Any]]? = nil, toolChoice: ToolChoice? = nil, temperature: Float? = nil) async throws -> ChatCompletion {
-//        let request = try createRequest(model: model, messages: messages, maxTokens: maxTokens, tools: tools, toolChoice: toolChoice, temperature: temperature)
-//        let (data, response) = try await URLSession.shared.data(for: request)
-//        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-//            throw NetworkError.network(description: "HTTP request failed with status code: \((response as? HTTPURLResponse)?.statusCode ?? 0)")
-//        }
-//        // data is non-optional, so it does not need to be unwrapped
-//        return try JSONDecoder().decode(ChatCompletion.self, from: data)
-//    }
+    func chatCompletionV1Async(with model: String, messages: [[String: Any]], maxTokens: Int? = nil, tools: [[String: Any]]? = nil, toolChoice: ToolChoice? = nil, temperature: Float? = nil) async throws -> ChatCompletion {
+        let request = try createRequest(model: model, messages: messages, maxTokens: maxTokens, tools: tools, toolChoice: toolChoice, temperature: temperature)
+        let (data, response) = try await URLSession.shared.data(for: request)
+        guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            throw NetworkError.network(description: "HTTP request failed with status code: \((response as? HTTPURLResponse)?.statusCode ?? 0)")
+        }
+        // data is non-optional, so it does not need to be unwrapped
+        return try JSONDecoder().decode(ChatCompletion.self, from: data)
+    }
 
 }
 

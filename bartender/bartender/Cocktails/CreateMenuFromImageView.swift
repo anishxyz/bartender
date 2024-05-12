@@ -72,18 +72,7 @@ struct CreateMenuFromImageView: View {
                     .padding(.horizontal)
                 
                 
-                Button(action: {
-                    isAnalyzing = true
-                    imageToMenu.convertToMenu(img: selectedImage) { tempMenu in
-                        isAnalyzing = false
-                        
-                        if let menu = tempMenu {
-                            onMenuFound(menu)
-                        } else {
-                            showError = true
-                        }
-                    }
-                }) {
+                Button{} label: {
                     if isAnalyzing {
                         ProgressView()
                             .progressViewStyle(CircularProgressViewStyle(tint: .gray))
@@ -100,6 +89,20 @@ struct CreateMenuFromImageView: View {
                 .tint(.orange)
                 .disabled(isAnalyzing)
                 .padding(.horizontal)
+                .task {
+                    // Start the analyzing task when the button is pressed and not already analyzing
+                    guard !isAnalyzing else { return }
+                    
+                    isAnalyzing = true
+                    do {
+                        if let tempMenu = await imageToMenu.convertToMenu(img: selectedImage) {
+                            onMenuFound(tempMenu)
+                        } else {
+                            showError = true
+                        }
+                    }
+                    isAnalyzing = false
+                }
             }
             
             if showError {

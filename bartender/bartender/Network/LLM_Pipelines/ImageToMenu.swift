@@ -15,21 +15,51 @@ class ImageToMenu {
         self.networkManager = OpenAINetworkManager()
     }
     
-    func convertToMenu(img: UIImage, completion: @escaping (CocktailMenu?) -> Void) {
-        _analyzeImageForCocktailDescriptions(img: img) { tempMenuDetail in
-            
-            if let tempMenuDetail = tempMenuDetail {
-                let newMenu = CocktailMenu(name: tempMenuDetail.menu_name)
-                
-                completion(newMenu)
-            } else {
-                completion(nil)
-            }
-            
+    func convertToMenu(img: UIImage) async -> CocktailMenu? {
+        guard let tempMenuDetail = await self._analyzeImageForCocktailDescriptions(img: img) else {
+            return nil
         }
+        
+        var newMenu = CocktailMenu(name: tempMenuDetail.menu_name)
+        var finalRecipes: [CocktailRecipe] = []
+        
+        await withTaskGroup(of: TempCocktail?.self) { group in
+            for cocktailDetail in tempMenuDetail.cocktails {
+                group.addTask {
+                    // Asynchronously call _descriptionToRecipe for each TempCocktailDetail
+                    return await self._descriptionToRecipe(cocktailDetails: cocktailDetail)
+                }
+            }
+
+            // Collect results from the group
+            for await tempCocktail in group {
+                if let tempCocktail = tempCocktail {
+                    var finalIngredients: [Ingredient] = []
+                    
+                    for tempIngredient in tempCocktail.ingredients {
+                        finalIngredients.append(Ingredient(name: tempIngredient.name, quantity: tempIngredient.quantity, units: tempIngredient.units, type: tempIngredient.type))
+                    }
+                    
+                    var finalRecipeSteps: [RecipeStep] = []
+                    
+                    for tempStep in tempCocktail.recipe_steps {
+                        finalRecipeSteps.append(RecipeStep(instruction: tempStep.instruction, index: tempStep.index))
+                    }
+                    
+                    let newRecipe = CocktailRecipe(name: tempCocktail.name)
+                    newRecipe.ingredients = finalIngredients
+                    newRecipe.steps = finalRecipeSteps
+                    
+                    finalRecipes.append(newRecipe)
+                }
+            }
+        }
+        
+        print("here", finalRecipes)
+        return newMenu
     }
     
-    func _descriptionToRecipe(cocktailDetails: TempCocktailDetail) {
+    func _descriptionToRecipe(cocktailDetails: TempCocktailDetail) async -> TempCocktail? {
         
         let cocktailName = cocktailDetails.name
         let ingredients = cocktailDetails.ingredients
@@ -50,7 +80,7 @@ class ImageToMenu {
             "content": [
                 [
                     "type": "text",
-                    "text": "You are a professional, michelin-star rated bartender. Your job is to assist in reverse engineering cocktail recipes from a cocktail description"
+                    "text": "You are a professional, michelin-star rated bartender. Your job is to assist in reverse engineering cocktail recipes from a cocktail description. When outputting the type and units for ingredients, ensure they are exactly as stated for the enum or the submision will not go through"
                 ]
             ]
         ]
@@ -69,6 +99,14 @@ I need your help to make a cocktail recipe from the following information I have
             ]
         ]
         
+        let messages: [[String: Any]] = [systemMessage, userMessage]
+        
+        let toolChoice: ToolChoice = ToolChoice.dictionaryValue([
+            "type": "function",
+            "function": [
+                "name": "submit_cocktail"
+            ]
+        ])
         
         let tools: [[String: Any]] = [
             [
@@ -108,7 +146,7 @@ I need your help to make a cocktail recipe from the following information I have
                                           "description": "type of ingredient",
                                         ],
                                     ],
-                                    "required": ["name", "quantity", "units", "type"]
+                                    "required": ["name", "units", "type"]
                                 ]
                             ],
                             "recipe_steps": [
@@ -136,10 +174,24 @@ I need your help to make a cocktail recipe from the following information I have
             ]
         ]
         
-        
+        do {
+            let chatCompletion = try await self.networkManager.chatCompletionV1Async(with: "gpt-4-turbo-2024-04-09", messages: messages, tools: tools, toolChoice: toolChoice)
+            if let firstChoice = chatCompletion.choices.first,
+               let toolCalls = firstChoice.message.toolCalls, !toolCalls.isEmpty,
+               let firstToolCall = toolCalls.first {
+                let functionArgs = firstToolCall.function.arguments
+                if let jsonData = functionArgs.data(using: .utf8) {
+                    return decodeTempCocktail(from: jsonData)
+                }
+            }
+            return nil
+        } catch {
+            print("Error: \(error.localizedDescription)")
+            return nil
+        }
     }
     
-    func _analyzeImageForCocktailDescriptions(img: UIImage, completion: @escaping (TempMenuDetail?) -> Void) {
+    func _analyzeImageForCocktailDescriptions(img: UIImage) async -> TempMenuDetail? {
        let base64Image = convertImageToBase64String(img: img)
        
        let systemMessage: [String: Any] = [
@@ -210,7 +262,7 @@ I need your help to make a cocktail recipe from the following information I have
            ]
        ]
        
-       let tool_choice: ToolChoice = ToolChoice.dictionaryValue([
+       let toolChoice: ToolChoice = ToolChoice.dictionaryValue([
            "type": "function",
            "function": [
                "name": "submit_cocktail_menu_description"
@@ -219,48 +271,25 @@ I need your help to make a cocktail recipe from the following information I have
        
        let messages: [[String: Any]] = [systemMessage, userMessage]
        
-       networkManager.chatCompletionV1(with: "gpt-4-turbo-2024-04-09", messages: messages, tools: tools, toolChoice: tool_choice) { result in
-           DispatchQueue.main.async {
-               switch result {
-               case .success(let chatCompletion):
-                   if let firstChoice = chatCompletion.choices.first {
-                       guard let toolCalls = firstChoice.message.toolCalls, !toolCalls.isEmpty else {
-                           print("No tool calls available.")
-                           completion(nil)
-                           return
-                       }
-                       
-                       let firstToolCall = toolCalls[0]
-                       let functionArgs = firstToolCall.function.arguments
-                                               
-                       if let jsonData = functionArgs.data(using: .utf8) {
-                           if let tempMenuDetail = decodeTempMenuDetails(from: jsonData) {
-                               completion(tempMenuDetail)
-                           } else {
-                               completion(nil)
-                           }
-                       } else {
-                           print("Failed to convert function arguments to Data.")
-                           completion(nil)
-                       }
-
-                   }
-                   
-               case .failure(let error):
-                   print("ImageToMenu Error: \(error.localizedDescription)")
-                   completion(nil)
-               }
-           }
-       }
+        do {
+            let chatCompletion = try await self.networkManager.chatCompletionV1Async(with: "gpt-4-turbo-2024-04-09", messages: messages, tools: tools, toolChoice: toolChoice)
+            if let firstChoice = chatCompletion.choices.first,
+               let toolCalls = firstChoice.message.toolCalls, !toolCalls.isEmpty,
+               let firstToolCall = toolCalls.first {
+                let functionArgs = firstToolCall.function.arguments
+                if let jsonData = functionArgs.data(using: .utf8) {
+                    return decodeTempMenuDetails(from: jsonData)
+                }
+            }
+            return nil
+        } catch {
+            print("Error: \(error.localizedDescription)")
+            return nil
+        }
    }
-    
-    func convertDetailsToCocktailRecipe(details: [TempMenuDetail], completion: @escaping ([TempMenuDetail]) -> Void) {
-        
-        completion([])
-    }
-
 }
 
+// image to menu
 struct TempCocktailDetail: Codable {
     let name: String
     let description: String
@@ -273,6 +302,27 @@ struct TempMenuDetail: Codable {
 }
 
 
+// temp cocktail to recipe
+struct TempIngredient: Codable {
+    let name: String
+    let quantity: Float?
+    let units: IngredientUnitType
+    let type: IngredientType
+}
+
+// Recipe Step Class
+struct TempRecipeStep: Codable {
+    let index: Int
+    let instruction: String
+}
+
+// Cocktail Class
+struct TempCocktail: Codable {
+    let name: String
+    let ingredients: [TempIngredient]
+    let recipe_steps: [TempRecipeStep]
+}
+
 func decodeTempMenuDetails(from jsonData: Data) -> TempMenuDetail? {
     let decoder = JSONDecoder()
     do {
@@ -283,3 +333,15 @@ func decodeTempMenuDetails(from jsonData: Data) -> TempMenuDetail? {
         return nil
     }
 }
+
+func decodeTempCocktail(from jsonData: Data) -> TempCocktail? {
+    let decoder = JSONDecoder()
+    do {
+        let tempCocktail = try decoder.decode(TempCocktail.self, from: jsonData)
+        return tempCocktail
+    } catch {
+        print("Error decoding JSON: \(error)")
+        return nil
+    }
+}
+
