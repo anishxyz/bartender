@@ -66,41 +66,45 @@ struct CellarView: View {
     var shouldShowBottleDetailSheet: Bool {
         showingBottleDetailSheet && selectedBottle != nil
     }
+    
+    private var barSection: some View {
+        Section {
+            LazyVGrid(columns: columns) {
+                ForEach(bars) { bar in
+                    Button(action: {
+                        if editMode == .inactive {
+                            if selectedBar == bar {
+                                selectedBar = nil
+                            } else {
+                                selectedBar = bar
+                            }
+                        } else {
+                            for bottle in selection {
+                                bottle.bar = bar
+                            }
+                            toggleEditMode()
+                            try? modelContext.save()
+                        }
+                    }) {
+                        Text(bar.name)
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 40)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(selectedBar == bar ? .orange : .blue)
+                }
+            }
+        }
+        .listRowBackground(Color.clear)
+        .listRowInsets(EdgeInsets())
+    }
 
     var body: some View {
         NavigationStack {
             List(selection: $selection) {
                 if !bars.isEmpty {
-                    Section {
-                        LazyVGrid(columns: columns) {
-                            ForEach(bars) { bar in
-                                Button(action: {
-                                    if editMode == .inactive {
-                                        if selectedBar == bar {
-                                            selectedBar = nil
-                                        } else {
-                                            selectedBar = bar
-                                        }
-                                    } else {
-                                        for bottle in selection {
-                                            bottle.bar = bar
-                                        }
-                                        toggleEditMode()
-                                        try? modelContext.save()
-                                    }
-                                }) {
-                                    Text(bar.name)
-                                        .bold()
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 40)
-                                }
-                                .buttonStyle(.bordered)
-                                .tint(selectedBar == bar ? .orange : .blue)
-                            }
-                        }
-                    }
-                    .listRowBackground(Color.clear)
-                    .listRowInsets(EdgeInsets())
+                    barSection
                 }
 
                 
@@ -179,8 +183,9 @@ struct CellarView: View {
                 get: { shouldShowBottleDetailSheet },
                 set: { if !$0 { selectedBottle = nil } }
             )) {
+                // TODO: bottle detail view
                 if let bottle = selectedBottle {
-                    Text(bottle.name)
+                    Text("TODO \(bottle.name)")
                         .presentationDetents([.medium])
                 } else {
                     Text("Selected bottle: \(selectedBottle?.name ?? "None")")

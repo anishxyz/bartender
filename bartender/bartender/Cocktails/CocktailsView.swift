@@ -9,6 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct CocktailsView: View {
+    @Environment(\.modelContext) private var modelContext
     
     @Query(sort:
             [SortDescriptor(\CocktailMenu.created_at),
@@ -34,6 +35,9 @@ struct CocktailsView: View {
                         }
                         .buttonStyle(.bordered)
                         .tint(.orange)
+                        .contextMenu {
+                            contextMenu(for: menu)
+                        }
                     }
                 }
                 .padding()
@@ -41,31 +45,7 @@ struct CocktailsView: View {
             .navigationTitle("Cocktail Menus")
             .background(Color(UIColor.systemGroupedBackground))
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Menu {
-                        Button(action: {
-                            showingCreateMenuSheet = true
-                        }) {
-                            HStack {
-                                Text("Create Menu")
-                                Image(systemName: "square.and.pencil")
-                            }
-                        }
-                        Button(action: {
-                            showingUploadMenuFromImageSheet = true
-                        }) {
-                            HStack {
-                                Text("From Image")
-                                Image(systemName: "square.and.pencil")
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "plus.circle.fill")
-                            .symbolRenderingMode(.hierarchical)
-                            .foregroundStyle(.orange)
-                            .font(.system(size: 22))
-                    }
-                }
+                toolbarContent
             }
             .sheet(isPresented: $showingCreateMenuSheet, content: {
                 CreateMenuView()
@@ -79,6 +59,45 @@ struct CocktailsView: View {
                     .presentationDetents([.medium])
                 
             })
+        }
+    }
+    
+    private func contextMenu(for menu: CocktailMenu) -> some View {
+        Group {
+            Button(role: .destructive) {
+                modelContext.delete(menu)
+                try? modelContext.save()
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
+    }
+    
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+            Menu {
+                Button(action: {
+                    showingCreateMenuSheet = true
+                }) {
+                    HStack {
+                        Text("Create Menu")
+                        Image(systemName: "square.and.pencil")
+                    }
+                }
+                Button(action: {
+                    showingUploadMenuFromImageSheet = true
+                }) {
+                    HStack {
+                        Text("From Image")
+                        Image(systemName: "square.and.pencil")
+                    }
+                }
+            } label: {
+                Image(systemName: "plus.circle.fill")
+                    .symbolRenderingMode(.hierarchical)
+                    .foregroundStyle(.orange)
+                    .font(.system(size: 22))
+            }
         }
     }
 }
