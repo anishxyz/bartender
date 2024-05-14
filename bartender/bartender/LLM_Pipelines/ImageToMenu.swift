@@ -36,7 +36,6 @@ class ImageToMenu {
             // Collect results from the group
             for await tempCocktail in group {
                 if let tempCocktail = tempCocktail {
-                    print(tempCocktail)
                     var finalIngredients: [Ingredient] = []
                     
                     for tempIngredient in tempCocktail.ingredients {
@@ -46,8 +45,6 @@ class ImageToMenu {
                     var finalRecipeSteps: [RecipeStep] = []
                     
                     for tempStep in tempCocktail.recipe_steps {
-                        print(tempStep.instruction)
-                        print(tempStep.index)
                         finalRecipeSteps.append(RecipeStep(instruction: tempStep.instruction, index: tempStep.index))
                     }
                     
@@ -60,7 +57,6 @@ class ImageToMenu {
             }
         }
         
-        print("here1", finalRecipes)
         DispatchQueue.main.async {
             for recipe in finalRecipes {
                 context.insert(recipe)
@@ -69,7 +65,6 @@ class ImageToMenu {
             newMenu.recipes = finalRecipes
         }
         
-        print("here2", newMenu)
         return newMenu
     }
     

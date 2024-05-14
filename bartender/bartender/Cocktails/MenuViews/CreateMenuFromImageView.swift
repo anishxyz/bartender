@@ -28,7 +28,6 @@ struct CreateMenuFromImageView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            // TODO: refactor out image picker buttons
             ImagePickerButtons(selectedImage: $selectedImage)
                 .padding(.top, 30)
             

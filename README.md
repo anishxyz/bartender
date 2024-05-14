@@ -12,5 +12,10 @@ Extensions
 - [ ] Attach menu to restaurant/coordinate
 
 Known bugs
-- [ ] Delete bars does not nullify `bottle.bar` field live
+- [X] Delete bars does not nullify `bottle.bar` field live
 - [ ] updated_at fields are not updated
+- [ ] ability to remove bar from bottle 
+
+May 14/15 TODOS
+- [ ] bottle view in sheet
+- [ ] recipe edit view refactor
