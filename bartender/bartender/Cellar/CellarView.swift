@@ -62,6 +62,10 @@ struct CellarView: View {
             }
         }
     }
+    
+    var shouldShowBottleDetailSheet: Bool {
+        showingBottleDetailSheet && selectedBottle != nil
+    }
 
     var body: some View {
         NavigationStack {
@@ -171,9 +175,10 @@ struct CellarView: View {
                 EditBarsView(bars: bars)
                     .presentationDetents([.medium])
             })
-            .sheet(isPresented: $showingBottleDetailSheet, onDismiss: {
-                selectedBottle = nil
-            }) {
+            .sheet(isPresented: Binding<Bool>(
+                get: { shouldShowBottleDetailSheet },
+                set: { if !$0 { selectedBottle = nil } }
+            )) {
                 if let bottle = selectedBottle {
                     Text(bottle.name)
                         .presentationDetents([.medium])
