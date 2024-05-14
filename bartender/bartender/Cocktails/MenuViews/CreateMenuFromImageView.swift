@@ -48,7 +48,7 @@ struct CreateMenuFromImageView: View {
                         isAnalyzing = true
                         isSheetDismissable = false
                         do {
-                            if let tempMenu = await imageToMenu.convertToMenu(img: selectedImage, context: modelContext) {
+                            if let tempMenu = await imageToMenu.generateMenu(img: selectedImage, context: modelContext) {
                                 onMenuFound(tempMenu)
                             } else {
                                 showError = true

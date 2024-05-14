@@ -17,7 +17,7 @@ class ImageToMenu {
     }
     
     @MainActor
-    func convertToMenu(img: UIImage, context: ModelContext) async -> CocktailMenu? {
+    func generateMenu(img: UIImage, context: ModelContext) async -> CocktailMenu? {
         guard let tempMenuDetail = await self._analyzeImageForCocktailDescriptions(img: img) else {
             return nil
         }

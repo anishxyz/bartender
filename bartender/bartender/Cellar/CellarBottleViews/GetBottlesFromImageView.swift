@@ -42,7 +42,7 @@ struct GetBottlesFromImageView: View {
                 Button(action: {
                     isAnalyzing = true
                     isSheetDismissable = false
-                    imageToCellar.analyzeImage(img: selectedImage) { bottles in
+                    imageToCellar.generateBottles(img: selectedImage) { bottles in
                         isAnalyzing = false
                         isSheetDismissable = true
                         

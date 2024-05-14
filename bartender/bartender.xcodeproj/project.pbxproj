@@ -169,6 +169,7 @@
 		B66FC1872BF353E4008D7322 /* MenuViews */ = {
 			isa = PBXGroup;
 			children = (
+				B66FC17A2BEC9CEB008D7322 /* CreateMenuFromImageView.swift */,
 				B6B520B82BCE1B040099C015 /* CreateMenuView.swift */,
 				B6B520AB2BC908C70099C015 /* MenuItemView.swift */,
 				B6B520AD2BCB9E4A0099C015 /* MenuDetailView.swift */,
@@ -195,7 +196,6 @@
 				B6B2506D2BAD384E00A3098D /* CocktailsTabView.swift */,
 				B6B520B12BCCEC480099C015 /* IngredientsView.swift */,
 				B6B520BC2BD22E020099C015 /* RecipeStepsView.swift */,
-				B66FC17A2BEC9CEB008D7322 /* CreateMenuFromImageView.swift */,
 			);
 			path = Cocktails;
 			sourceTree = "<group>";

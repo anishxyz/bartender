@@ -15,7 +15,7 @@ class ImageToCellar {
         self.networkManager = OpenAINetworkManager()
     }
     
-    func analyzeImage(img: UIImage, completion: @escaping ([Bottle]) -> Void) {
+    func generateBottles(img: UIImage, completion: @escaping ([Bottle]) -> Void) {
         
         let base64Image = convertImageToBase64String(img: img)
         let bottleTypes = BottleType.allCases.map { $0.rawValue }.joined(separator: ", ")
