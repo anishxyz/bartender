@@ -80,7 +80,7 @@ struct CocktailsView: View {
                     showingCreateMenuSheet = true
                 }) {
                     HStack {
-                        Text("Create Menu")
+                        Text("Add Manually")
                         Image(systemName: "square.and.pencil")
                     }
                 }
@@ -89,7 +89,7 @@ struct CocktailsView: View {
                 }) {
                     HStack {
                         Text("From Image")
-                        Image(systemName: "square.and.pencil")
+                        Image(systemName: "photo")
                     }
                 }
             } label: {

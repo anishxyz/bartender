@@ -85,12 +85,14 @@ class RecipeStep {
     var index: Int
     var instruction: String
     var recipe: CocktailRecipe?
+    var created_at: Date
         
     init(instruction: String, recipe: CocktailRecipe? = nil, index: Int = 0) {
         self.instruction = instruction
         self.recipe = recipe
         self.index = index
         
+        self.created_at = Date()
         self.id = UUID()
     }
 }

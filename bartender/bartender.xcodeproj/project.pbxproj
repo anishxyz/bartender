@@ -202,7 +202,6 @@
 		B6B250852BB279A700A3098D /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				B6B250862BB27B9E00A3098D /* LLM_Pipelines */,
 				B6B250872BB27D3B00A3098D /* OpenAINetworkManager.swift */,
 				B6B2508B2BB2832D00A3098D /* NetworkHelpers.swift */,
 			);
@@ -295,6 +294,7 @@
 		B6D1A4E92BAD2C530059942D /* bartender */ = {
 			isa = PBXGroup;
 			children = (
+				B6B250862BB27B9E00A3098D /* LLM_Pipelines */,
 				B6B520942BC116720099C015 /* Bartender */,
 				B6B250922BB287C600A3098D /* Info.plist */,
 				B6B2508D2BB285D800A3098D /* Auxiliary */,

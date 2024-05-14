@@ -11,7 +11,7 @@ import Foundation
 @Model
 class CocktailMenu {
     @Attribute(.unique) var id: UUID
-    @Attribute(.unique) var name: String
+    var name: String
     @Relationship(deleteRule: .nullify, inverse: \CocktailRecipe.menu)
     var recipes: [CocktailRecipe]
     var info: String?
