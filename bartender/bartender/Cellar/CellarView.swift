@@ -57,7 +57,8 @@ struct CellarView: View {
         } else {
             return bottles.filter { bot in
                 bot.name.localizedCaseInsensitiveContains(searchText) ||
-                bot.type.rawValue.localizedCaseInsensitiveContains(searchText)
+                bot.type.rawValue.localizedCaseInsensitiveContains(searchText) ||
+                (bot.info?.localizedCaseInsensitiveContains(searchText) ?? false)
             }
         }
     }
