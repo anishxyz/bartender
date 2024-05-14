@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 import UIKit
 
-struct CellarView: View {
+struct CellarTabView: View {
 
     //swift data queries
     @Environment(\.modelContext) private var modelContext

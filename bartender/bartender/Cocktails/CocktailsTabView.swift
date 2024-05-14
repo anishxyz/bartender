@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftData
 
-struct CocktailsView: View {
+struct CocktailsTabView: View {
     @Environment(\.modelContext) private var modelContext
     
     @Query(sort:
@@ -104,6 +104,6 @@ struct CocktailsView: View {
 
 
 #Preview {
-    CocktailsView()
+    CocktailsTabView()
         .modelContainer(previewContainer)
 }
