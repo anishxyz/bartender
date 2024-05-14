@@ -16,6 +16,7 @@ struct GetBottlesFromImageView: View {
     @State private var showingSheet = false
     @State private var isAnalyzing = false
     @State private var showError = false
+    @State private var isSheetDismissable = true
 //    @State private var bottlesFound: [Bottle] = []
         
     private var imageToCellar = ImageToCellar()
@@ -29,40 +30,8 @@ struct GetBottlesFromImageView: View {
     var body: some View {
         VStack(spacing: 20) {
             
-            HStack {
-                Button {
-                    self.imagePickerSourceType = .photoLibrary
-                    self.showingSheet = true
-                } label: {
-                    Text("Camera Roll")
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 40)
-                }
-                .buttonStyle(.bordered)
-                .tint(.green)
-                .padding(.leading)
-                .sheet(isPresented: $showingSheet) {
-                    ImagePicker(sourceType: self.imagePickerSourceType, selectedImage: self.$selectedImage)
-                }
-                
-                Button {
-                    self.imagePickerSourceType = .camera
-                    self.showingSheet = true
-                } label: {
-                    Text("Take Photo")
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 40)
-                }
-                .buttonStyle(.bordered)
-                .tint(.green)
-                .padding(.trailing)
-                .sheet(isPresented: $showingSheet) {
-                    ImagePicker(sourceType: self.imagePickerSourceType, selectedImage: self.$selectedImage)
-                }
-            }
-            .padding(.top, 30)
+            ImagePickerButtons(imagePickerSourceType: $imagePickerSourceType, selectedImage: $selectedImage, showingSheet: $showingSheet)
+                .padding(.top, 30)
             
             if let selectedImage = selectedImage {
                 Image(uiImage: selectedImage)
@@ -75,6 +44,7 @@ struct GetBottlesFromImageView: View {
                 
                 Button(action: {
                     isAnalyzing = true
+                    isSheetDismissable = false
                     imageToCellar.analyzeImage(img: selectedImage) { bottles in
                         isAnalyzing = false
                         
@@ -85,6 +55,7 @@ struct GetBottlesFromImageView: View {
                             onBottlesFound(bottles)
                         }
                     }
+                    isSheetDismissable = true
 //                    onBottlesFound(sampleBottles.contents)
                 }) {
                     if isAnalyzing {
@@ -118,5 +89,6 @@ struct GetBottlesFromImageView: View {
             
             Spacer()
         }
+        .interactiveDismissDisabled(!isSheetDismissable)
     }
 }

@@ -16,6 +16,7 @@ class ImageToMenu {
         self.networkManager = OpenAINetworkManager()
     }
     
+    @MainActor
     func convertToMenu(img: UIImage, context: ModelContext) async -> CocktailMenu? {
         guard let tempMenuDetail = await self._analyzeImageForCocktailDescriptions(img: img) else {
             return nil
@@ -151,7 +152,7 @@ I need your help to make a cocktail recipe from the following information I have
                                         "units": [
                                           "type": "string",
                                           "enum": IngredientUnitType.list,
-                                          "description": "units of quantity for cocktail ingredient",
+                                          "description": "units of quantity for cocktail ingredient. I prefer oz over ml",
                                         ],
                                         "type": [
                                           "type": "string",
@@ -244,7 +245,7 @@ I need your help to make a cocktail recipe from the following information I have
                        "properties": [
                            "menu_name": [
                                "type": "string",
-                               "description": "Name of cocktail menu being described. If it is not present, generate a creative relevant name"
+                               "description": "Name of cocktail menu being described. If it is not present, generate a brief relevant, creative name in 2-3 words. The name should take inspiration from the cocktails."
                            ],
                            "cocktails": [
                                "type": "array",
