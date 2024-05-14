@@ -21,7 +21,7 @@ class ImageToMenu {
             return nil
         }
         
-        var newMenu = CocktailMenu(name: tempMenuDetail.menu_name)
+        let newMenu = CocktailMenu(name: tempMenuDetail.menu_name)
         var finalRecipes: [CocktailRecipe] = []
         
         await withTaskGroup(of: TempCocktail?.self) { group in
@@ -35,6 +35,7 @@ class ImageToMenu {
             // Collect results from the group
             for await tempCocktail in group {
                 if let tempCocktail = tempCocktail {
+                    print(tempCocktail)
                     var finalIngredients: [Ingredient] = []
                     
                     for tempIngredient in tempCocktail.ingredients {
@@ -44,6 +45,8 @@ class ImageToMenu {
                     var finalRecipeSteps: [RecipeStep] = []
                     
                     for tempStep in tempCocktail.recipe_steps {
+                        print(tempStep.instruction)
+                        print(tempStep.index)
                         finalRecipeSteps.append(RecipeStep(instruction: tempStep.instruction, index: tempStep.index))
                     }
                     
@@ -241,7 +244,7 @@ I need your help to make a cocktail recipe from the following information I have
                        "properties": [
                            "menu_name": [
                                "type": "string",
-                               "description": "Name of cocktail menu being described"
+                               "description": "Name of cocktail menu being described. If it is not present, generate a creative relevant name"
                            ],
                            "cocktails": [
                                "type": "array",

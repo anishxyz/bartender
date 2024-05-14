@@ -13,7 +13,7 @@ struct CellarView: View {
 
     //swift data queries
     @Environment(\.modelContext) private var modelContext
-    
+
     @Query(sort: [
         SortDescriptor(\Bottle.created_at, order: .reverse),
         SortDescriptor(\Bottle.name)
@@ -171,6 +171,10 @@ struct CellarView: View {
                         .presentationDetents([.medium])
                 }
             }
+//            // SQL LITE DB CONNECTION COMMAND
+//            .onAppear {
+//                print(modelContext.sqliteCommand)
+//            }
         }
     }
 }

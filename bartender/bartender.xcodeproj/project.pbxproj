@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B66FC1792BDF3833008D7322 /* ImageToMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FC1782BDF3833008D7322 /* ImageToMenu.swift */; };
 		B66FC17B2BEC9CEB008D7322 /* CreateMenuFromImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FC17A2BEC9CEB008D7322 /* CreateMenuFromImageView.swift */; };
+		B66FC17E2BF30728008D7322 /* DBCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66FC17D2BF30728008D7322 /* DBCommand.swift */; };
 		B6B2506A2BAD371400A3098D /* CellarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250692BAD371400A3098D /* CellarView.swift */; };
 		B6B2506E2BAD384E00A3098D /* CocktailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2506D2BAD384E00A3098D /* CocktailsView.swift */; };
 		B6B250752BAD3BEE00A3098D /* BottleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250742BAD3BEE00A3098D /* BottleType.swift */; };
@@ -60,6 +61,7 @@
 /* Begin PBXFileReference section */
 		B66FC1782BDF3833008D7322 /* ImageToMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageToMenu.swift; sourceTree = "<group>"; };
 		B66FC17A2BEC9CEB008D7322 /* CreateMenuFromImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMenuFromImageView.swift; sourceTree = "<group>"; };
+		B66FC17D2BF30728008D7322 /* DBCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBCommand.swift; sourceTree = "<group>"; };
 		B6B250692BAD371400A3098D /* CellarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellarView.swift; sourceTree = "<group>"; };
 		B6B2506D2BAD384E00A3098D /* CocktailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailsView.swift; sourceTree = "<group>"; };
 		B6B250742BAD3BEE00A3098D /* BottleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleType.swift; sourceTree = "<group>"; };
@@ -122,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B66FC17C2BF306FF008D7322 /* Dev */ = {
+			isa = PBXGroup;
+			children = (
+				B66FC17D2BF30728008D7322 /* DBCommand.swift */,
+			);
+			path = Dev;
+			sourceTree = "<group>";
+		};
 		B6B250682BAD370000A3098D /* Cellar */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +169,7 @@
 		B6B250732BAD3BD200A3098D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B66FC17C2BF306FF008D7322 /* Dev */,
 				B6B520B52BCCF25F0099C015 /* Migrations */,
 				B6B520B42BCCF24B0099C015 /* SampleData */,
 				B6B520B32BCCF2240099C015 /* Enums */,
@@ -377,6 +388,7 @@
 				B6B2508C2BB2832D00A3098D /* NetworkHelpers.swift in Sources */,
 				B6B520A02BC292030099C015 /* CellarEditToolbarButton.swift in Sources */,
 				B6B250842BB12EAA00A3098D /* VersionedSchemas.swift in Sources */,
+				B66FC17E2BF30728008D7322 /* DBCommand.swift in Sources */,
 				B6B2509D2BB3BFA000A3098D /* BottleUploadViewHandler.swift in Sources */,
 				B6B2506A2BAD371400A3098D /* CellarView.swift in Sources */,
 				B6D1A4EF2BAD2C530059942D /* Item.swift in Sources */,

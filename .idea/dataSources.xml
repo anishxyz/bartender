@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="supabase" uuid="9f89377e-537e-499c-8d0f-fa28b8f41db4">
-      <driver-ref>postgresql</driver-ref>
+    <data-source source="LOCAL" name="default.store" uuid="1ac67062-9b96-4869-b2ac-048da9bd4e37">
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://db.vqbdupedwyfrobrgtipb.supabase.co:5432/postgres</jdbc-url>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$USER_HOME$/Library/Developer/CoreSimulator/Devices/CC934F88-2DEA-4933-9473-F91E680F484F/data/Containers/Data/Application/4B964A3F-5463-4CAD-9A29-089B4713986B/Library/Application Support/default.store</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

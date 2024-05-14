@@ -19,7 +19,7 @@ struct RecipeStepsView: View {
                 .padding(.bottom, 5)
             
             VStack(alignment: .leading) {
-                ForEach(Array(steps.enumerated()), id: \.element.id) { index, step in
+                ForEach(Array(steps.sorted { $0.index < $1.index }.enumerated()), id: \.element.id) { index, step in
                     HStack(alignment: .top) {
                         Circle()
                             .strokeBorder(Color.orange, lineWidth: 2)
