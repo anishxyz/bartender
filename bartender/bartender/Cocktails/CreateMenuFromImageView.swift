@@ -12,10 +12,7 @@ import SwiftData
 struct CreateMenuFromImageView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @State private var showImagePicker = false
-    @State private var imagePickerSourceType: UIImagePickerController.SourceType = .photoLibrary
     @State private var selectedImage: UIImage?
-    @State private var showingSheet = false
     @State private var isAnalyzing = false
     @State private var showError = false
     @State private var isSheetDismissable = true
@@ -32,7 +29,7 @@ struct CreateMenuFromImageView: View {
     var body: some View {
         VStack(spacing: 20) {
             // TODO: refactor out image picker buttons
-            ImagePickerButtons(imagePickerSourceType: $imagePickerSourceType, selectedImage: $selectedImage, showingSheet: $showingSheet)
+            ImagePickerButtons(selectedImage: $selectedImage)
                 .padding(.top, 30)
             
             if let selectedImage = selectedImage {

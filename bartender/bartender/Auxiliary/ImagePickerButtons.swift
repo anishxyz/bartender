@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ImagePickerButtons: View {
-    @Binding var imagePickerSourceType: UIImagePickerController.SourceType
+    @State private var imagePickerSourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State private var showingSheet = false
+    
     @Binding var selectedImage: UIImage?
-    @Binding var showingSheet: Bool
 
     var body: some View {
         HStack {

@@ -106,13 +106,23 @@ struct CellarView: View {
                         self.showingBottleDetailSheet = true
                     }) {
                         BottleItemView(bottle: bottle)
-                            .swipeActions {
-                                Button("Delete", systemImage: "trash", role: .destructive) {
-                                    modelContext.delete(bottle)
-                                }
-                            }
                     }
                     .foregroundColor(.primary)
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            modelContext.delete(bottle)
+                            try? modelContext.save()
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                    }
+                }
+                .onDelete { indexSet in
+                    for index in indexSet {
+                        let bottle = filteredBottles[index]
+                        modelContext.delete(bottle)
+                    }
+                    try? modelContext.save()
                 }
             }
             .searchable(text: $searchText)
