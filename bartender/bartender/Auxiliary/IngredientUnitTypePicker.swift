@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct IngredientUnitTypePicker: View {
-    @Binding var selectedType: IngredientUnitType
-    let options: [IngredientUnitType] = IngredientUnitType.allCases
+    @Binding var selectedType: IngredientUnitType?
+    let options: [IngredientUnitType?] = [nil] + IngredientUnitType.allCases
 
     var body: some View {
         Menu {
@@ -19,7 +19,7 @@ struct IngredientUnitTypePicker: View {
                     self.selectedType = option
                 }) {
                     HStack {
-                        Text(option.rawValue)
+                        Text(option?.rawValue ?? "None")
                         if selectedType == option {
                             Spacer()
                             Image(systemName: "checkmark")
@@ -31,7 +31,7 @@ struct IngredientUnitTypePicker: View {
         } label: {
             Button(action: {}) {
                 HStack {
-                    Text(selectedType.rawValue)
+                    Text(selectedType?.rawValue ?? "None")
                     Image(systemName: "chevron.up.chevron.down")
                 }
             }

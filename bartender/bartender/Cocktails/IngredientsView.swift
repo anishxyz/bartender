@@ -23,7 +23,11 @@ struct IngredientsView: View {
                         Text(ingredient.name)
                         Spacer()
                         if let quantity = ingredient.quantity {
-                            Text("\(quantity, specifier: "%.01f") \(ingredient.units.rawValue)")
+                            Text("\(quantity, specifier: "%.01f") \(ingredient.units?.rawValue ?? "")")
+                                .bold()
+                                .foregroundColor(.orange)
+                        } else {
+                            Text("\(ingredient.units?.rawValue ?? "")")
                                 .bold()
                                 .foregroundColor(.orange)
                         }

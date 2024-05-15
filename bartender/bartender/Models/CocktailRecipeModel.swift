@@ -61,12 +61,12 @@ class Ingredient {
     @Attribute(.unique) var id: UUID
     var name: String
     var quantity: Float?
-    var units: IngredientUnitType
+    var units: IngredientUnitType?
     var type: IngredientType
     var recipe: CocktailRecipe?
     var created_at: Date
         
-    init(name: String, quantity: Float? = nil, units: IngredientUnitType, type: IngredientType, recipe: CocktailRecipe? = nil) {
+    init(name: String, quantity: Float? = nil, units: IngredientUnitType?, type: IngredientType, recipe: CocktailRecipe? = nil) {
         self.name = name
         self.quantity = quantity
         self.units = units

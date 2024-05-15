@@ -147,7 +147,7 @@ I need your help to make a cocktail recipe from the following information I have
                                         "units": [
                                           "type": "string",
                                           "enum": IngredientUnitType.list,
-                                          "description": "units of quantity for cocktail ingredient. I prefer oz over ml. Default to units",
+                                          "description": "units of quantity for cocktail ingredient. I prefer oz over ml.",
                                         ],
                                         "type": [
                                           "type": "string",
@@ -155,7 +155,7 @@ I need your help to make a cocktail recipe from the following information I have
                                           "description": "type of ingredient",
                                         ],
                                     ],
-                                    "required": ["name", "units", "type"]
+                                    "required": ["name", "type"]
                                 ]
                             ],
                             "recipe_steps": [
@@ -315,7 +315,7 @@ struct TempMenuDetail: Codable {
 struct TempIngredient: Codable {
     let name: String
     let quantity: Float?
-    let units: IngredientUnitType
+    let units: IngredientUnitType?
     let type: IngredientType
 }
 
