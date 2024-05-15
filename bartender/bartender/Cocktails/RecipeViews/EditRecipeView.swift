@@ -61,7 +61,7 @@ struct EditRecipeView: View {
                                 HStack {
                                     IngredientEditor(ingredient: $recipe.ingredients[index])
                                     Button(action: {
-                                        deleteIngredient(at: index)
+                                        deleteIngredient(ingredient)
                                     }) {
                                         Image(systemName: "minus.circle.fill")
                                             .foregroundColor(.red)
@@ -125,13 +125,15 @@ struct EditRecipeView: View {
         try? modelContext.save()
     }
     
-    private func deleteIngredient(at index: Int) {
-        let ingredientToDelete = recipe.ingredients[index]
-        modelContext.delete(ingredientToDelete)
-        recipe.ingredients.remove(at: index)
-        
-        try? modelContext.save()
+    private func deleteIngredient(_ ingredient: Ingredient) {
+        if let index = recipe.ingredients.firstIndex(where: { $0.id == ingredient.id }) {
+            modelContext.delete(ingredient)
+            recipe.ingredients.remove(at: index)
+            
+            try? modelContext.save()
+        }
     }
+
     
     
     // recipe step helpers
