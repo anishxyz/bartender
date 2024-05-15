@@ -56,9 +56,17 @@ struct EditRecipeView: View {
                         .buttonStyle(.bordered)
                         .tint(.green)
                         
-                        ForEach(sortedIngredients) { ingredient in
+                        ForEach(sortedIngredients, id: \.id) { ingredient in
                             if let index = recipe.ingredients.firstIndex(where: { $0.id == ingredient.id }) {
-                                IngredientEditor(ingredient: $recipe.ingredients[index])
+                                HStack {
+                                    IngredientEditor(ingredient: $recipe.ingredients[index])
+                                    Button(action: {
+                                        deleteIngredient(at: index)
+                                    }) {
+                                        Image(systemName: "minus.circle.fill")
+                                            .foregroundColor(.red)
+                                    }
+                                }
                             }
                         }
                         
@@ -117,14 +125,12 @@ struct EditRecipeView: View {
         try? modelContext.save()
     }
     
-    private func deleteIngredient(at offsets: IndexSet) {
-        let sortedIngredients = recipe.sortedIngredients(true)
-        offsets.forEach { index in
-            let ingredientToDelete = sortedIngredients[index]
-            if let originalIndex = recipe.ingredients.firstIndex(where: { $0.id == ingredientToDelete.id }) {
-                recipe.ingredients.remove(at: originalIndex)
-            }
-        }
+    private func deleteIngredient(at index: Int) {
+        let ingredientToDelete = recipe.ingredients[index]
+        modelContext.delete(ingredientToDelete)
+        recipe.ingredients.remove(at: index)
+        
+        try? modelContext.save()
     }
     
     
@@ -134,7 +140,8 @@ struct EditRecipeView: View {
     }
     
     private func addRecipeStep() {
-        let newRecipeStep = RecipeStep(instruction: "", index: 0)
+        let newIndex = (recipe.steps.map { $0.index }.max() ?? -1) + 1
+        let newRecipeStep = RecipeStep(instruction: "", index: newIndex)
         modelContext.insert(newRecipeStep)
         recipe.steps.append(newRecipeStep)
         

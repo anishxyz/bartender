@@ -35,14 +35,15 @@ struct BottleItemView: View {
                         .tagStyle(bgc: .blue)
                         .lineLimit(1)
                 }
-                Text("\(bottle.qty)")
-                    .tagStyle(bgc: Color.secondary)
-                    .lineLimit(1)
                 if let price = bottle.price {
                     Text(String(format: "$%.2f", price))
                         .tagStyle(bgc: Color.secondary)
                         .lineLimit(1)
                 }
+                Spacer()
+                Text("\(bottle.qty)")
+                    .tagStyle(bgc: Color.secondary)
+                    .lineLimit(1)
             }
         }
         .padding(.vertical, 4)
