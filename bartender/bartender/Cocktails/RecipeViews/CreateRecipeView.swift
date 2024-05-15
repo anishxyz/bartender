@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import SwiftData
 
-struct CreateCocktailRecipeView: View {
+struct CreateRecipeView: View {
     // env
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -19,7 +19,8 @@ struct CreateCocktailRecipeView: View {
     
     var body: some View {
         VStack {
-            EditCocktailRecipeView(recipe: recipe)
+//            EditCocktailRecipeView(recipe: recipe)
+            EditRecipeView(recipe: recipe)
             
             Button {
                 modelContext.insert(recipe)

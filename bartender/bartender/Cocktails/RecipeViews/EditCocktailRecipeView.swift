@@ -81,38 +81,6 @@ struct EditCocktailRecipeView: View {
     }
 }
 
-
-struct IngredientEditor: View {
-    @Binding var ingredient: Ingredient
-    
-    private let decimalFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.minimumFractionDigits = 0 // Minimum decimal places
-        formatter.maximumFractionDigits = 2 // Maximum decimal places
-        return formatter
-    }()
-    
-    var body: some View {
-        VStack(spacing: 8) {
-            HStack {
-                TextField("Name", text: $ingredient.name)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                IngredientTypePicker(selectedType: $ingredient.type)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-            HStack {
-                TextField("Quantity", value: $ingredient.quantity, formatter: decimalFormatter)
-                    .keyboardType(.decimalPad)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                IngredientUnitTypePicker(selectedType: $ingredient.units)
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-            }
-        }
-    }
-}
-
-
 #Preview {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: CocktailMenu.self, configurations: config)
