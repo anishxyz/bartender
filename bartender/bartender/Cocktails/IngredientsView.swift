@@ -32,6 +32,7 @@ struct IngredientsView: View {
                 }
             }
             .padding()
+            .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color(UIColor.secondarySystemGroupedBackground))

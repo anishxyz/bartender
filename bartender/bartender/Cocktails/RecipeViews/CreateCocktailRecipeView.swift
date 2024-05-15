@@ -14,6 +14,7 @@ struct CreateCocktailRecipeView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) private var modelContext
     
+    @Binding var menu: CocktailMenu
     @State var recipe: CocktailRecipe = CocktailRecipe(name: "")
     
     var body: some View {
@@ -22,6 +23,8 @@ struct CreateCocktailRecipeView: View {
             
             Button {
                 modelContext.insert(recipe)
+                menu.recipes.append(recipe)
+                try? modelContext.save()
                 dismiss()
             } label: {
                 Text("Save")
@@ -40,6 +43,17 @@ struct CreateCocktailRecipeView: View {
     }
 }
 
-#Preview {
-    CreateCocktailRecipeView()
-}
+//#Preview {
+//    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+//    let container = try! ModelContainer(for: CocktailMenu.self, configurations: config)
+//    
+//    sampleCocktailMenu.setupRelationships()
+//    
+//    container.mainContext.insert(sampleCocktailMenu.menu)
+//    
+//    @State var sampleMenu = sampleCocktailMenu.menu
+//
+//    return CreateCocktailRecipeView(menu: $sampleMenu)
+//        .modelContainer(container)
+//}
+
