@@ -47,7 +47,7 @@ struct EditRecipeView: View {
                         }) {
                             HStack {
                                 Image(systemName: "plus.circle.fill")
-                                Text("Add New Ingredient")
+                                Text("Add Ingredient")
                             }
                             .bold()
                             .frame(maxWidth: .infinity)
@@ -61,7 +61,38 @@ struct EditRecipeView: View {
                                 IngredientEditor(ingredient: $recipe.ingredients[index])
                             }
                         }
-//                        .onDelete(perform: deleteIngredient)
+                        
+                    }
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 10).fill(.gray).opacity(0.1))
+                }
+                
+                Group {
+                    Text("Recipe Step")
+                        .padding(.leading, 16)
+                        .font(.subheadline)
+                        .bold()
+                    
+                    VStack(alignment: .leading) {
+                        Button(action: {
+                            addRecipeStep()
+                        }) {
+                            HStack {
+                                Image(systemName: "plus.circle.fill")
+                                Text("Add Recipe Step")
+                            }
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 40)
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(.green)
+                        
+                        ForEach(sortedRecipeSteps) { step in
+                            if let index = recipe.steps.firstIndex(where: { $0.id == step.id }) {
+                                RecipeStepEditor(step: $recipe.steps[index])
+                            }
+                        }
                         
                         
                     }
@@ -73,6 +104,7 @@ struct EditRecipeView: View {
         }
     }
     
+    // ingredient helpers
     var sortedIngredients: [Ingredient] {
         recipe.ingredients.sorted { $0.created_at < $1.created_at }
     }
@@ -93,5 +125,19 @@ struct EditRecipeView: View {
                 recipe.ingredients.remove(at: originalIndex)
             }
         }
+    }
+    
+    
+    // recipe step helpers
+    var sortedRecipeSteps: [RecipeStep] {
+        recipe.steps.sorted { $0.created_at < $1.created_at }
+    }
+    
+    private func addRecipeStep() {
+        let newRecipeStep = RecipeStep(instruction: "", index: 0)
+        modelContext.insert(newRecipeStep)
+        recipe.steps.append(newRecipeStep)
+        
+        try? modelContext.save()
     }
 }
