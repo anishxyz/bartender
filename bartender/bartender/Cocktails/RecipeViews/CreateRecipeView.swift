@@ -19,7 +19,6 @@ struct CreateRecipeView: View {
     
     var body: some View {
         VStack {
-//            EditCocktailRecipeView(recipe: recipe)
             EditRecipeView(recipe: recipe)
             
             Button {

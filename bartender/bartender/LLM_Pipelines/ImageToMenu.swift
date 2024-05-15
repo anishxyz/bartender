@@ -147,7 +147,7 @@ I need your help to make a cocktail recipe from the following information I have
                                         "units": [
                                           "type": "string",
                                           "enum": IngredientUnitType.list,
-                                          "description": "units of quantity for cocktail ingredient. I prefer oz over ml",
+                                          "description": "units of quantity for cocktail ingredient. I prefer oz over ml. Default to units",
                                         ],
                                         "type": [
                                           "type": "string",

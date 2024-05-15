@@ -56,10 +56,12 @@ struct EditRecipeView: View {
                         .buttonStyle(.bordered)
                         .tint(.green)
                         
-                        ForEach(recipe.ingredients, id: \.id) { ingredient in
-                            IngredientEditor(ingredient: $recipe.ingredients[recipe.ingredients.firstIndex(where: { $0.id == ingredient.id })!])
+                        ForEach(sortedIngredients) { ingredient in
+                            if let index = recipe.ingredients.firstIndex(where: { $0.id == ingredient.id }) {
+                                IngredientEditor(ingredient: $recipe.ingredients[index])
+                            }
                         }
-                        .onDelete(perform: deleteIngredient)
+//                        .onDelete(perform: deleteIngredient)
                         
                         
                     }
@@ -69,6 +71,10 @@ struct EditRecipeView: View {
                 
             }
         }
+    }
+    
+    var sortedIngredients: [Ingredient] {
+        recipe.ingredients.sorted { $0.created_at < $1.created_at }
     }
     
     private func addIngredient() {
