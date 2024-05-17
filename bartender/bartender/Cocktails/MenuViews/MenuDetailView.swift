@@ -11,6 +11,8 @@ import SwiftData
 
 
 struct MenuDetailView: View {
+    @Environment(\.modelContext) private var modelContext
+
     @State var menu: CocktailMenu
         
     // toolbar
@@ -21,6 +23,14 @@ struct MenuDetailView: View {
             ForEach(menu.recipes.sorted(by: { $0.created_at < $1.created_at })) { recipe in
                 NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                     Text(recipe.name)
+                }
+                .swipeActions {
+                    Button(role: .destructive) {
+                        modelContext.delete(recipe)
+                        try? modelContext.save()
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
                 }
             }
         }
