@@ -98,8 +98,16 @@ struct EditRecipeView: View {
                         
                         ForEach(sortedRecipeSteps) { step in
                             if let index = recipe.steps.firstIndex(where: { $0.id == step.id }) {
-                                RecipeStepEditor(step: $recipe.steps[index])
-                                    .padding(.vertical, 8)
+                                HStack {
+                                    RecipeStepEditor(step: $recipe.steps[index])
+                                        .padding(.vertical, 8)
+                                    Button(action: {
+                                        deleteRecipeStep(step)
+                                    }) {
+                                        Image(systemName: "minus.circle.fill")
+                                            .foregroundColor(.red)
+                                    }
+                                }
                             }
                         }
                         
@@ -148,6 +156,20 @@ struct EditRecipeView: View {
         recipe.steps.append(newRecipeStep)
         
         try? modelContext.save()
+    }
+    
+    private func deleteRecipeStep(_ step: RecipeStep) {
+        if let index = recipe.steps.firstIndex(where: { $0.id == step.id }) {
+            modelContext.delete(step)
+            recipe.steps.remove(at: index)
+            
+            // Reindex remaining steps
+            for i in 0..<recipe.steps.count {
+                sortedRecipeSteps[i].index = i
+            }
+            
+            try? modelContext.save()
+        }
     }
 }
 
