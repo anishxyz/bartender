@@ -21,16 +21,7 @@ struct RecipeStepsView: View {
             VStack(alignment: .leading) {
                 ForEach(Array(steps.sorted { $0.index < $1.index }.enumerated()), id: \.element.id) { index, step in
                     HStack(alignment: .top) {
-                        Circle()
-                            .strokeBorder(Color.orange, lineWidth: 2)
-                            .background(Circle().fill(Color.orange.opacity(0.2)))
-                            .frame(width: 24, height: 24)
-                            .overlay(
-                                Text("\(index + 1)")
-                                    .font(.caption)
-                                    .bold()
-                                    .foregroundColor(.orange)
-                            )
+                        RecipeStepIndexCircle(index: index)
                         Text(step.instruction)
                             .alignmentGuide(.firstTextBaseline) { d in d[VerticalAlignment.center] }
                         Spacer()

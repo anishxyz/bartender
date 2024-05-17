@@ -31,6 +31,7 @@
 		B6B2509F2BB3C81100A3098D /* EditBottleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2509E2BB3C81100A3098D /* EditBottleView.swift */; };
 		B6B250A12BB3DB4A00A3098D /* BottleTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250A02BB3DB4A00A3098D /* BottleTypePicker.swift */; };
 		B6B250A52BBA966100A3098D /* AddBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250A42BBA966100A3098D /* AddBarView.swift */; };
+		B6B2D4FC2BF736D600316400 /* RecipeStepIndexCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2D4FB2BF736D600316400 /* RecipeStepIndexCircle.swift */; };
 		B6B520932BC10CBC0099C015 /* BarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520922BC10CBC0099C015 /* BarPicker.swift */; };
 		B6B520962BC1167E0099C015 /* BartenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520952BC1167E0099C015 /* BartenderView.swift */; };
 		B6B520982BC234CC0099C015 /* BottleToolbarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520972BC234CC0099C015 /* BottleToolbarSection.swift */; };
@@ -89,6 +90,7 @@
 		B6B2509E2BB3C81100A3098D /* EditBottleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBottleView.swift; sourceTree = "<group>"; };
 		B6B250A02BB3DB4A00A3098D /* BottleTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleTypePicker.swift; sourceTree = "<group>"; };
 		B6B250A42BBA966100A3098D /* AddBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBarView.swift; sourceTree = "<group>"; };
+		B6B2D4FB2BF736D600316400 /* RecipeStepIndexCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStepIndexCircle.swift; sourceTree = "<group>"; };
 		B6B520922BC10CBC0099C015 /* BarPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarPicker.swift; sourceTree = "<group>"; };
 		B6B520952BC1167E0099C015 /* BartenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartenderView.swift; sourceTree = "<group>"; };
 		B6B520972BC234CC0099C015 /* BottleToolbarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleToolbarSection.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				B6EEAEDE2BD23D6E001B8EA3 /* IngredientTypePicker.swift */,
 				B6B520922BC10CBC0099C015 /* BarPicker.swift */,
 				B66FC17F2BF31F8A008D7322 /* ImagePickerButtons.swift */,
+				B6B2D4FB2BF736D600316400 /* RecipeStepIndexCircle.swift */,
 			);
 			path = Auxiliary;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				B6B5209E2BC23E330099C015 /* EditBarsView.swift in Sources */,
 				B6B520932BC10CBC0099C015 /* BarPicker.swift in Sources */,
 				B66FC1802BF31F8A008D7322 /* ImagePickerButtons.swift in Sources */,
+				B6B2D4FC2BF736D600316400 /* RecipeStepIndexCircle.swift in Sources */,
 				B6B520AE2BCB9E4A0099C015 /* MenuDetailView.swift in Sources */,
 				B6B250A12BB3DB4A00A3098D /* BottleTypePicker.swift in Sources */,
 				B6B520B02BCB9E660099C015 /* RecipeDetailView.swift in Sources */,

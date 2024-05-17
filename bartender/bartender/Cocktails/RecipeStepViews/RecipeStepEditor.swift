@@ -13,8 +13,12 @@ struct RecipeStepEditor: View {
     
     var body: some View {
         VStack(spacing: 8) {
-            TextField("Instruction", text: $step.instruction)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack {
+                RecipeStepIndexCircle(index: step.index)
+                TextField("Instruction", text: $step.instruction, axis: .vertical)
+                    .lineLimit(3)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
         }
     }
 }

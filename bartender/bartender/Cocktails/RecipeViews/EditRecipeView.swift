@@ -99,6 +99,7 @@ struct EditRecipeView: View {
                         ForEach(sortedRecipeSteps) { step in
                             if let index = recipe.steps.firstIndex(where: { $0.id == step.id }) {
                                 RecipeStepEditor(step: $recipe.steps[index])
+                                    .padding(.vertical, 8)
                             }
                         }
                         
@@ -149,3 +150,15 @@ struct EditRecipeView: View {
         try? modelContext.save()
     }
 }
+
+//#Preview {
+//    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+//    let container = try! ModelContainer(for: CocktailRecipe.self, configurations: config)
+//    
+//    spicyMargarita.setupRelationships()
+//    
+//    container.mainContext.insert(spicyMargarita.recipe)
+//
+//    return EditRecipeView(recipe: spicyMargarita.recipe)
+//        .modelContainer(container)
+//}
