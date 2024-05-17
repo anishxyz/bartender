@@ -10,7 +10,7 @@ import SwiftUI
 
 
 struct RecipeDetailView: View {
-    var recipe: CocktailRecipe
+    @State var recipe: CocktailRecipe
     
     var body: some View {
         ScrollView {
