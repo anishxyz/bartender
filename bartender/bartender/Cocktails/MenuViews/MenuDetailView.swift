@@ -47,7 +47,7 @@ struct MenuDetailView: View {
         }
         .sheet(isPresented: $showingCreateCocktailRecipeSheet, content: {
             CreateRecipeView(menu: $menu)
-                .presentationDetents([.medium, .large])
+                .presentationDetents([.large])
             
         })
     }

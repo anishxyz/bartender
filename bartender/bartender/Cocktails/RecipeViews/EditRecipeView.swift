@@ -135,7 +135,6 @@ struct EditRecipeView: View {
     }
 
     
-    
     // recipe step helpers
     var sortedRecipeSteps: [RecipeStep] {
         recipe.steps.sorted { $0.created_at < $1.created_at }
