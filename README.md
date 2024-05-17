@@ -1,8 +1,8 @@
-TODO
+Core Features
 
 - [X] Cellar Functionality: add bottles to cellar manual + image
 - [X] Bar Functionality: add bottles to a bar, view bar etc.
-- [ ] Recipe: Create cocktail recipes and store them
+- [X] Recipe: Create cocktail recipes and store them
 - [X] Menu Uploads: upload cocktail menu via photo
 - [ ] Bartender: AI bartender to search recipes, generate recipes, chat etc
 
@@ -16,6 +16,9 @@ Known bugs
 - [ ] updated_at fields are not updated
 - [ ] ability to remove bar from bottle 
 
-May 14/15 TODOS
+TODOS
 - [ ] bottle view in sheet
-- [ ] recipe edit view refactor
+- [X] recipe edit view refactor
+- [ ] recipe edit view in recipe detail view
+- [ ] geo-tag menus (attach to restaurant)
+- [ ] talk to recipe and version?
