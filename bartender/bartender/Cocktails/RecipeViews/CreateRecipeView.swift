@@ -17,10 +17,26 @@ struct CreateRecipeView: View {
     @Binding var menu: CocktailMenu
     @State var recipe: CocktailRecipe = CocktailRecipe(name: "")
     
+    // view state
+    @State private var isPreviewMode: Bool = false
+    
     var body: some View {
         VStack {
-            EditRecipeView(recipe: recipe)
-            
+            if isPreviewMode {
+                RecipeDetailView(recipe: recipe)
+            } else {
+                EditRecipeView(recipe: recipe)
+            }
+            Button {
+                isPreviewMode.toggle()
+            } label: {
+                Text(isPreviewMode ? "Editor" : "Preview")
+                    .bold()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 40)
+            }
+            .buttonStyle(.bordered)
+            .tint(.orange)
             Button {
                 modelContext.insert(recipe)
                 menu.recipes.append(recipe)
