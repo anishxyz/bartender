@@ -183,10 +183,12 @@ struct CellarTabView: View {
                 get: { shouldShowBottleDetailSheet },
                 set: { if !$0 { selectedBottle = nil } }
             )) {
-                // TODO: bottle detail view
                 if let bottle = selectedBottle {
-                    BottleDetailView(bottle: bottle)
-                        .presentationDetents([.height(300), .medium])
+                    BottleDetailView(bottle: Binding(
+                        get: { bottle },
+                        set: { self.selectedBottle = $0 }
+                    ))
+                        .presentationDetents([.medium, .large])
                 } else {
                     Text("Error viewing bottle: \(selectedBottle?.name ?? "None")")
                         .presentationDetents([.medium])
