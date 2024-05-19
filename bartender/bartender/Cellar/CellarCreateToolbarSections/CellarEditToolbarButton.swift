@@ -24,8 +24,8 @@ struct CellarEditToolbarButton: View {
             Menu {
                 Button(action: toggleEditMode) {
                     HStack {
-                        Text("Add Bottles to Bar")
-                        Image(systemName: "plus.square")
+                        Text("Edit Bottles")
+                        Image(systemName: "slider.horizontal.2.square")
                     }
                 }
                 Button(action: {

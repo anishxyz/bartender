@@ -185,10 +185,10 @@ struct CellarTabView: View {
             )) {
                 // TODO: bottle detail view
                 if let bottle = selectedBottle {
-                    Text("TODO \(bottle.name)")
-                        .presentationDetents([.medium])
+                    BottleDetailView(bottle: bottle)
+                        .presentationDetents([.height(300), .medium])
                 } else {
-                    Text("Selected bottle: \(selectedBottle?.name ?? "None")")
+                    Text("Error viewing bottle: \(selectedBottle?.name ?? "None")")
                         .presentationDetents([.medium])
                 }
             }

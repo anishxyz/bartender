@@ -32,6 +32,7 @@
 		B6B250A12BB3DB4A00A3098D /* BottleTypePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250A02BB3DB4A00A3098D /* BottleTypePicker.swift */; };
 		B6B250A52BBA966100A3098D /* AddBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B250A42BBA966100A3098D /* AddBarView.swift */; };
 		B6B2D4FC2BF736D600316400 /* RecipeStepIndexCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2D4FB2BF736D600316400 /* RecipeStepIndexCircle.swift */; };
+		B6B2D4FE2BF9FD2300316400 /* BottleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B2D4FD2BF9FD2200316400 /* BottleDetailView.swift */; };
 		B6B520932BC10CBC0099C015 /* BarPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520922BC10CBC0099C015 /* BarPicker.swift */; };
 		B6B520962BC1167E0099C015 /* BartenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520952BC1167E0099C015 /* BartenderView.swift */; };
 		B6B520982BC234CC0099C015 /* BottleToolbarSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B520972BC234CC0099C015 /* BottleToolbarSection.swift */; };
@@ -91,6 +92,7 @@
 		B6B250A02BB3DB4A00A3098D /* BottleTypePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleTypePicker.swift; sourceTree = "<group>"; };
 		B6B250A42BBA966100A3098D /* AddBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBarView.swift; sourceTree = "<group>"; };
 		B6B2D4FB2BF736D600316400 /* RecipeStepIndexCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeStepIndexCircle.swift; sourceTree = "<group>"; };
+		B6B2D4FD2BF9FD2200316400 /* BottleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleDetailView.swift; sourceTree = "<group>"; };
 		B6B520922BC10CBC0099C015 /* BarPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarPicker.swift; sourceTree = "<group>"; };
 		B6B520952BC1167E0099C015 /* BartenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartenderView.swift; sourceTree = "<group>"; };
 		B6B520972BC234CC0099C015 /* BottleToolbarSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottleToolbarSection.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				B6B2509A2BB3B41100A3098D /* AddBottlesView.swift */,
 				B6B2509E2BB3C81100A3098D /* EditBottleView.swift */,
 				B6B2509C2BB3BFA000A3098D /* BottleUploadViewHandler.swift */,
+				B6B2D4FD2BF9FD2200316400 /* BottleDetailView.swift */,
 			);
 			path = CellarBottleViews;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				B6B520A02BC292030099C015 /* CellarEditToolbarButton.swift in Sources */,
 				B6B250842BB12EAA00A3098D /* VersionedSchemas.swift in Sources */,
 				B66FC17E2BF30728008D7322 /* DBCommand.swift in Sources */,
+				B6B2D4FE2BF9FD2300316400 /* BottleDetailView.swift in Sources */,
 				B6B2509D2BB3BFA000A3098D /* BottleUploadViewHandler.swift in Sources */,
 				B6B2506A2BAD371400A3098D /* CellarTabView.swift in Sources */,
 				B6D1A4EF2BAD2C530059942D /* Item.swift in Sources */,
